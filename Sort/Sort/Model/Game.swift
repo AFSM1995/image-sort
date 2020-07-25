@@ -102,6 +102,34 @@ class GameManager {
                 }
             }
         }
+        
+        bubbleSort(gameBoard: scene.gameBoard)
+    }
+    
+    func bubbleSort(gameBoard: [SkNodeAndLocation]) {
+        var isSorted = false
+        while (!isSorted) {
+            isSorted = true
+            for i in 0...((scene!.playableGameboardSize)-1) {
+                var redOne: CGFloat = 0
+                var greenOne: CGFloat = 0
+                var blueOne: CGFloat = 0
+                var alphaOne: CGFloat = 0
+                var redTwo: CGFloat = 0
+                var greenTwo: CGFloat = 0
+                var blueTwo: CGFloat = 0
+                var alphaTwo: CGFloat = 0
+
+                gameBoard[i].square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
+                gameBoard[i+1].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
+                
+                if alphaOne > alphaTwo {
+                    gameBoard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
+                    gameBoard[i+1].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
+                    isSorted = false
+                }
+            }
+        }
     }
     
     var foodBlocksHaveAnimated = Bool()
