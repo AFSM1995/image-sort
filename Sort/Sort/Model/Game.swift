@@ -36,6 +36,9 @@ class GameManager {
     var horizontalMinBoundry = Int()
     var foodPosition: [SkNodeAndLocation] = []
     
+    // Sort
+    var randomSquare: [SkNodeAndLocation] = []
+    
     init(scene: GameScene) {
         self.scene = scene
         
@@ -79,6 +82,18 @@ class GameManager {
         matrix[2][2] = 2
         
         gameStarted = true
+    }
+    
+    
+    func initaitateRandomSquares() {
+        for (skNodeAndLocation) in scene.gameBoard {
+            if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
+                if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
+                    skNodeAndLocation.square.fillColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+                    randomSquare.append(SkNodeAndLocation(square: skNodeAndLocation.square, location: skNodeAndLocation.location))
+                }
+            }
+        }
     }
     
     var foodBlocksHaveAnimated = Bool()

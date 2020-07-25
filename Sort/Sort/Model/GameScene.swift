@@ -338,6 +338,7 @@ class GameScene: SKScene {
         algorithimChoiceName.run(SKAction.move(to: topCenter, duration: 0.4)) {
             self.game.initiateSnakeStartingPosition()
             self.game.spawnFoodBlock()
+            self.game.initaitateRandomSquares()
         }
         startingAnimationAndSquareColoring()
     }
@@ -599,11 +600,12 @@ class GameScene: SKScene {
     
     func squareColoringWhileSnakeIsMoving() {
         if pathFindingAlgorithimChoice == 0 {
-            colorTheGameboard()
-            colorTheSnake()
-            colorTheFood()
-            colorThePath()
-            colorTheBarriers()
+//            colorTheGameboard()
+//            colorTheSnake()
+//            colorTheFood()
+//            colorThePath()
+//            colorTheBarriers()
+//            colorTheRandomSquares()
         } else if pathFindingAnimationsHaveEnded == true && game.paused == false {
             colorTheGameboard()
             colorTheSnake()
@@ -623,6 +625,12 @@ class GameScene: SKScene {
             } else {
                 i.square.fillColor = gameboardSquareColor
             }
+        }
+    }
+    
+    func colorTheRandomSquares() {
+        for i in (game.foodPosition) {
+            i.square.fillColor = foodSquareColor
         }
     }
     
