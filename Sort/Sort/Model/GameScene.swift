@@ -42,6 +42,9 @@ class GameScene: SKScene {
     var gameBackgroundColor = UIColor()
     var screenLabelColor = UIColor()
     var scoreButtonColor = UIColor()
+    
+//    sort
+    var playableGameboardSize = Int()
 
     override func didMove(to view: SKView) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -277,6 +280,7 @@ class GameScene: SKScene {
                 } else {
                     row.append(0)
                     square.fillColor = gameboardSquareColor
+                    playableGameboardSize += 1
                 }
                 
                 square.name = String(x) + "," + String(y)

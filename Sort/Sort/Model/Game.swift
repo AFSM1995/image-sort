@@ -86,11 +86,19 @@ class GameManager {
     
     
     func initaitateRandomSquares() {
+        var colorArray = [Float]()
+        let playableGameboardSize = scene!.playableGameboardSize
+        for i in 0...playableGameboardSize {
+            colorArray.append(Float(i)/Float(playableGameboardSize))
+        }
+        colorArray.shuffle()
+        
         for (skNodeAndLocation) in scene.gameBoard {
             if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
                 if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
-                    skNodeAndLocation.square.fillColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
+                    skNodeAndLocation.square.fillColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: CGFloat(colorArray.first ?? 1.0))
                     randomSquare.append(SkNodeAndLocation(square: skNodeAndLocation.square, location: skNodeAndLocation.location))
+                    colorArray.removeFirst()
                 }
             }
         }
