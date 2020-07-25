@@ -340,8 +340,8 @@ class GameScene: SKScene {
     private func startTheGame() {
         let topCenter = CGPoint(x: 0, y: (frame.size.height / 2) - 25)
         algorithimChoiceName.run(SKAction.move(to: topCenter, duration: 0.4)) {
-            self.game.initiateSnakeStartingPosition()
-            self.game.spawnFoodBlock()
+//            self.game.initiateSnakeStartingPosition()
+//            self.game.spawnFoodBlock()
             self.game.initaitateRandomSquares()
         }
         startingAnimationAndSquareColoring()

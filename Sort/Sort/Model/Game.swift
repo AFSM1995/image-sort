@@ -48,41 +48,41 @@ class GameManager {
         }
     }
     
-    func initiateSnakeStartingPosition() {
-        // Must be run at the very begining.
-        verticalMaxBoundry = (scene.rowCount - 2)
-        verticalMinBoundry = 1
-        horizontalMaxBoundry = (scene.columnCount - 2)
-        horizontalMinBoundry = 1
-        
-        // temp change
-//        weak var node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 3)})!.square
-        weak var node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 7)})!.square
-        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 7)))
-        matrix[2][7] = 1
-
-        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 6)})!.square
-        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 6)))
-        matrix[2][6] = 2
-
-        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 5)})!.square
-        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 5)))
-        matrix[2][5] = 2
-
-        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 4)})!.square
-        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 4)))
-        matrix[2][4] = 2
-
-        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 3)})!.square
-        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 3)))
-        matrix[2][3] = 2
-
-        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 2)})!.square
-        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 2)))
-        matrix[2][2] = 2
-        
-        gameStarted = true
-    }
+//    func initiateSnakeStartingPosition() {
+//        // Must be run at the very begining.
+//        verticalMaxBoundry = (scene.rowCount - 2)
+//        verticalMinBoundry = 1
+//        horizontalMaxBoundry = (scene.columnCount - 2)
+//        horizontalMinBoundry = 1
+//
+//        // temp change
+////        weak var node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 3)})!.square
+//        weak var node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 7)})!.square
+//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 7)))
+//        matrix[2][7] = 1
+//
+//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 6)})!.square
+//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 6)))
+//        matrix[2][6] = 2
+//
+//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 5)})!.square
+//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 5)))
+//        matrix[2][5] = 2
+//
+//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 4)})!.square
+//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 4)))
+//        matrix[2][4] = 2
+//
+//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 3)})!.square
+//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 3)))
+//        matrix[2][3] = 2
+//
+//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 2)})!.square
+//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 2)))
+//        matrix[2][2] = 2
+//
+//        gameStarted = true
+//    }
     
     
     func initaitateRandomSquares() {
@@ -360,12 +360,12 @@ class GameManager {
                         
                         // these two must be together
                         runPredeterminedPath()
-                        updateSnakePosition()
+//                        updateSnakePosition()
                         
                         checkIfPaused()
-                        checkForFoodCollision()
+//                        checkForFoodCollision()
                         
-                        checkForDeath()
+//                        checkForDeath()
 //                        updateSnakePosition()
                     }
 //                }
@@ -402,65 +402,65 @@ class GameManager {
     }
     
     // this is run when game hasent started. fix for optimization.
-    func checkForDeath() {
-        if snakeBodyPos.count > 0 {
-            // Create temp variable of snake without the head.
-            var snakeBody = snakeBodyPos
-            snakeBody.remove(at: 0)
-            // Implement wraping snake in god mode.
-            // If head is in same position as the body the snake is dead.
-            // The snake dies in corners becouse blocks are stacked.
-            
-            if !(UserDefaults.standard.bool(forKey: "God Button On Setting")) {
-                if snakeBody.contains(snakeBodyPos[0]) {
-                    endTheGame()
-                }
-            }
-            
-            if barrierNodesWaitingToBeDisplayed.contains(snakeBodyPos[0]) {
-                endTheGame()
-            }
-        }
-    }
+//    func checkForDeath() {
+//        if snakeBodyPos.count > 0 {
+//            // Create temp variable of snake without the head.
+//            var snakeBody = snakeBodyPos
+//            snakeBody.remove(at: 0)
+//            // Implement wraping snake in god mode.
+//            // If head is in same position as the body the snake is dead.
+//            // The snake dies in corners becouse blocks are stacked.
+//
+//            if !(UserDefaults.standard.bool(forKey: "God Button On Setting")) {
+//                if snakeBody.contains(snakeBodyPos[0]) {
+//                    endTheGame()
+//                }
+//            }
+//
+//            if barrierNodesWaitingToBeDisplayed.contains(snakeBodyPos[0]) {
+//                endTheGame()
+//            }
+//        }
+//    }
     
     var foodCollisionPoint = Int()
-    func checkForFoodCollision() {
-        if foodPosition != nil {
-            let x = snakeBodyPos[0].location.x
-            let y = snakeBodyPos[0].location.y
-            var counter = 0
-            
-            for i in (foodPosition) {
-                // potential redudndent casting
-                if Int((i.location.x)) == y && Int((i.location.y)) == x {
-                    
-                    matrix[Int(i.location.y)][Int(i.location.x)] = 0
-                    foodCollisionPoint = counter
-                    foodPosition.remove(at: foodCollisionPoint)
-                    
-                    
-                    spawnFoodBlock()
-                    playSound(selectedSoundFileName: "sfx_coin_double3")
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.impactOccurred()
-                    
-                    
-                    // Update the score
-                    if !(UserDefaults.standard.bool(forKey: "God Button On Setting")) {
-                        currentScore += 1
-                        scene.updateScoreButtonText()
-                        updateScore()
-                     }
-                    
-                    let max = UserDefaults.standard.integer(forKey: "Food Weight Setting")
-                    for _ in 1...max {
-                        snakeBodyPos.append(snakeBodyPos.last!)
-                    }
-                }
-                counter += 1
-            }
-         }
-    }
+//    func checkForFoodCollision() {
+//        if foodPosition != nil {
+//            let x = snakeBodyPos[0].location.x
+//            let y = snakeBodyPos[0].location.y
+//            var counter = 0
+//
+//            for i in (foodPosition) {
+//                // potential redudndent casting
+//                if Int((i.location.x)) == y && Int((i.location.y)) == x {
+//
+//                    matrix[Int(i.location.y)][Int(i.location.x)] = 0
+//                    foodCollisionPoint = counter
+//                    foodPosition.remove(at: foodCollisionPoint)
+//
+//
+//                    spawnFoodBlock()
+//                    playSound(selectedSoundFileName: "sfx_coin_double3")
+//                    let generator = UIImpactFeedbackGenerator(style: .medium)
+//                    generator.impactOccurred()
+//
+//
+//                    // Update the score
+//                    if !(UserDefaults.standard.bool(forKey: "God Button On Setting")) {
+//                        currentScore += 1
+//                        scene.updateScoreButtonText()
+//                        updateScore()
+//                     }
+//
+//                    let max = UserDefaults.standard.integer(forKey: "Food Weight Setting")
+//                    for _ in 1...max {
+//                        snakeBodyPos.append(snakeBodyPos.last!)
+//                    }
+//                }
+//                counter += 1
+//            }
+//         }
+//    }
     
     func playSound(selectedSoundFileName: String) {
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
@@ -491,103 +491,103 @@ class GameManager {
         }
     }
     
-    private func updateSnakePosition() {
-        var xChange = -1
-        var yChange = 0
-
-        switch playerDirection {
-            case 1:
-                //left
-                xChange = -1
-                yChange = 0
-                break
-            case 2:
-                //up
-                xChange = 0
-                yChange = -1
-                break
-            case 3:
-                //right
-                xChange = 1
-                yChange = 0
-                break
-            case 4:
-                //down
-                xChange = 0
-                yChange = 1
-                break
-            default:
-                break
-        }
-
-        if snakeBodyPos.count > 0 {
-            var start = snakeBodyPos.count - 1
-            matrix[snakeBodyPos[start].location.x][snakeBodyPos[start].location.y] = 0
-            while start > 0 {
-                snakeBodyPos[start] = snakeBodyPos[start - 1]
-                start -= 1
-            }
-            // Can be reduced only 3 blocks need to be updated.
-            let xx = (snakeBodyPos[0].location.x + yChange)
-            let yy = (snakeBodyPos[0].location.y + xChange)
-            let newSnakeHead = scene.gameBoard.first(where: {$0.location == Tuple(x: xx, y: yy)})
-            
-            if newSnakeHead != nil {
-                snakeBodyPos[0] = newSnakeHead!
-            } else {
-                endTheGame()
-            }
-
-            if snakeBodyPos[0].location.x < 0 || snakeBodyPos[0].location.y < 0 {
-                endTheGame()
-            }
-            
-            if gameIsOver != true {
-                matrix[snakeBodyPos[0].location.x][snakeBodyPos[0].location.y] = 1
-                matrix[snakeBodyPos[1].location.x][snakeBodyPos[1].location.y] = 2
-            }
-            // Temporary removal
-            matrix[snakeBodyPos[2].location.x][snakeBodyPos[2].location.y] = 2
-            matrix[snakeBodyPos[3].location.x][snakeBodyPos[3].location.y] = 2
-            matrix[snakeBodyPos[4].location.x][snakeBodyPos[4].location.y] = 2
-            matrix[snakeBodyPos[5].location.x][snakeBodyPos[5].location.y] = 2
-//            for i in 0...(scene.rowCount-1) {
-//                print(matrix[i])
+//    private func updateSnakePosition() {
+//        var xChange = -1
+//        var yChange = 0
+//
+//        switch playerDirection {
+//            case 1:
+//                //left
+//                xChange = -1
+//                yChange = 0
+//                break
+//            case 2:
+//                //up
+//                xChange = 0
+//                yChange = -1
+//                break
+//            case 3:
+//                //right
+//                xChange = 1
+//                yChange = 0
+//                break
+//            case 4:
+//                //down
+//                xChange = 0
+//                yChange = 1
+//                break
+//            default:
+//                break
+//        }
+//
+//        if snakeBodyPos.count > 0 {
+//            var start = snakeBodyPos.count - 1
+//            matrix[snakeBodyPos[start].location.x][snakeBodyPos[start].location.y] = 0
+//            while start > 0 {
+//                snakeBodyPos[start] = snakeBodyPos[start - 1]
+//                start -= 1
 //            }
-//            print("----")
-        }
-    
-        if gameIsOver != true {
-            if snakeBodyPos.count > 0 {
-                let x = snakeBodyPos[0].location.y
-                let y = snakeBodyPos[0].location.x
-                if UserDefaults.standard.bool(forKey: "God Button On Setting") {
-                    // temporary removal buggy
+//            // Can be reduced only 3 blocks need to be updated.
+//            let xx = (snakeBodyPos[0].location.x + yChange)
+//            let yy = (snakeBodyPos[0].location.y + xChange)
+//            let newSnakeHead = scene.gameBoard.first(where: {$0.location == Tuple(x: xx, y: yy)})
+//
+//            if newSnakeHead != nil {
+//                snakeBodyPos[0] = newSnakeHead!
+//            } else {
+//                endTheGame()
+//            }
+//
+//            if snakeBodyPos[0].location.x < 0 || snakeBodyPos[0].location.y < 0 {
+//                endTheGame()
+//            }
+//
+//            if gameIsOver != true {
+//                matrix[snakeBodyPos[0].location.x][snakeBodyPos[0].location.y] = 1
+//                matrix[snakeBodyPos[1].location.x][snakeBodyPos[1].location.y] = 2
+//            }
+//            // Temporary removal
+//            matrix[snakeBodyPos[2].location.x][snakeBodyPos[2].location.y] = 2
+//            matrix[snakeBodyPos[3].location.x][snakeBodyPos[3].location.y] = 2
+//            matrix[snakeBodyPos[4].location.x][snakeBodyPos[4].location.y] = 2
+//            matrix[snakeBodyPos[5].location.x][snakeBodyPos[5].location.y] = 2
+////            for i in 0...(scene.rowCount-1) {
+////                print(matrix[i])
+////            }
+////            print("----")
+//        }
+//
+//        if gameIsOver != true {
+//            if snakeBodyPos.count > 0 {
+//                let x = snakeBodyPos[0].location.y
+//                let y = snakeBodyPos[0].location.x
+//                if UserDefaults.standard.bool(forKey: "God Button On Setting") {
+//                    // temporary removal buggy
+////                    if y > verticalMaxBoundry { // Moving To Bottom
+////                        snakeBodyPos[0].location.x = verticalMinBoundry-1 // Spawning At Top
+////                    } else if y < verticalMinBoundry { // Moving to top +1
+////                        snakeBodyPos[0].location.x = verticalMaxBoundry+1 // Spawning at bottom
+////                    } else if x > horizontalMaxBoundry { // Moving to right
+////                        snakeBodyPos[0].location.y = horizontalMinBoundry-1 // Spawning on left
+////                    }
+////                    else if x < horizontalMinBoundry { // Moving to left +1
+////                        snakeBodyPos[0].location.y = horizontalMaxBoundry+1 // Spawning on right
+////                    }
+//                } else {
 //                    if y > verticalMaxBoundry { // Moving To Bottom
-//                        snakeBodyPos[0].location.x = verticalMinBoundry-1 // Spawning At Top
-//                    } else if y < verticalMinBoundry { // Moving to top +1
-//                        snakeBodyPos[0].location.x = verticalMaxBoundry+1 // Spawning at bottom
+//                        endTheGame()
+//                    } else if y < verticalMinBoundry { // Moving to top
+//                        endTheGame()
 //                    } else if x > horizontalMaxBoundry { // Moving to right
-//                        snakeBodyPos[0].location.y = horizontalMinBoundry-1 // Spawning on left
+//                        endTheGame()
+//                    } else if x < horizontalMinBoundry { // Moving to left
+//                        endTheGame()
 //                    }
-//                    else if x < horizontalMinBoundry { // Moving to left +1
-//                        snakeBodyPos[0].location.y = horizontalMaxBoundry+1 // Spawning on right
-//                    }
-                } else {
-                    if y > verticalMaxBoundry { // Moving To Bottom
-                        endTheGame()
-                    } else if y < verticalMinBoundry { // Moving to top
-                        endTheGame()
-                    } else if x > horizontalMaxBoundry { // Moving to right
-                        endTheGame()
-                    } else if x < horizontalMinBoundry { // Moving to left
-                        endTheGame()
-                    }
-                }
-            }
-            scene.squareColoringWhileSnakeIsMoving()
-        }
-    }
+//                }
+//            }
+//            scene.squareColoringWhileSnakeIsMoving()
+//        }
+//    }
 
     func updateScore() {
         // Update the high score if need be.
