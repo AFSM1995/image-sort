@@ -432,6 +432,7 @@ class GameScene: SKScene {
                 }
                 gameBoardSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.0006) // 0.003
             }
+            gamboardAnimationEnded = true
         }
         
         // 2
@@ -511,11 +512,11 @@ class GameScene: SKScene {
             // Make sure the game dosent animate over food and the snake head.
             // Cant animate the head or food after the fact becouse it will ruin the animation. (Big-O).
             // Snake body and barriers will never be a consern since pathfinding animation ignores them.
-            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
+//            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
                 squareAndLocation.square.run(.sequence([animationSequanceManager(animation: 2)]))
                 squareAndLocation.square.fillColor = visitedSquareColor
                 updateScoreButtonText()
-            }
+//            }
             animatedVisitedSquareCount += 1
             
             // runs one time.
@@ -698,6 +699,7 @@ class GameScene: SKScene {
         defaults.bool(forKey: "Score Button Is Tapped") ? (updateScoreButtonText()) : ()
         
         if pathFindingAlgorithimChoice != 0 {
+//            print(gamboardAnimationEnded, game!.visitedNodeArray.count)
             if game!.visitedNodeArray.count > 0 && gamboardAnimationEnded == true {
                 // Dissble buttons for pathfinding animation.
                 animationDualButtonManager(buttonsEnabled: false)
@@ -708,7 +710,7 @@ class GameScene: SKScene {
 //                animationDualButtonManager(buttonsEnabled: true)
 //            }
         }
-        
+//        pathFindingAnimationsAndSquareColoring()
         game.update(time: currentTime)
     }
     

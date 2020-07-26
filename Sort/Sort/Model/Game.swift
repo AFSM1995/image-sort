@@ -106,6 +106,22 @@ class GameManager {
         bubbleSort(gameBoard: scene.gameBoard)
     }
     
+    var visitedNodeArray = [SkNodeAndLocation]()
+    func visitedSquareBuilder(visitedX: Int, visitedY: Int) {
+        let squareSK = scene.gameBoard.first(where: {$0.location == Tuple(x: visitedX, y: visitedY)})?.square
+        visitedNodeArray.append(SkNodeAndLocation(square: squareSK!, location: Tuple(x: visitedX, y: visitedY)))
+    }
+    
+    var fronteerSquareArray = [[SkNodeAndLocation]]()
+    func fronteerSquaresBuilder(squareArray: [Tuple]) {
+        var innerFronterSKSquareArray = [SkNodeAndLocation]()
+        for square in squareArray {
+            let squareSK = scene.gameBoard.first(where: {$0.location == Tuple(x: square.y, y: square.x)})?.square
+            innerFronterSKSquareArray.append(SkNodeAndLocation(square: squareSK!, location: Tuple(x: square.x, y: square.y)))
+        }
+        fronteerSquareArray.append(innerFronterSKSquareArray)
+    }
+    
     func bubbleSort(gameBoard: [SkNodeAndLocation]) {
         var isSorted = false
         while (!isSorted) {
@@ -139,6 +155,7 @@ class GameManager {
                         if alphaOne > alphaTwo {
                             gameBoard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
                             gameBoard[ii].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
+                            visitedSquareBuilder(visitedX: gameBoard[i].location.x, visitedY: gameBoard[i].location.y)
                             isSorted = false
                         }
                     }
@@ -205,8 +222,8 @@ class GameManager {
     var conditionYellow = Bool()
     var conditionRed = Bool()
     
-    var fronteerSquareArray = [[SkNodeAndLocation]]()
-    var visitedNodeArray = [SkNodeAndLocation]()
+//    var fronteerSquareArray = [[SkNodeAndLocation]]()
+//    var visitedNodeArray = [SkNodeAndLocation]()
     var pathSquareArray = [SkNodeAndLocation]()
     var displayFronteerSquareArray = [[SkNodeAndLocation]]()
     var displayVisitedSquareArray = [SkNodeAndLocation]()
@@ -240,8 +257,8 @@ class GameManager {
         let gameBoardDictionary = sceleton.gameBoardMatrixToDictionary(gameBoardMatrix: matrix)
         
         if scene.pathFindingAlgorithimChoice == 1 {
-            nnnpath = ass.aStarSearch(startSquare: snakeHead, foodLocations: foodPosition,  maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
-            pathManager()
+//            nnnpath = ass.aStarSearch(startSquare: snakeHead, foodLocations: foodPosition,  maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
+//            pathManager()
         } else if scene.pathFindingAlgorithimChoice == 2 {
             nnnpath = bfs.breathFirstSearch(startSquare: snakeHead, foodLocations: foodPosition, maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
             pathManager()
