@@ -532,25 +532,25 @@ class GameScene: SKScene {
             var queuedSquareWait = SKAction()
             pathFindingAnimationsHaveEnded = false
             
-            for (squareIndex, innerSquareArray) in game.fronteerSquareArray.enumerated() {
-                for squareAndLocation in innerSquareArray {
+            for (squareIndex, innerSquareArray) in game.swapSquareAndColor.enumerated() {
+                for squareLocationAndColor in innerSquareArray {
                     // Easter would go here enable this one
-                    squareAndLocation.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareAndLocation: squareAndLocation)})
+                    squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor)})
                     queuedSquareWait = .wait(forDuration: TimeInterval(squareIndex) * Double(pathFindingAnimationSpeed))
                 }
-                game.fronteerSquareArray.remove(at: 0)
+                game.swapSquareAndColor.remove(at: 0)
             }
         }
         
-        func queuedSquareAnimationEnding(squareAndLocation: SkNodeAndLocation) {
+        func queuedSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor) {
             // Make sure the game dosent animate over food and the snake head.
             // Cant animate the head or food after the fact becouse it will ruin the animation. (Big-O).
             // Snake body and barriers will never be a consern since pathfinding animation ignores them.
-            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
-                squareAndLocation.square.run(.sequence([animationSequanceManager(animation: 2)]))
-                squareAndLocation.square.fillColor = queuedSquareColor
-                updateScoreButtonText()
-            }
+//            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
+            squareLocationAndColor.square.run(.sequence([animationSequanceManager(animation: 2)]))
+            squareLocationAndColor.square.fillColor = squareLocationAndColor.color
+            updateScoreButtonText()
+//            }
             animatedQueuedSquareCount += 1
         }
         
@@ -600,7 +600,7 @@ class GameScene: SKScene {
         visitedSquareDispatchCalled = false
         pathSquareDispatchCalled = false
         queuedSquareAnimationBegining()
-        visitedSquareAnimationBegining()
+//        visitedSquareAnimationBegining()
     }
     
     func squareColoringWhileSnakeIsMoving() {
@@ -698,9 +698,9 @@ class GameScene: SKScene {
         // Check if score button was tapped.
         defaults.bool(forKey: "Score Button Is Tapped") ? (updateScoreButtonText()) : ()
         
-        if pathFindingAlgorithimChoice != 0 {
+        if game!.visitedNodeArray.count > 0 && gamboardAnimationEnded == true {
 //            print(gamboardAnimationEnded, game!.visitedNodeArray.count)
-            if game!.visitedNodeArray.count > 0 && gamboardAnimationEnded == true {
+            if gamboardAnimationEnded == true {
                 // Dissble buttons for pathfinding animation.
                 animationDualButtonManager(buttonsEnabled: false)
                 pathFindingAnimationsAndSquareColoring()

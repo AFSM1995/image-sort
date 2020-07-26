@@ -122,6 +122,7 @@ class GameManager {
         fronteerSquareArray.append(innerFronterSKSquareArray)
     }
     
+    var swapSquareAndColor = [[SkNodeLocationAndColor]]()
     func bubbleSort(gameBoard: [SkNodeAndLocation]) {
         var isSorted = false
         while (!isSorted) {
@@ -156,11 +157,21 @@ class GameManager {
                             gameBoard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
                             gameBoard[ii].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
                             visitedSquareBuilder(visitedX: gameBoard[i].location.x, visitedY: gameBoard[i].location.y)
+                            
+                            let fronterTuple = [Tuple(x: gameBoard[i].location.y, y: gameBoard[i].location.x), Tuple(x: gameBoard[ii].location.y, y: gameBoard[ii].location.x)]
+                            fronteerSquaresBuilder(squareArray: fronterTuple)
+                            
+                            
+                            let tempi = SkNodeLocationAndColor(square: gameBoard[i].square, location: Tuple(x: gameBoard[i].location.y, y: gameBoard[i].location.x), color: UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo))
+                            let tempii = SkNodeLocationAndColor(square: gameBoard[ii].square, location: Tuple(x: gameBoard[ii].location.y, y: gameBoard[ii].location.x), color: UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne))
+                            swapSquareAndColor.append([tempi, tempii])
+                            
                             isSorted = false
                         }
                     }
                 }
             }
+            print("-")
         }
     }
     

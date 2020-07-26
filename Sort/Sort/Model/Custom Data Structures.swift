@@ -17,3 +17,9 @@ struct SkNodeAndLocation: Hashable {
     var square: SKShapeNode
     var location: Tuple
 }
+
+struct SkNodeLocationAndColor: Hashable {
+    var square: SKShapeNode
+    var location: Tuple
+    var color: UIColor
+}
