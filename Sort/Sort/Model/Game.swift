@@ -110,23 +110,38 @@ class GameManager {
         var isSorted = false
         while (!isSorted) {
             isSorted = true
-            for i in 0...((scene!.playableGameboardSize)-1) {
-                var redOne: CGFloat = 0
-                var greenOne: CGFloat = 0
-                var blueOne: CGFloat = 0
-                var alphaOne: CGFloat = 0
-                var redTwo: CGFloat = 0
-                var greenTwo: CGFloat = 0
-                var blueTwo: CGFloat = 0
-                var alphaTwo: CGFloat = 0
+            for i in 0...((scene!.gameBoard.count)-scene.columnCount-3) {
+                if gameBoard[i].location.x != 0 && gameBoard[i].location.x != (scene.rowCount - 1) {
+                    if gameBoard[i].location.y != 0 && gameBoard[i].location.y != (scene.columnCount - 1) {
+                        var ii = i+1
+                        
+                        var validNextSquare = false
+                        while validNextSquare == false {
+                            if gameBoard[ii].location.y == (scene.columnCount - 1) || gameBoard[ii].location.y == 0 {
+                                ii += 1
+                            } else {
+                                validNextSquare = true
+                            }
+                        }
+                        
+                        var redOne: CGFloat = 0
+                        var greenOne: CGFloat = 0
+                        var blueOne: CGFloat = 0
+                        var alphaOne: CGFloat = 0
+                        var redTwo: CGFloat = 0
+                        var greenTwo: CGFloat = 0
+                        var blueTwo: CGFloat = 0
+                        var alphaTwo: CGFloat = 0
 
-                gameBoard[i].square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
-                gameBoard[i+1].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
-                
-                if alphaOne > alphaTwo {
-                    gameBoard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
-                    gameBoard[i+1].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
-                    isSorted = false
+                        gameBoard[i].square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
+                        gameBoard[ii].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
+                        
+                        if alphaOne > alphaTwo {
+                            gameBoard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
+                            gameBoard[ii].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
+                            isSorted = false
+                        }
+                    }
                 }
             }
         }
