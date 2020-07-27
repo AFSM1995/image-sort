@@ -40,7 +40,7 @@ extension SKAction {
                                      green: lerp(a: startColorComponents.green, b: endColorComponents.green, fraction: fraction),
                                      blue: lerp(a: startColorComponents.blue, b: endColorComponents.blue, fraction: fraction),
                                      alpha: lerp(a: startColorComponents.alpha, b: endColorComponents.alpha, fraction: fraction))
-            (node as? SKSpriteNode)?.color = transColor
+            (node as? SKShapeNode)?.strokeColor = transColor
         }
         )
     }
@@ -285,10 +285,10 @@ class GameScene: SKScene {
         let squareWidth: CGFloat = 25
         // Creates the correct number of rows and columns based on screen size.
         // temp removal
-//        let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
-//        let realColumnCount = Int(((frame.size.width)/squareWidth).rounded(.up)) // 30
-//        rowCount = realRowCount
-//        columnCount = realColumnCount
+        let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
+        let realColumnCount = Int(((frame.size.width)/squareWidth).rounded(.up)) // 30
+        rowCount = realRowCount
+        columnCount = realColumnCount
         
         var matrix = [[Int]]()
         var row = [Int]()
@@ -587,8 +587,9 @@ class GameScene: SKScene {
             squareLocationAndColor.square.run(.sequence([animationSequanceManager(animation: 2)]))
 //            var life: SKShapeNode
 //            life.run
-//            squareLocationAndColor.square.run(SKAction.colorize(with: .blue, colorBlendFactor: 0.8, duration: 0.5))
-//            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .green, toColor: .blue, duration: 0.01))
+            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .red, toColor: .blue, duration: 0.5))
+            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .blue, toColor: .red, duration: 0.5))
+            squareLocationAndColor.square.fillColor = squareLocationAndColor.color
             updateScoreButtonText()
 //            }
             animatedQueuedSquareCount += 1
