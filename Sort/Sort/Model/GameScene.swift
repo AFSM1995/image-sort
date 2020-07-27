@@ -54,8 +54,8 @@ class GameScene: SKScene {
     var algorithimChoiceName: SKLabelNode!
     var gameBackground: SKShapeNode!
     var gameBoard: [SkNodeAndLocation] = []
-    var rowCount = 6 // 7.5 Temp gets updated when the gameboard gets created.
-    var columnCount = 6 // 14 Temp gets updated when the gameboard gets created.
+    var rowCount = 3 // 7.5 Temp gets updated when the gameboard gets created.
+    var columnCount = 25 // 14 Temp gets updated when the gameboard gets created.
     let pathFindingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Path Finding Algorithim")
     let mazeGeneratingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Maze Algorithim")
     
@@ -106,7 +106,7 @@ class GameScene: SKScene {
         let legendData = defaults.array(forKey: "Legend Preferences") as! [[Any]]
         
         // Update pathfinding animation speed
-        pathFindingAnimationSpeed = (defaults.float(forKey: "Snake Move Speed") * 0.14)
+        pathFindingAnimationSpeed = (defaults.float(forKey: "Snake Move Speed") * 1.4)
         
         // Update square colors, seen by the user in the next frame update.
         snakeHeadSquareColor = colors[legendData[0][1] as! Int]
@@ -285,10 +285,10 @@ class GameScene: SKScene {
         let squareWidth: CGFloat = 25
         // Creates the correct number of rows and columns based on screen size.
         // temp removal
-        let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
-        let realColumnCount = Int(((frame.size.width)/squareWidth).rounded(.up)) // 30
-        rowCount = realRowCount
-        columnCount = realColumnCount
+//        let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
+//        let realColumnCount = Int(((frame.size.width)/squareWidth).rounded(.up)) // 30
+//        rowCount = realRowCount
+//        columnCount = realColumnCount
         
         var matrix = [[Int]]()
         var row = [Int]()
@@ -573,8 +573,9 @@ class GameScene: SKScene {
                 for squareLocationAndColor in innerSquareArray {
                     // Easter would go here enable this one
                     squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor)})
-                    queuedSquareWait = .wait(forDuration: TimeInterval(squareIndex) * Double(pathFindingAnimationSpeed))
+                    
                 }
+                queuedSquareWait = .wait(forDuration: TimeInterval(squareIndex) * Double(pathFindingAnimationSpeed))
                 game.swapSquareAndColor.remove(at: 0)
             }
         }
@@ -585,11 +586,10 @@ class GameScene: SKScene {
             // Snake body and barriers will never be a consern since pathfinding animation ignores them.
 //            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
             squareLocationAndColor.square.run(.sequence([animationSequanceManager(animation: 2)]))
-//            var life: SKShapeNode
-//            life.run
-            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .red, toColor: .blue, duration: 0.5))
-            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .blue, toColor: .red, duration: 0.5))
+            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: .blue, duration: 0.5))
+            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .blue, toColor: .clear, duration: 0.5))
             squareLocationAndColor.square.fillColor = squareLocationAndColor.color
+            squareLocationAndColor.square.lineWidth = 5
             updateScoreButtonText()
 //            }
             animatedQueuedSquareCount += 1
