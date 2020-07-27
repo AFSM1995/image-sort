@@ -106,7 +106,7 @@ class GameScene: SKScene {
         let legendData = defaults.array(forKey: "Legend Preferences") as! [[Any]]
         
         // Update pathfinding animation speed
-        pathFindingAnimationSpeed = (defaults.float(forKey: "Snake Move Speed") * 1.4)
+        pathFindingAnimationSpeed = (defaults.float(forKey: "Snake Move Speed") * 2.4)
         
         // Update square colors, seen by the user in the next frame update.
         snakeHeadSquareColor = colors[legendData[0][1] as! Int]
@@ -572,24 +572,34 @@ class GameScene: SKScene {
             for (squareIndex, innerSquareArray) in game.swapSquareAndColor.enumerated() {
                 for squareLocationAndColor in innerSquareArray {
                     // Easter would go here enable this one
-                    squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor)})
-                    
+                    if innerSquareArray.count != 1 {
+                        squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: true)})
+                    } else {
+                        squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: false)})
+                    }
                 }
                 queuedSquareWait = .wait(forDuration: TimeInterval(squareIndex) * Double(pathFindingAnimationSpeed))
                 game.swapSquareAndColor.remove(at: 0)
             }
         }
         
-        func queuedSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor) {
+        func queuedSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor, swap: Bool) {
             // Make sure the game dosent animate over food and the snake head.
             // Cant animate the head or food after the fact becouse it will ruin the animation. (Big-O).
             // Snake body and barriers will never be a consern since pathfinding animation ignores them.
 //            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
             squareLocationAndColor.square.run(.sequence([animationSequanceManager(animation: 2)]))
-            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: .blue, duration: 0.5))
-            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .blue, toColor: .clear, duration: 0.5))
             squareLocationAndColor.square.fillColor = squareLocationAndColor.color
             squareLocationAndColor.square.lineWidth = 5
+            
+            if swap == true {
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: .blue, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .blue, toColor: .clear, duration: 0.5))
+            } else {
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: .green, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .green, toColor: .clear, duration: 0.5))
+            }
+            
             updateScoreButtonText()
 //            }
             animatedQueuedSquareCount += 1

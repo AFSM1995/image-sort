@@ -153,6 +153,8 @@ class GameManager {
                         gameBoard[i].square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
                         gameBoard[ii].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
                         
+                        let tempi = SkNodeLocationAndColor(square: gameBoard[i].square, location: Tuple(x: gameBoard[i].location.y, y: gameBoard[i].location.x), color: UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo))
+                        swapSquareAndColor.append([tempi])
                         if alphaOne < alphaTwo {
                             gameBoard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
                             gameBoard[ii].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
@@ -167,6 +169,9 @@ class GameManager {
                             swapSquareAndColor.append([tempi, tempii])
                             
                             isSorted = false
+                        } else {
+//                            let tempi = SkNodeLocationAndColor(square: gameBoard[i].square, location: Tuple(x: gameBoard[i].location.y, y: gameBoard[i].location.x), color: UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo))
+//                            swapSquareAndColor.append([tempi])
                         }
                     }
                 }
