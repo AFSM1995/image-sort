@@ -750,7 +750,7 @@ class GameScene: SKScene {
         // Check if score button was tapped.
         defaults.bool(forKey: "Score Button Is Tapped") ? (updateScoreButtonText()) : ()
         
-        if game!.visitedNodeArray.count > 0 && gamboardAnimationEnded == true {
+        if game!.swapSquareAndColor.count > 0 && gamboardAnimationEnded == true {
 //            print(gamboardAnimationEnded, game!.visitedNodeArray.count)
             if gamboardAnimationEnded == true {
                 // Dissble buttons for pathfinding animation.

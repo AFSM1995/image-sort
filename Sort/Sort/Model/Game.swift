@@ -48,43 +48,7 @@ class GameManager {
         }
     }
     
-//    func initiateSnakeStartingPosition() {
-//        // Must be run at the very begining.
-//        verticalMaxBoundry = (scene.rowCount - 2)
-//        verticalMinBoundry = 1
-//        horizontalMaxBoundry = (scene.columnCount - 2)
-//        horizontalMinBoundry = 1
-//
-//        // temp change
-////        weak var node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 3)})!.square
-//        weak var node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 7)})!.square
-//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 7)))
-//        matrix[2][7] = 1
-//
-//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 6)})!.square
-//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 6)))
-//        matrix[2][6] = 2
-//
-//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 5)})!.square
-//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 5)))
-//        matrix[2][5] = 2
-//
-//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 4)})!.square
-//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 4)))
-//        matrix[2][4] = 2
-//
-//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 3)})!.square
-//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 3)))
-//        matrix[2][3] = 2
-//
-//        node = scene.gameBoard.first(where: {$0.location == Tuple(x: 2, y: 2)})!.square
-//        snakeBodyPos.append(SkNodeAndLocation(square: node!, location: Tuple(x: 2, y: 2)))
-//        matrix[2][2] = 2
-//
-//        gameStarted = true
-//    }
-    
-    
+    var swapSquareAndColor = [[SkNodeLocationAndColor]]()
     func initaitateRandomSquares() {
         var colorArray = [Float]()
         let playableGameboardSize = scene!.playableGameboardSize
@@ -103,7 +67,8 @@ class GameManager {
             }
         }
         
-        bubbleSort(gameBoard: scene.gameBoard)
+        let bs = BubbleSort(scene: scene)
+        swapSquareAndColor = bs.bubbleSort(gameBoard: scene.gameBoard)
     }
     
     var visitedNodeArray = [SkNodeAndLocation]()
@@ -122,63 +87,7 @@ class GameManager {
         fronteerSquareArray.append(innerFronterSKSquareArray)
     }
     
-    var swapSquareAndColor = [[SkNodeLocationAndColor]]()
-    func bubbleSort(gameBoard: [SkNodeAndLocation]) {
-        var isSorted = false
-        while (!isSorted) {
-            isSorted = true
-            for i in 0...((scene!.gameBoard.count)-scene.columnCount-3) {
-                if gameBoard[i].location.x != 0 && gameBoard[i].location.x != (scene.rowCount - 1) {
-                    if gameBoard[i].location.y != 0 && gameBoard[i].location.y != (scene.columnCount - 1) {
-                        var ii = i+1
-                        
-                        var validNextSquare = false
-                        while validNextSquare == false {
-                            if gameBoard[ii].location.y == (scene.columnCount - 1) || gameBoard[ii].location.y == 0 {
-                                ii += 1
-                            } else {
-                                validNextSquare = true
-                            }
-                        }
-                        
-                        var redOne: CGFloat = 0
-                        var greenOne: CGFloat = 0
-                        var blueOne: CGFloat = 0
-                        var alphaOne: CGFloat = 0
-                        var redTwo: CGFloat = 0
-                        var greenTwo: CGFloat = 0
-                        var blueTwo: CGFloat = 0
-                        var alphaTwo: CGFloat = 0
-
-                        gameBoard[i].square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
-                        gameBoard[ii].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
-                        
-                        let tempi = SkNodeLocationAndColor(square: gameBoard[i].square, location: Tuple(x: gameBoard[i].location.y, y: gameBoard[i].location.x), color: UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo))
-                        swapSquareAndColor.append([tempi])
-                        if alphaOne < alphaTwo {
-                            gameBoard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
-                            gameBoard[ii].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
-                            visitedSquareBuilder(visitedX: gameBoard[i].location.x, visitedY: gameBoard[i].location.y)
-                            
-                            let fronterTuple = [Tuple(x: gameBoard[i].location.y, y: gameBoard[i].location.x), Tuple(x: gameBoard[ii].location.y, y: gameBoard[ii].location.x)]
-                            fronteerSquaresBuilder(squareArray: fronterTuple)
-                            
-                            
-                            let tempi = SkNodeLocationAndColor(square: gameBoard[i].square, location: Tuple(x: gameBoard[i].location.y, y: gameBoard[i].location.x), color: UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo))
-                            let tempii = SkNodeLocationAndColor(square: gameBoard[ii].square, location: Tuple(x: gameBoard[ii].location.y, y: gameBoard[ii].location.x), color: UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne))
-                            swapSquareAndColor.append([tempi, tempii])
-                            
-                            isSorted = false
-                        } else {
-//                            let tempi = SkNodeLocationAndColor(square: gameBoard[i].square, location: Tuple(x: gameBoard[i].location.y, y: gameBoard[i].location.x), color: UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo))
-//                            swapSquareAndColor.append([tempi])
-                        }
-                    }
-                }
-            }
-            print("-")
-        }
-    }
+    
     
     var foodBlocksHaveAnimated = Bool()
     func spawnFoodBlock() {
@@ -273,8 +182,7 @@ class GameManager {
         let gameBoardDictionary = sceleton.gameBoardMatrixToDictionary(gameBoardMatrix: matrix)
         
         if scene.pathFindingAlgorithimChoice == 1 {
-//            nnnpath = ass.aStarSearch(startSquare: snakeHead, foodLocations: foodPosition,  maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
-//            pathManager()
+            
         } else if scene.pathFindingAlgorithimChoice == 2 {
             nnnpath = bfs.breathFirstSearch(startSquare: snakeHead, foodLocations: foodPosition, maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
             pathManager()
