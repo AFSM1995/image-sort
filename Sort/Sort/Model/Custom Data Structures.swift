@@ -23,3 +23,10 @@ struct SkNodeLocationAndColor: Hashable {
     var location: Tuple
     var color: UIColor
 }
+
+struct ColorComponents {
+    var red = CGFloat(0)
+    var green = CGFloat(0)
+    var blue = CGFloat(0)
+    var alpha = CGFloat(0)
+}
