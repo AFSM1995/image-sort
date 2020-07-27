@@ -9,6 +9,43 @@
 import SpriteKit
 import UIKit
 
+func lerp(a : CGFloat, b : CGFloat, fraction : CGFloat) -> CGFloat
+{
+    return (b-a) * fraction + a
+}
+
+struct ColorComponents {
+    var red = CGFloat(0)
+    var green = CGFloat(0)
+    var blue = CGFloat(0)
+    var alpha = CGFloat(0)
+}
+
+extension UIColor {
+    func toComponents() -> ColorComponents {
+        var components = ColorComponents()
+        getRed(&components.red, green: &components.green, blue: &components.blue, alpha: &components.alpha)
+        return components
+    }
+}
+
+extension SKAction {
+    static func colorTransitionAction(fromColor : UIColor, toColor : UIColor, duration : Double = 0.4) -> SKAction
+    {
+        return SKAction.customAction(withDuration: duration, actionBlock: { (node : SKNode!, elapsedTime : CGFloat) -> Void in
+            let fraction = CGFloat(elapsedTime / CGFloat(duration))
+            let startColorComponents = fromColor.toComponents()
+            let endColorComponents = toColor.toComponents()
+            let transColor = UIColor(red: lerp(a: startColorComponents.red, b: endColorComponents.red, fraction: fraction),
+                                     green: lerp(a: startColorComponents.green, b: endColorComponents.green, fraction: fraction),
+                                     blue: lerp(a: startColorComponents.blue, b: endColorComponents.blue, fraction: fraction),
+                                     alpha: lerp(a: startColorComponents.alpha, b: endColorComponents.alpha, fraction: fraction))
+            (node as? SKSpriteNode)?.color = transColor
+        }
+        )
+    }
+}
+
 class GameScene: SKScene {
     // Game construction
     let defaults = UserDefaults.standard
@@ -17,8 +54,8 @@ class GameScene: SKScene {
     var algorithimChoiceName: SKLabelNode!
     var gameBackground: SKShapeNode!
     var gameBoard: [SkNodeAndLocation] = []
-    var rowCount = 7 // 7.5 Temp gets updated when the gameboard gets created.
-    var columnCount = 14 // 14 Temp gets updated when the gameboard gets created.
+    var rowCount = 6 // 7.5 Temp gets updated when the gameboard gets created.
+    var columnCount = 6 // 14 Temp gets updated when the gameboard gets created.
     let pathFindingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Path Finding Algorithim")
     let mazeGeneratingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Maze Algorithim")
     
@@ -248,10 +285,10 @@ class GameScene: SKScene {
         let squareWidth: CGFloat = 25
         // Creates the correct number of rows and columns based on screen size.
         // temp removal
-        let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
-        let realColumnCount = Int(((frame.size.width)/squareWidth).rounded(.up)) // 30
-        rowCount = realRowCount
-        columnCount = realColumnCount
+//        let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
+//        let realColumnCount = Int(((frame.size.width)/squareWidth).rounded(.up)) // 30
+//        rowCount = realRowCount
+//        columnCount = realColumnCount
         
         var matrix = [[Int]]()
         var row = [Int]()
@@ -548,7 +585,10 @@ class GameScene: SKScene {
             // Snake body and barriers will never be a consern since pathfinding animation ignores them.
 //            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
             squareLocationAndColor.square.run(.sequence([animationSequanceManager(animation: 2)]))
-            squareLocationAndColor.square.fillColor = squareLocationAndColor.color
+//            var life: SKShapeNode
+//            life.run
+//            squareLocationAndColor.square.run(SKAction.colorize(with: .blue, colorBlendFactor: 0.8, duration: 0.5))
+//            squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .green, toColor: .blue, duration: 0.01))
             updateScoreButtonText()
 //            }
             animatedQueuedSquareCount += 1
@@ -682,6 +722,7 @@ class GameScene: SKScene {
         let shrink3 = SKAction.scale(by: 0.95, duration: 0.10)
         let shrink4 = SKAction.scale(by: 0.97, duration: 0.05)
         let shrink5 = SKAction.scale(by: 0.75, duration: 0.05)
+        let colorChange = SKAction.colorize(with: UIColor.blue, colorBlendFactor: 1, duration: 1)
 
         if animation == 1 {
             return SKAction.sequence([wait0, grow1, wait1, shrink1, wait1, scale1, shrink2, wait2, scale1])

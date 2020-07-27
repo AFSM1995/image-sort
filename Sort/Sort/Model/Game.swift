@@ -153,7 +153,7 @@ class GameManager {
                         gameBoard[i].square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
                         gameBoard[ii].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
                         
-                        if alphaOne > alphaTwo {
+                        if alphaOne < alphaTwo {
                             gameBoard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
                             gameBoard[ii].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
                             visitedSquareBuilder(visitedX: gameBoard[i].location.x, visitedY: gameBoard[i].location.y)
