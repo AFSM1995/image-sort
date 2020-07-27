@@ -66,9 +66,7 @@ class GameManager {
                 }
             }
         }
-        
-        let bs = BubbleSort(scene: scene)
-        swapSquareAndColor = bs.bubbleSort(gameBoard: scene.gameBoard)
+        pathSelector()
     }
     
     var visitedNodeArray = [SkNodeAndLocation]()
@@ -171,58 +169,19 @@ class GameManager {
     }
     
     func pathSelector() {
-        let sceleton = AlgorithmHelper(scene: scene)
-        let ass = AStarSearch(scene: scene)
-        let bfs = BreadthFirstSearch(scene: scene)
-        let dfs = DepthFirstSearch(scene: scene)
-        let ds = DijkstrasSearch(scene: scene)
-        let ucs = UniformCostSearch(scene: scene)
-        
-        let snakeHead = Tuple(x: snakeBodyPos[0].location.y, y: snakeBodyPos[0].location.x)
-        let gameBoardDictionary = sceleton.gameBoardMatrixToDictionary(gameBoardMatrix: matrix)
-        
-        if scene.pathFindingAlgorithimChoice == 1 {
-            
+        if scene.pathFindingAlgorithimChoice == 0 {
+            let bs = BubbleSort(scene: scene)
+            swapSquareAndColor = bs.bubbleSort(gameBoard: scene.gameBoard)
+        } else if scene.pathFindingAlgorithimChoice == 1 {
+
         } else if scene.pathFindingAlgorithimChoice == 2 {
-            nnnpath = bfs.breathFirstSearch(startSquare: snakeHead, foodLocations: foodPosition, maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
-            pathManager()
+
         } else if scene.pathFindingAlgorithimChoice == 3 {
-            nnnpath = dfs.depthFirstSearch(startSquare: snakeHead, foodLocations: foodPosition, maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
-            pathManager()
+
         } else if scene.pathFindingAlgorithimChoice == 4 {
-            nnnpath = ds.dijkstrasSearch(startSquare: snakeHead, foodLocations: foodPosition,  maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
-            pathManager()
-        } else if scene.pathFindingAlgorithimChoice == 5 {
-            nnnpath = ucs.uniformCostSearch(startSquare: snakeHead, foodLocations: foodPosition,  maze: mazze, gameBoard: gameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
-            pathManager()
-        // No Algorithim Mode, Need clean up
+
         } else {
-            func mazeSquareBuilder(visitedX: Int, visitedY: Int) {
-                let squareSK = scene.gameBoard.first(where: {$0.location == Tuple(x: visitedX, y: visitedY)})?.square
-                scene.game.barrierNodesWaitingToBeDisplayed.append(SkNodeAndLocation(square: squareSK!, location: Tuple(x: visitedX, y: visitedY)))
-                squareSK!.fillColor = scene.barrierSquareColor
-                scene.colorTheBarriers()
-                scene.game.matrix[visitedX][visitedY] = 7
-            }
-            
-            if mazze.count != 0 {
-                for i in mazze {
-                    if !(scene.game.snakeBodyPos.contains(where: { $0.location == Tuple(x: i.key.y, y: i.key.x) })) {
-                        if !(scene.game.foodPosition.contains(where: { $0.location == Tuple(x: i.key.x, y: i.key.y) })) {
-                            mazeSquareBuilder(visitedX: i.key.y, visitedY: i.key.x)
-                        }
-                    }
-                    let firstChild = mazze[i.key]
-                    for i in firstChild! {
-                        if !(scene.game.snakeBodyPos.contains(where: { $0.location == Tuple(x: i.y, y: i.x) })) {
-                            if !(scene.game.foodPosition.contains(where: { $0.location == Tuple(x: i.x, y: i.y) })) {
-                                mazeSquareBuilder(visitedX: i.y, visitedY: i.x)
-                            }
-                        }
-                    }
-                }
-            }
-            moveInstructions = []
+            print("Out Of Bounds Error")
         }
         
         for i in pathBlockCordinatesNotReversed {
