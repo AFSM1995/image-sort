@@ -77,42 +77,14 @@ class GameScreenViewController: UIViewController {
         
         // If button tapped switch to next option.
         switch sender.tag {
-            case 1:
-                print("Snake lenght count")
-                sender.backgroundColor = colors[(legendData[sender.tag][1] as? Int)!].withAlphaComponent(0.5)
-                sender.tag = 2
-            case 2:
-                print("Food count")
-                sender.backgroundColor = colors[(legendData[sender.tag][1] as? Int)!].withAlphaComponent(0.5)
-                sender.tag = 3
-            case 3:
-                print("Path square count")
-                sender.backgroundColor = colors[(legendData[sender.tag][1] as? Int)!].withAlphaComponent(0.5)
-                sender.tag = 4
-            case 4:
-                print("Visited square")
-                sender.backgroundColor = colors[(legendData[sender.tag][1] as? Int)!].withAlphaComponent(0.5)
-                sender.tag = 5
-            case 5:
-                print("Queued Square")
-                sender.backgroundColor = colors[(legendData[sender.tag][1] as? Int)!].withAlphaComponent(0.5)
-                sender.tag = 6
-            case 6:
-                print("Barrier count")
-                sender.backgroundColor = colors[(legendData[sender.tag][1] as? Int)!].withAlphaComponent(0.5)
-                sender.tag = 7
-            case 7:
-                print("Weight")
-                sender.backgroundColor = colors[(legendData[sender.tag][1] as? Int)!].withAlphaComponent(0.5)
-                sender.tag = 8
-            case 8:
-                print("Score")
-                sender.backgroundColor = UIColor(named: "UI Button")!.withAlphaComponent(0.5)
-                sender.tag = 9
-            case 9:
-                print("High score")
-                sender.backgroundColor = UIColor(named: "UI Button")!.withAlphaComponent(0.5)
+            case 0:
+                print("Swap count")
+                sender.backgroundColor = colors[legendData[4][1] as! Int].withAlphaComponent(0.5)
                 sender.tag = 1
+            case 1:
+                print("Comp count")
+                sender.backgroundColor = colors[legendData[5][1] as! Int].withAlphaComponent(0.5)
+                sender.tag = 0
             default:
                 print("Score button loading error")
         }

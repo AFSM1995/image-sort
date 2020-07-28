@@ -751,28 +751,10 @@ class GameScene: SKScene {
         let scoreButtonTag = self.viewController?.scoreButton.tag
         
         switch scoreButtonTag {
-            case 1: // Highscore
-                self.viewController?.scoreButton.setTitle("HS: " + String(defaults.integer(forKey: "highScore")), for: .normal)
-            case 2: // Snake lenght
-                self.viewController?.scoreButton.setTitle(String(game.snakeBodyPos.count), for: .normal)
-            case 3: // Food
-                self.viewController?.scoreButton.setTitle(String(game.foodPosition.count), for: .normal)
-            case 4: // Path
-                self.viewController?.scoreButton.setTitle(String(game.moveInstructions.count), for: .normal)
-            case 5: // Visited
-                self.viewController?.scoreButton.setTitle(String(Int(animatedVisitedSquareCount)), for: .normal)
-            case 6: // Queued
+            case 0: // Swap
                 self.viewController?.scoreButton.setTitle(String(Int(animatedQueuedSquareCount)), for: .normal)
-            case 7: // Barriers
-                self.viewController?.scoreButton.setTitle(String(game.barrierNodesWaitingToBeDisplayed.count), for: .normal)
-            case 8: // Weight
-                self.viewController?.scoreButton.setTitle("NA", for: .normal)
-            case 9: // Score
-                if defaults.bool(forKey: "God Button On Setting") {
-                    self.viewController?.scoreButton.setTitle("NA", for: .normal)
-                } else {
-                    self.viewController?.scoreButton.setTitle(String(game.currentScore), for: .normal)
-                }
+            case 1: // Comp
+                self.viewController?.scoreButton.setTitle(String(Int(animatedVisitedSquareCount)), for: .normal)
             default:
                 print("Score button loading error")
         }
