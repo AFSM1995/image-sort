@@ -172,6 +172,7 @@ class GameManager {
         if scene.pathFindingAlgorithimChoice == 0 {
             let bs = BubbleSort(scene: scene)
             swapSquareAndColor = bs.bubbleSort(gameBoard: scene.gameBoard)
+//            updateScore()
         } else if scene.pathFindingAlgorithimChoice == 1 {
 
         } else if scene.pathFindingAlgorithimChoice == 2 {
@@ -533,14 +534,8 @@ class GameManager {
 //    }
 
     func updateScore() {
-        // Update the high score if need be.
-         if currentScore > UserDefaults.standard.integer(forKey: "highScore") {
-              UserDefaults.standard.set(currentScore, forKey: "highScore")
-         }
-        
-        // Reset and present score variables on game menu.
-        UserDefaults.standard.set(currentScore, forKey: "lastScore")
-//         currentScore = 0
+//        UserDefaults.standard.set(animatedQueuedSquareCount, forKey: "highScore")
+//        UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
     }
 }
 

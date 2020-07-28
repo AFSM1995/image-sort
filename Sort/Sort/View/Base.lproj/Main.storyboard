@@ -50,7 +50,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EYG-IF-HxQ" userLabel="Score Stack View">
                                                 <rect key="frame" x="0.0" y="60" width="328" height="34"/>
                                                 <subviews>
-                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Lastscore: 0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FCi-3a-UgI">
+                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Comparisons: 0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FCi-3a-UgI">
                                                         <rect key="frame" x="0.0" y="0.0" width="154" height="34"/>
                                                         <color key="backgroundColor" name="Right View Background"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -68,7 +68,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JiO-p9-PEj">
                                                         <rect key="frame" x="154" y="0.0" width="20" height="34"/>
                                                     </view>
-                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Highscore: 0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gJU-qy-YPl">
+                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Swaps: 0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gJU-qy-YPl">
                                                         <rect key="frame" x="174" y="0.0" width="154" height="34"/>
                                                         <color key="backgroundColor" name="Right View Background"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -652,7 +652,7 @@
                                 <rect key="frame" x="20" y="349" width="696" height="45"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.80000000000000004" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZ8-7E-hZ7" userLabel="Score Button" customClass="IconUIButton" customModule="Sort" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="135" height="45"/>
                                         <color key="backgroundColor" name="UI Button"/>
                                         <fontDescription key="fontDescription" name="Dogica_Pixel" family="Dogica Pixel" pointSize="16"/>
                                         <state key="normal">
@@ -663,7 +663,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="et9-wm-bbf">
-                                        <rect key="frame" x="90" y="0.0" width="396" height="45"/>
+                                        <rect key="frame" x="135" y="0.0" width="351" height="45"/>
                                     </view>
                                     <button opaque="NO" alpha="0.80000000000000004" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GO-jV-W0k" userLabel="Step / Auto Play " customClass="IconUIButton" customModule="Sort" customModuleProvider="target">
                                         <rect key="frame" x="486" y="0.0" width="45" height="45"/>
@@ -732,7 +732,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="os2-yv-uox" secondAttribute="trailing" multiplier="736/716" id="0Xw-Vc-ahc"/>
-                            <constraint firstItem="hZ8-7E-hZ7" firstAttribute="width" secondItem="V6u-dH-R6S" secondAttribute="width" multiplier="90/736" id="35S-7i-gl7"/>
+                            <constraint firstItem="hZ8-7E-hZ7" firstAttribute="width" secondItem="V6u-dH-R6S" secondAttribute="width" multiplier="135/736" id="35S-7i-gl7"/>
                             <constraint firstItem="hoi-kw-a8i" firstAttribute="width" secondItem="V6u-dH-R6S" secondAttribute="width" multiplier="10/736" id="4Hu-Jc-4zG"/>
                             <constraint firstItem="os2-yv-uox" firstAttribute="leading" secondItem="lMT-5a-1pP" secondAttribute="trailing" multiplier="20/736" id="AkF-S4-uSV"/>
                             <constraint firstItem="a7y-o8-THV" firstAttribute="width" secondItem="V6u-dH-R6S" secondAttribute="width" multiplier="10/736" id="kxN-sx-DON"/>
@@ -982,6 +982,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f62-Ey-MOA"/>
+        <segue reference="HB8-7U-962"/>
     </inferredMetricsTieBreakers>
 </document>

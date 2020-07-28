@@ -226,7 +226,7 @@ class GameScene: SKScene {
         let mazeGenerationAlgorithimName = defaults.string(forKey: "Selected Maze Algorithim Name")
         
         algorithimChoiceName = SKLabelNode(fontNamed: "Dogica_Pixel")
-        algorithimChoiceName.text = "Path: \(pathFindingAlgorithimName ?? "Player"), Maze: \(mazeGenerationAlgorithimName ?? "None")"
+        algorithimChoiceName.text = "Path: \(pathFindingAlgorithimName ?? "---")"
         algorithimChoiceName.fontColor = screenLabelColor
         algorithimChoiceName.fontSize = 11
         algorithimChoiceName.horizontalAlignmentMode = .center
@@ -490,8 +490,8 @@ class GameScene: SKScene {
     var pathSquareDispatchCalled = Bool()
     var visitedSquareWait = SKAction()
     var pathSquareWait = SKAction()
-    var animatedVisitedSquareCount = 0
-    var animatedQueuedSquareCount = 0
+    var animatedVisitedSquareCount = Float()
+    var animatedQueuedSquareCount = Float()
     
     func pathFindingAnimationsAndSquareColoring() {
         func visitedSquareAnimationBegining() {
@@ -517,7 +517,7 @@ class GameScene: SKScene {
                 squareAndLocation.square.fillColor = visitedSquareColor
                 updateScoreButtonText()
 //            }
-            animatedVisitedSquareCount += 1
+            
             
             // runs one time.
             if !visitedSquareDispatchCalled {
@@ -558,14 +558,20 @@ class GameScene: SKScene {
             if swap == true {
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: .blue, duration: 0.5))
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .blue, toColor: .clear, duration: 0.5))
+                animatedQueuedSquareCount += 0.5
+                animatedVisitedSquareCount += 0.5
             } else {
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: .green, duration: 0.5))
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .green, toColor: .clear, duration: 0.5))
+                animatedVisitedSquareCount += 1
             }
             
+            UserDefaults.standard.set(animatedQueuedSquareCount, forKey: "highScore")
+            UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
             updateScoreButtonText()
+
 //            }
-            animatedQueuedSquareCount += 1
+            
         }
         
         func pathSquareAnimationBegining(run: Bool) {
@@ -719,6 +725,8 @@ class GameScene: SKScene {
                 // Dissble buttons for pathfinding animation.
                 animationDualButtonManager(buttonsEnabled: false)
                 pathFindingAnimationsAndSquareColoring()
+//                UserDefaults.standard.set(animatedQueuedSquareCount, forKey: "highScore")
+//                UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
             }
 //            else {
 //                // new
@@ -752,9 +760,9 @@ class GameScene: SKScene {
             case 4: // Path
                 self.viewController?.scoreButton.setTitle(String(game.moveInstructions.count), for: .normal)
             case 5: // Visited
-                self.viewController?.scoreButton.setTitle(String(animatedVisitedSquareCount), for: .normal)
+                self.viewController?.scoreButton.setTitle(String(Int(animatedVisitedSquareCount)), for: .normal)
             case 6: // Queued
-                self.viewController?.scoreButton.setTitle(String(animatedQueuedSquareCount), for: .normal)
+                self.viewController?.scoreButton.setTitle(String(Int(animatedQueuedSquareCount)), for: .normal)
             case 7: // Barriers
                 self.viewController?.scoreButton.setTitle(String(game.barrierNodesWaitingToBeDisplayed.count), for: .normal)
             case 8: // Weight
