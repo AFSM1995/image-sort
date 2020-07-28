@@ -29,14 +29,10 @@ class GameScene: SKScene {
     var clearBarriersWasTapped = Bool()
     var clearPathWasTapped = Bool()
     
-    var snakeHeadSquareColor = UIColor()
-    var snakeBodySquareColor = UIColor()
-    var foodSquareColor = UIColor()
-    var pathSquareColor = UIColor()
-    var visitedSquareColor = UIColor()
-    var queuedSquareColor = UIColor()
-    var barrierSquareColor = UIColor()
-    var weightSquareColor = UIColor()
+    var squareColor = UIColor()
+    var swapHaloColor = UIColor()
+    var comparisonHaloColor = UIColor()
+    var verificationHaloColor = UIColor()
     var gameboardSquareColor = UIColor()
     var fadedGameBoardSquareColor = UIColor()
     var gameBackgroundColor = UIColor()
@@ -72,24 +68,20 @@ class GameScene: SKScene {
         pathFindingAnimationSpeed = (defaults.float(forKey: "Snake Move Speed") * 2.4)
         
         // Update square colors, seen by the user in the next frame update.
-        snakeHeadSquareColor = colors[legendData[0][1] as! Int]
-        snakeBodySquareColor = colors[legendData[1][1] as! Int]
-        foodSquareColor = colors[legendData[2][1] as! Int]
-        pathSquareColor = colors[legendData[3][1] as! Int]
-        visitedSquareColor = colors[legendData[4][1] as! Int]
-        queuedSquareColor = colors[legendData[5][1] as! Int]
-        barrierSquareColor = colors[legendData[6][1] as! Int]
-        weightSquareColor = colors[legendData[7][1] as! Int]
+        squareColor = colors[legendData[0][1] as! Int]
+        swapHaloColor = colors[legendData[1][1] as! Int]
+        comparisonHaloColor = colors[legendData[2][1] as! Int]
+        verificationHaloColor = colors[legendData[2][1] as! Int]
         
         if defaults.bool(forKey: "Dark Mode On Setting") {
-            gameboardSquareColor = darkBackgroundColors[legendData[8][1] as! Int]
-            fadedGameBoardSquareColor = darkBackgroundColors[legendData[8][1] as! Int].withAlphaComponent(0.5)
+            gameboardSquareColor = darkBackgroundColors[legendData[4][1] as! Int]
+            fadedGameBoardSquareColor = darkBackgroundColors[legendData[4][1] as! Int].withAlphaComponent(0.5)
             gameBackgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1.00)
             screenLabelColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
             scoreButtonColor = UIColor(red: 0.25, green: 0.25, blue: 0.27, alpha: 1.00)
         } else {
-            gameboardSquareColor = lightBackgroundColors[legendData[8][1] as! Int]
-            fadedGameBoardSquareColor = lightBackgroundColors[legendData[8][1] as! Int].withAlphaComponent(0.5)
+            gameboardSquareColor = lightBackgroundColors[legendData[4][1] as! Int]
+            fadedGameBoardSquareColor = lightBackgroundColors[legendData[4][1] as! Int].withAlphaComponent(0.5)
             gameBackgroundColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)
             screenLabelColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.00)
             scoreButtonColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)
@@ -161,45 +153,14 @@ class GameScene: SKScene {
         func colorQueued() {
             for i in (game.displayFronteerSquareArray) {
                 for j in i {
-                    j.square.fillColor = queuedSquareColor
+                    j.square.fillColor = comparisonHaloColor
                 }
             }
         }
         
         func colorVisited() {
             for i in (game.displayVisitedSquareArray) {
-                i.square.fillColor = visitedSquareColor
-            }
-        }
-        
-        func colorPath() {
-            for i in game.displayPathSquareArray {
-                i.square.fillColor = pathSquareColor
-            }
-        }
-        
-        func colorBarriers() {
-            game.barrierSquareManager()
-            
-            for i in game.barrierNodesWaitingToBeDisplayed {
-                i.square.fillColor = barrierSquareColor
-//                updateScoreButtonText()
-            }
-        }
-        
-        func colorSnake() {
-            for (index, squareAndLocation) in game.snakeBodyPos.enumerated() {
-                if index == 0 {
-                    squareAndLocation.square.fillColor = snakeHeadSquareColor
-                } else {
-                    squareAndLocation.square.fillColor = snakeBodySquareColor
-                }
-            }
-        }
-        
-        func colorFood() {
-            for i in (game.foodPosition) {
-                i.square.fillColor = foodSquareColor
+                i.square.fillColor = swapHaloColor
             }
         }
         
@@ -209,14 +170,14 @@ class GameScene: SKScene {
                 colorQueued()
                 colorVisited()
                 if clearPathWasTapped != true {
-                    colorPath()
+//                    colorPath()
                 }
                 
                 if clearBarriersWasTapped != true {
-                    colorBarriers()
+//                    colorBarriers()
                 }
-                colorSnake()
-                colorFood()
+//                colorSnake()
+//                colorFood()
             }
         }
     }
@@ -396,8 +357,8 @@ class GameScene: SKScene {
                                 if defaults.bool(forKey: "Add Barrier Mode On Setting") {
 //                                    updateScoreButtonText()
                                     game.barrierNodesWaitingToBeDisplayed.append(SkNodeAndLocation(square: selectedSquare, location: squareLocation))
-                                    selectedSquare.fillColor = barrierSquareColor
-                                    colorTheBarriers()
+//                                    selectedSquare.fillColor = barrierSquareColor
+//                                    colorTheBarriers()
                                     game.matrix[squareLocation.x][squareLocation.y] = 7
                                 } else {
 //                                    updateScoreButtonText()
@@ -450,9 +411,9 @@ class GameScene: SKScene {
         func snakeBodyAnimationEnding(square: SKShapeNode, squareIndex: Int, lastIndex: Int) {
             square.run(.sequence([animationSequanceManager(animation: 2)]))
             if squareIndex == 0 {
-                square.fillColor = snakeHeadSquareColor
+//                square.fillColor = snakeHeadSquareColor
             } else {
-                square.fillColor = snakeBodySquareColor
+//                square.fillColor = snakeBodySquareColor
             }
             
             if squareIndex == lastIndex {
@@ -470,7 +431,7 @@ class GameScene: SKScene {
         // 5
         func foodSquareAnimationEnding(square: SKShapeNode) {
             square.run(.sequence([animationSequanceManager(animation: 2)]))
-            square.fillColor = foodSquareColor
+//            square.fillColor = foodSquareColor
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.firstAnimationSequanceHasCompleted = true
@@ -514,7 +475,7 @@ class GameScene: SKScene {
             // Snake body and barriers will never be a consern since pathfinding animation ignores them.
 //            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
                 squareAndLocation.square.run(.sequence([animationSequanceManager(animation: 2)]))
-                squareAndLocation.square.fillColor = visitedSquareColor
+                squareAndLocation.square.fillColor = swapHaloColor
                 updateScoreButtonText()
 //            }
             
@@ -556,13 +517,13 @@ class GameScene: SKScene {
             squareLocationAndColor.square.lineWidth = 5
             
             if swap == true {
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: queuedSquareColor, duration: 0.5))
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: queuedSquareColor, toColor: .clear, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: comparisonHaloColor, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: comparisonHaloColor, toColor: .clear, duration: 0.5))
                 animatedQueuedSquareCount += 0.5
                 animatedVisitedSquareCount += 0.5
             } else {
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: visitedSquareColor, duration: 0.5))
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: visitedSquareColor, toColor: .clear, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: swapHaloColor, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: swapHaloColor, toColor: .clear, duration: 0.5))
                 animatedVisitedSquareCount += 1
             }
             
@@ -589,7 +550,7 @@ class GameScene: SKScene {
             // Snake body and barriers will never be a consern since pathfinding animation ignores them.
             if squareIndex != 0 && squareIndex != lastIndex {
                 square.run(.sequence([animationSequanceManager(animation: 2)]))
-                square.fillColor = pathSquareColor
+//                square.fillColor = pathSquareColor
                 updateScoreButtonText()
             }
 
@@ -655,29 +616,29 @@ class GameScene: SKScene {
     
     func colorTheRandomSquares() {
         for i in (game.foodPosition) {
-            i.square.fillColor = foodSquareColor
+            i.square.fillColor = squareColor
         }
     }
     
     func colorTheSnake() {
         for (index, squareAndLocation) in game.snakeBodyPos.enumerated() {
             if index == 0 {
-                squareAndLocation.square.fillColor = snakeHeadSquareColor
+//                squareAndLocation.square.fillColor = snakeHeadSquareColor
             } else {
-                squareAndLocation.square.fillColor = snakeBodySquareColor
+//                squareAndLocation.square.fillColor = snakeBodySquareColor
             }
         }
     }
     
     func colorTheFood() {
         for i in (game.foodPosition) {
-            i.square.fillColor = foodSquareColor
+//            i.square.fillColor = foodSquareColor
         }
     }
     
     func colorThePath() {
         for i in (game.displayPathSquareArray) {
-            i.square.fillColor = pathSquareColor
+//            i.square.fillColor = pathSquareColor
         }
     }
     
@@ -685,7 +646,7 @@ class GameScene: SKScene {
         game.barrierSquareManager()
         
         for i in (game.barrierNodesWaitingToBeDisplayed) {
-            i.square.fillColor = barrierSquareColor
+//            i.square.fillColor = barrierSquareColor
         }
         updateScoreButtonText()
     }
