@@ -556,13 +556,13 @@ class GameScene: SKScene {
             squareLocationAndColor.square.lineWidth = 5
             
             if swap == true {
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: .blue, duration: 0.5))
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .blue, toColor: .clear, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: queuedSquareColor, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: queuedSquareColor, toColor: .clear, duration: 0.5))
                 animatedQueuedSquareCount += 0.5
                 animatedVisitedSquareCount += 0.5
             } else {
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: .green, duration: 0.5))
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .green, toColor: .clear, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: visitedSquareColor, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: visitedSquareColor, toColor: .clear, duration: 0.5))
                 animatedVisitedSquareCount += 1
             }
             
