@@ -55,8 +55,8 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func loadUserData() {
-        highScoreLabel.text = "High Score: \(defaults.integer(forKey: "highScore"))"
-        lastScoreLabel.text = "Last Score: \(defaults.integer(forKey: "lastScore"))"
+        highScoreLabel.text = "Swaps: \(defaults.integer(forKey: "highScore"))"
+        lastScoreLabel.text = "Comps: \(defaults.integer(forKey: "lastScore"))"
         defaults.bool(forKey: "Dark Mode On Setting") ? (overrideUserInterfaceStyle = .dark) : (overrideUserInterfaceStyle = .light)
         segControl.font(name: "Dogica_Pixel", size: 9)
     }
