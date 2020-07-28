@@ -60,7 +60,7 @@ class GameManager {
         for (skNodeAndLocation) in scene.gameBoard {
             if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
                 if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
-                    skNodeAndLocation.square.fillColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: CGFloat(colorArray.first ?? 1.0))
+                    skNodeAndLocation.square.fillColor = scene.squareColor.withAlphaComponent(CGFloat(colorArray.first ?? 1.0))
                     randomSquare.append(SkNodeAndLocation(square: skNodeAndLocation.square, location: skNodeAndLocation.location))
                     colorArray.removeFirst()
                 }
@@ -172,7 +172,6 @@ class GameManager {
         if scene.pathFindingAlgorithimChoice == 0 {
             let bs = BubbleSort(scene: scene)
             swapSquareAndColor = bs.bubbleSort(gameBoard: scene.gameBoard)
-//            updateScore()
         } else if scene.pathFindingAlgorithimChoice == 1 {
 
         } else if scene.pathFindingAlgorithimChoice == 2 {
