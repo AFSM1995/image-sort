@@ -17,6 +17,7 @@ class GameScene: SKScene {
     var algorithimChoiceName: SKLabelNode!
     var gameBackground: SKShapeNode!
     var gameBoard: [SkNodeAndLocation] = []
+    var gameboardEdgeSquares: [SkNodeAndLocation] = []
     var rowCount = 3 // 7.5 Temp gets updated when the gameboard gets created.
     var columnCount = 25 // 14 Temp gets updated when the gameboard gets created.
     let pathFindingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Path Finding Algorithim")
@@ -166,22 +167,28 @@ class GameScene: SKScene {
             }
         }
         
-        if pathFindingAnimationsHaveEnded == true {
-            if clearAllWasTapped != true {
-                colorTheGameboard()
-                colorQueued()
-                colorVisited()
-                if clearPathWasTapped != true {
-//                    colorPath()
-                }
-                
-                if clearBarriersWasTapped != true {
-//                    colorBarriers()
-                }
-//                colorSnake()
-//                colorFood()
+        func colorTheGameboard() {
+            for i in gameboardEdgeSquares {
+                i.square.fillColor = gameboardSquareColor
             }
         }
+        
+//        if pathFindingAnimationsHaveEnded == true {
+//            if clearAllWasTapped != true {
+                colorTheGameboard()
+//                colorQueued()
+//                colorVisited()
+//                if clearPathWasTapped != true {
+////                    colorPath()
+//                }
+//
+//                if clearBarriersWasTapped != true {
+////                    colorBarriers()
+//                }
+////                colorSnake()
+////                colorFood()
+//            }
+//        }
     }
     
     private func createScreenLabels() {
@@ -237,9 +244,11 @@ class GameScene: SKScene {
                 if x == 0 || x == (rowCount - 1) {
                     row.append(9)
                     square.fillColor = fadedGameBoardSquareColor
+                    gameboardEdgeSquares.append(SkNodeAndLocation(square: square, location: Tuple(x: x, y: y)))
                 } else if y == 0 || y == (columnCount - 1) {
                     row.append(9)
                     square.fillColor = fadedGameBoardSquareColor
+                    gameboardEdgeSquares.append(SkNodeAndLocation(square: square, location: Tuple(x: x, y: y)))
                 } else {
                     row.append(0)
                     square.fillColor = gameboardSquareColor
