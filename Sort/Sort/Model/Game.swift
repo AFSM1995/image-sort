@@ -145,8 +145,6 @@ class GameManager {
     var conditionYellow = Bool()
     var conditionRed = Bool()
     
-//    var fronteerSquareArray = [[SkNodeAndLocation]]()
-//    var visitedNodeArray = [SkNodeAndLocation]()
     var pathSquareArray = [SkNodeAndLocation]()
     var displayFronteerSquareArray = [[SkNodeAndLocation]]()
     var displayVisitedSquareArray = [SkNodeAndLocation]()

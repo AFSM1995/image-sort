@@ -62,8 +62,14 @@ class GameScreenViewController: UIViewController {
     
     func loadScoreButtonStyling() {
         scoreButton.layer.borderWidth = 2
-        scoreButton.layer.borderColor = UIColor(named: "UI Button")!.withAlphaComponent(0.8).cgColor
-        scoreButton.layer.backgroundColor = UIColor(named: "UI Button")!.withAlphaComponent(0.5).cgColor
+        
+        if scoreButton.tag == 0 {
+            scoreButton.layer.borderColor = (colors[legendData[2][1] as! Int].withAlphaComponent(0.8)).cgColor
+            scoreButton.layer.backgroundColor = (colors[legendData[2][1] as! Int].withAlphaComponent(0.5)).cgColor
+        } else {
+            scoreButton.layer.borderColor = (colors[legendData[1][1] as! Int].withAlphaComponent(0.8)).cgColor
+            scoreButton.layer.backgroundColor = (colors[legendData[1][1] as! Int].withAlphaComponent(0.5)).cgColor
+        }
     }
     
     func reloadStepButtonSettings(isTheGamePaused: Bool) {

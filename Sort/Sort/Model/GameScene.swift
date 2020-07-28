@@ -50,7 +50,7 @@ class GameScene: SKScene {
         
         game = GameManager(scene: self)
         // Disable buttons for initial animation.
-        animationDualButtonManager(buttonsEnabled: false)
+        animationDualButtonManager(buttonsEnabled: true)
         settingLoader(firstRun: true)
         createScreenLabels()
         createGameBoard()
@@ -78,18 +78,20 @@ class GameScene: SKScene {
             fadedGameBoardSquareColor = darkBackgroundColors[legendData[4][1] as! Int].withAlphaComponent(0.5)
             gameBackgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1.00)
             screenLabelColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
-            scoreButtonColor = UIColor(red: 0.25, green: 0.25, blue: 0.27, alpha: 1.00)
+            scoreButtonColor = squareColor
         } else {
             gameboardSquareColor = lightBackgroundColors[legendData[4][1] as! Int]
             fadedGameBoardSquareColor = lightBackgroundColors[legendData[4][1] as! Int].withAlphaComponent(0.5)
             gameBackgroundColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)
             screenLabelColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.00)
-            scoreButtonColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)
+            scoreButtonColor = squareColor
         }
         
         if firstRun {
             // Populate score button text on first run.
             updateScoreButtonText()
+//            self.viewController?.scoreButton.layer.borderColor = scoreButtonColor.withAlphaComponent(0.8).cgColor
+//            self.viewController?.scoreButton.layer.backgroundColor = scoreButtonColor.withAlphaComponent(0.5).cgColor
         } else {
             // Update stored UI colors.
             gameBackground!.fillColor = gameBackgroundColor
@@ -194,7 +196,7 @@ class GameScene: SKScene {
         algorithimChoiceName.position = CGPoint(x: 0, y: 185)
         algorithimChoiceName.zPosition = 1
         self.addChild(algorithimChoiceName)
-    }
+    }   
     
     private func createGameBoard() {
         func createBackground() {
