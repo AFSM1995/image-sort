@@ -103,6 +103,20 @@ class GameScene: SKScene {
             
             // Check and respond to clear button interactions.
 //            clearButtonManager()
+            var redOne: CGFloat = 0
+            var greenOne: CGFloat = 0
+            var blueOne: CGFloat = 0
+            var alphaOne: CGFloat = 0
+            for i in gameBoard {
+                i.square.removeAllActions()
+                print("old", i.square.fillColor)
+                i.square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
+                i.square.fillColor = squareColor.withAlphaComponent(alphaOne)
+                print("new", i.square.fillColor)
+                i.square.strokeColor = .clear
+                i.square.run(SKAction.scale(to: 1.0, duration: 0))
+            }
+//            game.pathSelector()
         }
         // Render the changed square color live.
         settingsChangeSquareColorManager()
@@ -167,6 +181,12 @@ class GameScene: SKScene {
 //            }
 //        }
         
+        func removeAllAnimations() {
+            for i in gameBackground.children {
+                i.removeAllActions()
+            }
+        }
+        
         func colorTheGameboard() {
             for i in gameboardEdgeSquares {
                 i.square.fillColor = gameboardSquareColor
@@ -175,7 +195,9 @@ class GameScene: SKScene {
         
 //        if pathFindingAnimationsHaveEnded == true {
 //            if clearAllWasTapped != true {
-                colorTheGameboard()
+//        removeAllAnimations()
+        colorTheGameboard()
+        
 //                colorQueued()
 //                colorVisited()
 //                if clearPathWasTapped != true {
@@ -336,6 +358,7 @@ class GameScene: SKScene {
     }
     
     func barrierManager(touches: Set<UITouch>) {
+        game.pathSelector()
         func selectSquareFromTouch(_ touchLocation: CGPoint) -> SKShapeNode? {
             let squares = self.nodes(at: touchLocation)
             for square in squares {
@@ -506,7 +529,6 @@ class GameScene: SKScene {
             
             for (squareIndex, innerSquareArray) in game.swapSquareAndColor.enumerated() {
                 for squareLocationAndColor in innerSquareArray {
-                    // Easter would go here enable this one
                     if innerSquareArray.count != 1 {
                         squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: true)})
                     } else {
