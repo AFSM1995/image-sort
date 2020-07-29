@@ -53,10 +53,24 @@ class GameManager {
         var colorArray = [Float]()
         let playableGameboardSize = scene!.playableGameboardSize
         for i in 0...playableGameboardSize {
-            colorArray.append(Float(i)/Float(playableGameboardSize))
+            colorArray.append(1 - Float(i)/Float(playableGameboardSize))
         }
-        colorArray.shuffle()
         
+        // Animation 1: Displays colors in order
+        // Use pointers instead of array value removals.
+        var colorArrayTwo = colorArray
+        for (skNodeAndLocation) in scene.gameBoard {
+            if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
+                if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
+                    skNodeAndLocation.square.fillColor = scene.squareColor.withAlphaComponent(CGFloat(colorArrayTwo.first ?? 1.0))
+                    randomSquare.append(SkNodeAndLocation(square: skNodeAndLocation.square, location: skNodeAndLocation.location))
+                    colorArrayTwo.removeFirst()
+                }
+            }
+        }
+        
+        // Animation 2: Squares are suffled
+        colorArray.shuffle()
         for (skNodeAndLocation) in scene.gameBoard {
             if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
                 if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
@@ -66,6 +80,8 @@ class GameManager {
                 }
             }
         }
+        
+        // Animation 3 Squares are sorted
         pathSelector()
     }
     
@@ -88,57 +104,57 @@ class GameManager {
     
     
     var foodBlocksHaveAnimated = Bool()
-    func spawnFoodBlock() {
-        let foodPalletsNeeded = (UserDefaults.standard.integer(forKey: "Food Count Setting") - foodPosition.count)
-        
-        if foodPalletsNeeded > 0 {
-            for _ in 1...foodPalletsNeeded {
-                foodBlocksHaveAnimated = false
-                var randomX = Int.random(in: 1...verticalMaxBoundry)
-                var randomY = Int.random(in: 1...horizontalMaxBoundry)
-                
-                var validFoodLocationConfirmed = false
-                var foodLocationChnaged = false
-                
-                while validFoodLocationConfirmed == false {
-                    validFoodLocationConfirmed = true
-                    for i in (barrierNodesWaitingToBeDisplayed) {
-                        if i.location.y == randomY && i.location.x == randomX {
-                            randomX = Int.random(in: 1...verticalMaxBoundry)
-                            randomY = Int.random(in: 1...horizontalMaxBoundry)
-                            validFoodLocationConfirmed = false
-                            foodLocationChnaged = true
-                        }
-                    }
-
-                    for i in (snakeBodyPos) {
-                        if i.location.y == randomY && i.location.x == randomX {
-                            randomX = Int.random(in: 1...verticalMaxBoundry)
-                            randomY = Int.random(in: 1...horizontalMaxBoundry)
-                            validFoodLocationConfirmed = false
-                            foodLocationChnaged = true
-                        }
-                    }
-                    
-                    foodPosition = Array(Set(foodPosition))
-                    if foodLocationChnaged == false {
-                        validFoodLocationConfirmed = true
-                    }
-                }
-                matrix[randomX][randomY] = 3
-                // potential reverseal
-                let node = scene.gameBoard.first(where: {$0.location == Tuple(x: randomX, y: randomY)})?.square
-                foodPosition.append(SkNodeAndLocation(square: node!, location: Tuple(x: randomY, y: randomX)))
-            }
-        }
-        if scene.mazeGeneratingAlgorithimChoice != 0 {
-            if mazeGenerated == false {
-                mazeSelector()
-                mazeGenerated = true
-            }
-        }
-        pathSelector()
-    }
+//    func spawnFoodBlock() {
+//        let foodPalletsNeeded = (UserDefaults.standard.integer(forKey: "Food Count Setting") - foodPosition.count)
+//        
+//        if foodPalletsNeeded > 0 {
+//            for _ in 1...foodPalletsNeeded {
+//                foodBlocksHaveAnimated = false
+//                var randomX = Int.random(in: 1...verticalMaxBoundry)
+//                var randomY = Int.random(in: 1...horizontalMaxBoundry)
+//                
+//                var validFoodLocationConfirmed = false
+//                var foodLocationChnaged = false
+//                
+//                while validFoodLocationConfirmed == false {
+//                    validFoodLocationConfirmed = true
+//                    for i in (barrierNodesWaitingToBeDisplayed) {
+//                        if i.location.y == randomY && i.location.x == randomX {
+//                            randomX = Int.random(in: 1...verticalMaxBoundry)
+//                            randomY = Int.random(in: 1...horizontalMaxBoundry)
+//                            validFoodLocationConfirmed = false
+//                            foodLocationChnaged = true
+//                        }
+//                    }
+//
+//                    for i in (snakeBodyPos) {
+//                        if i.location.y == randomY && i.location.x == randomX {
+//                            randomX = Int.random(in: 1...verticalMaxBoundry)
+//                            randomY = Int.random(in: 1...horizontalMaxBoundry)
+//                            validFoodLocationConfirmed = false
+//                            foodLocationChnaged = true
+//                        }
+//                    }
+//                    
+//                    foodPosition = Array(Set(foodPosition))
+//                    if foodLocationChnaged == false {
+//                        validFoodLocationConfirmed = true
+//                    }
+//                }
+//                matrix[randomX][randomY] = 3
+//                // potential reverseal
+//                let node = scene.gameBoard.first(where: {$0.location == Tuple(x: randomX, y: randomY)})?.square
+//                foodPosition.append(SkNodeAndLocation(square: node!, location: Tuple(x: randomY, y: randomX)))
+//            }
+//        }
+//        if scene.mazeGeneratingAlgorithimChoice != 0 {
+//            if mazeGenerated == false {
+////                mazeSelector()
+//                mazeGenerated = true
+//            }
+//        }
+//        pathSelector()
+//    }
         
     var nnnpath: (([Int], [(Tuple)], Int, Int), [SkNodeAndLocation], [[SkNodeAndLocation]], [SkNodeAndLocation], [Bool])?
     var conditionGreen = Bool()
@@ -152,19 +168,19 @@ class GameManager {
     
     var mazze = [Tuple : [Tuple]]()
     
-    func mazeSelector() {
-        let sceleton = AlgorithmHelper(scene: scene)
-        let dfsp = MazeDepthFirstSearch(scene: scene)
-        
-        let mazeGameBoardDictionary = sceleton.gameBoardMatrixToDictionary(gameBoardMatrix: emptyMazeMatrixMaker())
-        let snakeHead = Tuple(x: snakeBodyPos[0].location.y, y: snakeBodyPos[0].location.x)
-        
-        if scene.mazeGeneratingAlgorithimChoice == 1 {
-            mazze = dfsp.depthFirstSearchPath(startSquare: snakeHead, foodLocations: foodPosition, gameBoard: mazeGameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
-        } else {
-            // pass
-        }
-    }
+//    func mazeSelector() {
+//        let sceleton = AlgorithmHelper(scene: scene)
+//        let dfsp = MazeDepthFirstSearch(scene: scene)
+//
+//        let mazeGameBoardDictionary = sceleton.gameBoardMatrixToDictionary(gameBoardMatrix: emptyMazeMatrixMaker())
+//        let snakeHead = Tuple(x: snakeBodyPos[0].location.y, y: snakeBodyPos[0].location.x)
+//
+//        if scene.mazeGeneratingAlgorithimChoice == 1 {
+//            mazze = dfsp.depthFirstSearchPath(startSquare: snakeHead, foodLocations: foodPosition, gameBoard: mazeGameBoardDictionary, returnPathCost: false, returnSquaresVisited: false)
+//        } else {
+//            // pass
+//        }
+//    }
     
     func pathSelector() {
         if scene.pathFindingAlgorithimChoice == 0 {
@@ -182,102 +198,102 @@ class GameManager {
             print("Out Of Bounds Error")
         }
         
-        for i in pathBlockCordinatesNotReversed {
-            let node = scene.gameBoard.first(where: {$0.location == Tuple(x: i.y, y: i.x)})?.square
-            pathSquareArray.append(SkNodeAndLocation(square: node!, location: Tuple(x: i.x, y: i.y)))
-            displayPathSquareArray.append(SkNodeAndLocation(square: node!, location: Tuple(x: i.x, y: i.y)))
-        }
-        
-        if scene.pathFindingAlgorithimChoice != 0 {
-            if displayPathSquareArray.count >= 2 {
-                displayPathSquareArray.removeFirst()
-                displayPathSquareArray.removeLast()
-            }
-        }
-
-        if UserDefaults.standard.bool(forKey: "Step Mode On Setting") {
-            // working here may not need
-            UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
-            paused = true
-            checkIfPaused()
-            if scene.gamboardAnimationEnded == true {
-                self.viewController?.reloadStepButtonSettings(isTheGamePaused: true)
-            }
-        } else {
-            if scene.gamboardAnimationEnded == true {
-                // working here may not need
-                self.viewController?.reloadStepButtonSettings(isTheGamePaused: true)
-            } else {
-                // working here may not need
-                UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
-                paused = true
-                checkIfPaused()
-            }
-        }
-        
-        if scene.pathFindingAlgorithimChoice != 0 {
-            scene.pathFindingAnimationsHaveEnded = false
-            UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
-            paused = true
-            checkIfPaused()
-        }
-        
-        scene.updateScoreButtonHalo()
+//        for i in pathBlockCordinatesNotReversed {
+//            let node = scene.gameBoard.first(where: {$0.location == Tuple(x: i.y, y: i.x)})?.square
+//            pathSquareArray.append(SkNodeAndLocation(square: node!, location: Tuple(x: i.x, y: i.y)))
+//            displayPathSquareArray.append(SkNodeAndLocation(square: node!, location: Tuple(x: i.x, y: i.y)))
+//        }
+//
+//        if scene.pathFindingAlgorithimChoice != 0 {
+//            if displayPathSquareArray.count >= 2 {
+//                displayPathSquareArray.removeFirst()
+//                displayPathSquareArray.removeLast()
+//            }
+//        }
+//
+//        if UserDefaults.standard.bool(forKey: "Step Mode On Setting") {
+//            // working here may not need
+//            UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
+//            paused = true
+//            checkIfPaused()
+//            if scene.gamboardAnimationEnded == true {
+//                self.viewController?.reloadStepButtonSettings(isTheGamePaused: true)
+//            }
+//        } else {
+//            if scene.gamboardAnimationEnded == true {
+//                // working here may not need
+//                self.viewController?.reloadStepButtonSettings(isTheGamePaused: true)
+//            } else {
+//                // working here may not need
+//                UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
+//                paused = true
+//                checkIfPaused()
+//            }
+//        }
+//
+//        if scene.pathFindingAlgorithimChoice != 0 {
+//            scene.pathFindingAnimationsHaveEnded = false
+//            UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
+//            paused = true
+//            checkIfPaused()
+//        }
+//
+//        scene.updateScoreButtonHalo()
     }
     
-    func pathManager() {
-        moveInstructions = nnnpath!.0.0
-        moveInstructions = moveInstructions.reversed()
-        pathBlockCordinatesNotReversed = nnnpath!.0.1
-        pathBlockCordinates = pathBlockCordinatesNotReversed.reversed()
-        visitedNodeArray = nnnpath!.1
-        displayVisitedSquareArray = visitedNodeArray
-        fronteerSquareArray = nnnpath!.2
-        displayFronteerSquareArray = fronteerSquareArray
-        pathSquareArray = nnnpath!.3
-        conditionGreen = nnnpath!.4[0]
-        conditionYellow = nnnpath!.4[1]
-        conditionRed = nnnpath!.4[2]
-    }
+//    func pathManager() {
+//        moveInstructions = nnnpath!.0.0
+//        moveInstructions = moveInstructions.reversed()
+//        pathBlockCordinatesNotReversed = nnnpath!.0.1
+//        pathBlockCordinates = pathBlockCordinatesNotReversed.reversed()
+//        visitedNodeArray = nnnpath!.1
+//        displayVisitedSquareArray = visitedNodeArray
+//        fronteerSquareArray = nnnpath!.2
+//        displayFronteerSquareArray = fronteerSquareArray
+//        pathSquareArray = nnnpath!.3
+//        conditionGreen = nnnpath!.4[0]
+//        conditionYellow = nnnpath!.4[1]
+//        conditionRed = nnnpath!.4[2]
+//    }
     
     func bringOvermatrix(tempMatrix: [[Int]]) {
         matrix = tempMatrix
     }
     
-    func emptyMazeMatrixMaker() -> [[Int]] {
-        var matrix = [[Int]]()
-        var row = [Int]()
-        
-        for _ in 1...Int(ceil(Float(scene.rowCount)/2)) {
-            for _ in 1...Int(ceil(Float(scene.columnCount)/2)) {
-                row.append(0)
-            }
-            matrix.append(row)
-            row = [Int]()
-        }
-        return matrix
-    }
+//    func emptyMazeMatrixMaker() -> [[Int]] {
+//        var matrix = [[Int]]()
+//        var row = [Int]()
+//
+//        for _ in 1...Int(ceil(Float(scene.rowCount)/2)) {
+//            for _ in 1...Int(ceil(Float(scene.columnCount)/2)) {
+//                row.append(0)
+//            }
+//            matrix.append(row)
+//            row = [Int]()
+//        }
+//        return matrix
+//    }
     
-    func runPredeterminedPath() {
-        if gameStarted == true {
-            if (moveInstructions.count != 0) {
-                swipe(ID: moveInstructions[0])
-                moveInstructions.remove(at: 0)
-                if displayPathSquareArray.count != 0 {
-                    displayPathSquareArray.removeLast()
-                }
-                pathBlockCordinates.remove(at: 0)
-                playSound(selectedSoundFileName: "sfx_coin_single3")
-                onPathMode = true
-            } else {
-                onPathMode = false
-                if scene.pathFindingAlgorithimChoice != 0 {
-                    pathSelector()
-                }
-                onPathMode = true
-            }
-        }
-    }
+//    func runPredeterminedPath() {
+//        if gameStarted == true {
+//            if (moveInstructions.count != 0) {
+//                swipe(ID: moveInstructions[0])
+//                moveInstructions.remove(at: 0)
+//                if displayPathSquareArray.count != 0 {
+//                    displayPathSquareArray.removeLast()
+//                }
+//                pathBlockCordinates.remove(at: 0)
+//                playSound(selectedSoundFileName: "sfx_coin_single3")
+//                onPathMode = true
+//            } else {
+//                onPathMode = false
+//                if scene.pathFindingAlgorithimChoice != 0 {
+//                    pathSelector()
+//                }
+//                onPathMode = true
+//            }
+//        }
+//    }
     
     func update(time: Double) {
             
@@ -300,7 +316,7 @@ class GameManager {
                         scene.updateScoreButtonText()
                         
                         // these two must be together
-                        runPredeterminedPath()
+//                        runPredeterminedPath()
 //                        updateSnakePosition()
                         
                         checkIfPaused()
@@ -335,7 +351,7 @@ class GameManager {
     func endTheGame() {
         scene.algorithimChoiceName.text = "Game Over"
         self.viewController?.scoreButton.layer.borderColor = UIColor.red.cgColor
-        updateScore()
+//        updateScore()
         gameIsOver = true
         mazeGenerated = false
         currentScore = 0
@@ -364,7 +380,7 @@ class GameManager {
 //        }
 //    }
     
-    var foodCollisionPoint = Int()
+//    var foodCollisionPoint = Int()
 //    func checkForFoodCollision() {
 //        if foodPosition != nil {
 //            let x = snakeBodyPos[0].location.x
@@ -530,9 +546,9 @@ class GameManager {
 //        }
 //    }
 
-    func updateScore() {
+//    func updateScore() {
 //        UserDefaults.standard.set(animatedQueuedSquareCount, forKey: "highScore")
 //        UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
-    }
+//    }
 }
 
