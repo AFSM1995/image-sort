@@ -133,6 +133,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func returnButtonTapped(_ sender: UIButton) {
+        defaults.set(true, forKey: "Settings Dismissed")
         self.dismiss(animated: true)
     }
     

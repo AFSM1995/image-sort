@@ -109,18 +109,17 @@ class GameScene: SKScene {
             var alphaOne: CGFloat = 0
             for i in gameBoard {
                 i.square.removeAllActions()
-                print("old", i.square.fillColor)
                 i.square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
                 i.square.fillColor = squareColor.withAlphaComponent(alphaOne)
-                print("new", i.square.fillColor)
                 i.square.strokeColor = .clear
                 i.square.run(SKAction.scale(to: 1.0, duration: 0))
             }
-//            game.pathSelector()
+            game.pathSelector()
         }
         // Render the changed square color live.
         settingsChangeSquareColorManager()
         defaults.set(false, forKey: "Settings Value Modified")
+        defaults.set(false, forKey: "Settings Dismissed")
     }
     
     // Effects happen in real time.
@@ -358,7 +357,7 @@ class GameScene: SKScene {
     }
     
     func barrierManager(touches: Set<UITouch>) {
-        game.pathSelector()
+//        game.pathSelector()
         func selectSquareFromTouch(_ touchLocation: CGPoint) -> SKShapeNode? {
             let squares = self.nodes(at: touchLocation)
             for square in squares {
@@ -710,7 +709,9 @@ class GameScene: SKScene {
 
     override func update(_ currentTime: TimeInterval) {
         // Check if user settings were modified.
-        defaults.bool(forKey: "Settings Value Modified") ? (settingLoader(firstRun: false)) : ()
+        if defaults.bool(forKey: "Settings Value Modified") && defaults.bool(forKey: "Settings Dismissed") {
+            settingLoader(firstRun: false)
+        }
         // Check if score button was tapped.
         defaults.bool(forKey: "Score Button Is Tapped") ? (updateScoreButtonText()) : ()
         
