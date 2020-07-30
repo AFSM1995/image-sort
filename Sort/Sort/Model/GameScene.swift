@@ -122,6 +122,12 @@ class GameScene: SKScene {
         defaults.set(false, forKey: "Settings Dismissed")
     }
     
+//    func noSettingsChange() {
+//        game.pathSelector()
+//        defaults.set(false, forKey: "Settings Value Modified")
+//        defaults.set(false, forKey: "Settings Dismissed")
+//    }
+    
     // Effects happen in real time.
 //    func clearButtonManager() {
 //        if defaults.bool(forKey: "Clear All Setting") {
@@ -712,8 +718,39 @@ class GameScene: SKScene {
         if defaults.bool(forKey: "Settings Value Modified") && defaults.bool(forKey: "Settings Dismissed") {
             settingLoader(firstRun: false)
         }
+        
+        if !(defaults.bool(forKey: "Settings Value Modified")) && (defaults.bool(forKey: "Settings Dismissed")) {
+//            gameBackground!.fillColor = gameBackgroundColor
+
+            var redOne: CGFloat = 0
+            var greenOne: CGFloat = 0
+            var blueOne: CGFloat = 0
+            var alphaOne: CGFloat = 0
+            for i in gameBoard {
+                i.square.removeAllActions()
+                i.square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
+                i.square.fillColor = squareColor.withAlphaComponent(alphaOne)
+                i.square.strokeColor = .clear
+                i.square.run(SKAction.scale(to: 1.0, duration: 0))
+            }
+            for i in gameboardEdgeSquares {
+                i.square.fillColor = gameboardSquareColor
+            }
+            game.pathSelector()
+            defaults.set(false, forKey: "Settings Value Modified")
+            defaults.set(false, forKey: "Settings Dismissed")
+        }
+        
         // Check if score button was tapped.
         defaults.bool(forKey: "Score Button Is Tapped") ? (updateScoreButtonText()) : ()
+        
+        if defaults.bool(forKey: "In Settings From Game") {
+            for i in gameBoard {
+                i.square.removeAllActions()
+            }
+            defaults.set(false, forKey: "In Settings From Game")
+//            noSettingsChange()
+        }
         
         if game!.swapSquareAndColor.count > 0 && gamboardAnimationEnded == true {
 //            print(gamboardAnimationEnded, game!.visitedNodeArray.count)

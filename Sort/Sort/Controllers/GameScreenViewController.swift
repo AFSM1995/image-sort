@@ -79,6 +79,25 @@ class GameScreenViewController: UIViewController {
         boolButtonLoader(isIconButton: true, targetButton: barrierButton, key: "Add Barrier Mode On Setting", trueOption: "Plus_Icon_Set", falseOption: "Minus_Icon_Set")
     }
     
+    @IBAction func settingsButtonTapped(_ sender: Any) {
+        defaults.set(true, forKey: "In Settings From Game")
+    }
+    
+    @IBAction func homeButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func stepButtonTapped(_ sender: UIButton) {
+        // If the game is paused, then the correct icon to display is play.
+        boolButtonResponder(sender, isIconButton: true, key: "Game Is Paused Setting", trueOption: "Play_Icon_Set", falseOption: "Pause_Icon_Set")
+        sender.tag == 1 ? (barrierButton.isEnabled = true) : (barrierButton.isEnabled = false)
+        
+    }
+    
+    @IBAction func barrierButtonTapped(_ sender: UIButton) {
+        boolButtonResponder(sender, isIconButton: true, key: "Add Barrier Mode On Setting", trueOption: "Plus_Icon_Set", falseOption: "Minus_Icon_Set")
+    }
+    
     @IBAction func scoreButtonTapped(_ sender: UIButton) {
         
         // If button tapped switch to next option.
@@ -95,20 +114,5 @@ class GameScreenViewController: UIViewController {
                 print("Score button loading error")
         }
         defaults.set(true, forKey: "Score Button Is Tapped")
-    }
-    
-    @IBAction func homeButtonTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func stepButtonTapped(_ sender: UIButton) {
-        // If the game is paused, then the correct icon to display is play.
-        boolButtonResponder(sender, isIconButton: true, key: "Game Is Paused Setting", trueOption: "Play_Icon_Set", falseOption: "Pause_Icon_Set")
-        sender.tag == 1 ? (barrierButton.isEnabled = true) : (barrierButton.isEnabled = false)
-        
-    }
-    
-    @IBAction func barrierButtonTapped(_ sender: UIButton) {
-        boolButtonResponder(sender, isIconButton: true, key: "Add Barrier Mode On Setting", trueOption: "Plus_Icon_Set", falseOption: "Minus_Icon_Set")
     }
 }
