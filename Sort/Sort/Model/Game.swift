@@ -81,8 +81,19 @@ class GameManager {
             }
         }
         
+//        let dupli = scene.gameBoard
+        
         // Animation 3 Squares are sorted
         pathSelector()
+        
+//        let old = scene.gameBoard
+//        for i in dupli {
+//            if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
+//                if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
+//                    old[i].
+//                }
+//            }
+//        }
     }
     
     var visitedNodeArray = [SkNodeAndLocation]()
@@ -184,8 +195,10 @@ class GameManager {
     
     func pathSelector() {
         if scene.pathFindingAlgorithimChoice == 0 {
+//            var dupli = [SkNodeAndLocation]() as! NSCopying
+            let dupli = (scene.gameBoard)
             let bs = BubbleSort(scene: scene)
-            swapSquareAndColor = bs.bubbleSort(gameboard: scene.gameBoard)
+            swapSquareAndColor = bs.bubbleSort(gameboard: dupli)
         } else if scene.pathFindingAlgorithimChoice == 1 {
 
         } else if scene.pathFindingAlgorithimChoice == 2 {
