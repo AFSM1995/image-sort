@@ -57,6 +57,7 @@ class GameScene: SKScene {
         createGameBoard()
         swipeManager(swipeGesturesAreOn: true)
         startTheGame()
+        print("-")
     }
     
     func settingLoader(firstRun: Bool) {

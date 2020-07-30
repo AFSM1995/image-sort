@@ -106,16 +106,16 @@ class GameManager {
     var foodBlocksHaveAnimated = Bool()
 //    func spawnFoodBlock() {
 //        let foodPalletsNeeded = (UserDefaults.standard.integer(forKey: "Food Count Setting") - foodPosition.count)
-//        
+//
 //        if foodPalletsNeeded > 0 {
 //            for _ in 1...foodPalletsNeeded {
 //                foodBlocksHaveAnimated = false
 //                var randomX = Int.random(in: 1...verticalMaxBoundry)
 //                var randomY = Int.random(in: 1...horizontalMaxBoundry)
-//                
+//
 //                var validFoodLocationConfirmed = false
 //                var foodLocationChnaged = false
-//                
+//
 //                while validFoodLocationConfirmed == false {
 //                    validFoodLocationConfirmed = true
 //                    for i in (barrierNodesWaitingToBeDisplayed) {
@@ -135,7 +135,7 @@ class GameManager {
 //                            foodLocationChnaged = true
 //                        }
 //                    }
-//                    
+//
 //                    foodPosition = Array(Set(foodPosition))
 //                    if foodLocationChnaged == false {
 //                        validFoodLocationConfirmed = true
@@ -185,7 +185,7 @@ class GameManager {
     func pathSelector() {
         if scene.pathFindingAlgorithimChoice == 0 {
             let bs = BubbleSort(scene: scene)
-            swapSquareAndColor = bs.bubbleSort(gameBoard: scene.gameBoard)
+            swapSquareAndColor = bs.bubbleSort(gameboard: scene.gameBoard)
         } else if scene.pathFindingAlgorithimChoice == 1 {
 
         } else if scene.pathFindingAlgorithimChoice == 2 {
