@@ -431,9 +431,12 @@ class GameScene: SKScene {
                 } else {
 //                    squareAndLocation.square.run(.sequence([gameBoardSquareWait, animationSequanceManager(animation: 1)]), completion: {snakeBodyAnimationBegining()})
                 }
-                gameBoardSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.0006) // 0.003
+                gameBoardSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.003
             }
-            gamboardAnimationEnded = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + gameBoardSquareWait.duration) {
+                self.gamboardAnimationEnded = true
+            }
         }
         
         // 2
@@ -767,7 +770,6 @@ class GameScene: SKScene {
                 animationDualButtonManager(buttonsEnabled: false)
             }
         }
-//        pathFindingAnimationsAndSquareColoring()
         game.update(time: currentTime)
     }
     
