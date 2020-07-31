@@ -42,7 +42,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             defaults.set(legendData, forKey: "Legend Preferences")
             defaults.set(2, forKey: "Snake Speed Text Setting")
             defaults.set(0.25, forKey: "Snake Move Speed")
-            defaults.set(true, forKey: "Food Weight Setting")
+//            defaults.set(true, forKey: "Food Weight Setting")
             defaults.set(true, forKey: "Food Count Setting")
             defaults.set(false, forKey: "God Button On Setting")
             defaults.set(true, forKey: "Volume On Setting")
