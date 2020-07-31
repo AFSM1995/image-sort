@@ -19,7 +19,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var clearPathButton: UIButton!
     @IBOutlet weak var godModeButton: UIButton!
     @IBOutlet weak var snakeSpeedButton: UIButton!
-    @IBOutlet weak var foodWeightButton: UIButton!
+    @IBOutlet weak var squareSizeButton: UIButton!
     @IBOutlet weak var foodCountButton: UIButton!
     
     // Icon Buttons
@@ -46,8 +46,8 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     func loadButtonStyling() {
         var options = ["Speed: Slow", "Speed: Normal", "Speed: Fast", "Speed: Extreme"]
         fourOptionButtonLoader(targetButton: snakeSpeedButton, key: "Snake Speed Text Setting", optionArray: options)
-        options = ["Food Weight: 1", "Food Weight: 2", "Food Weight: 3", "Food Weight: 5"]
-        fourOptionButtonLoader(targetButton: foodWeightButton, key: "Food Weight Setting", optionArray: options)
+        options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large", "Size: One Row"]
+        fiveOptionButtonLoader(targetButton: squareSizeButton, key: "Food Weight Setting", optionArray: options)
         options = ["Food Count: 1", "Food Count: 2", "Food Count: 3", "Food Count: 5"]
         fourOptionButtonLoader(targetButton: foodCountButton, key: "Food Count Setting", optionArray: options)
         
@@ -118,9 +118,9 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         fourOptionButtonResponder(sender, isSpeedButton: true, key: "Snake Speed Text Setting", optionArray: options)
     }
     
-    @IBAction func foodWeightButtonTapped(_ sender: UIButton) {
-        let options = ["Food Weight: 1", "Food Weight: 2", "Food Weight: 3", "Food Weight: 5"]
-        fourOptionButtonResponder(sender, isSpeedButton: false, key: "Food Weight Setting", optionArray: options)
+    @IBAction func squareSizeButtonTapped(_ sender: UIButton) {
+        let options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large", "Size: One Row"]
+        fiveOptionButtonResponder(sender, isSpeedButton: false, key: "Food Weight Setting", optionArray: options)
     }
     
     @IBAction func foodCountButtonTapped(_ sender: UIButton) {

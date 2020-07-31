@@ -243,7 +243,7 @@ class GameScene: SKScene {
             self.addChild(gameBackground)
         }
         
-        let squareWidth: CGFloat = 35
+        let squareWidth: CGFloat = 51
         // Creates the correct number of rows and columns based on screen size.
         // temp removal
         let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17

@@ -331,11 +331,11 @@
                                                         <rect key="frame" x="205" y="0.0" width="195" height="40"/>
                                                         <color key="backgroundColor" name="UI Button"/>
                                                         <fontDescription key="fontDescription" name="Dogica_Pixel" family="Dogica Pixel" pointSize="11"/>
-                                                        <state key="normal" title="Food Weight: 1">
+                                                        <state key="normal" title="Size: Small">
                                                             <color key="titleColor" name="Text"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="foodWeightButtonTapped:" destination="x7L-u7-4Ti" eventType="touchUpInside" id="HQ6-GL-d6S"/>
+                                                            <action selector="squareSizeButtonTapped:" destination="x7L-u7-4Ti" eventType="touchUpInside" id="HQ6-GL-d6S"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -625,13 +625,13 @@
                         <outlet property="clearPathButton" destination="A0B-4l-xoA" id="yvY-C1-V4t"/>
                         <outlet property="darkOrLightModeButton" destination="NXh-5F-g45" id="bRt-7t-iWt"/>
                         <outlet property="foodCountButton" destination="dca-WQ-y2k" id="Dux-Oa-fPG"/>
-                        <outlet property="foodWeightButton" destination="hDw-Gg-rpE" id="erG-Iv-rgd"/>
                         <outlet property="godModeButton" destination="Iw0-3b-GoY" id="Ckc-gV-Yki"/>
                         <outlet property="leftView" destination="gzl-h0-Vcb" id="OkJ-Dt-LNb"/>
                         <outlet property="returnButton" destination="8uq-B1-7Ui" id="SHd-6Z-lhm"/>
                         <outlet property="rightView" destination="xDg-9d-HTP" id="mW3-Gc-OAn"/>
                         <outlet property="snakeSpeedButton" destination="2Q6-95-HQk" id="gyA-vP-cVS"/>
                         <outlet property="soundButton" destination="rF9-Fn-yKR" id="bBc-g9-Njf"/>
+                        <outlet property="squareSizeButton" destination="hDw-Gg-rpE" id="erG-Iv-rgd"/>
                         <outlet property="stepOrPlayPauseButton" destination="GfL-tN-qLN" id="o3V-bq-97q"/>
                         <outlet property="tableVIew" destination="PIt-eS-dbd" id="5F5-F9-MYi"/>
                     </connections>
