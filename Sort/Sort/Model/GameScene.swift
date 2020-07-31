@@ -450,33 +450,38 @@ class GameScene: SKScene {
         }
         
         // 3
+        var randomAnimationCalled = false
         func snakeBodyAnimationEnding(squareAndLocation: SkNodeLocationAndColor, snakeBodySquareWait: SKAction) {
             squareAndLocation.square.run(SKAction.colorTransitionActionFill(fromColor: .white, toColor: squareAndLocation.color, duration: 0.5))
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + snakeBodySquareWait.duration) {
-//                self.gamboardAnimationEnded = true
-                foodSquareAnimationBegining()
+                if randomAnimationCalled == false {
+                    foodSquareAnimationBegining()
+                    randomAnimationCalled = true
+                }
             }
         }
         
         // 4
         func foodSquareAnimationBegining() {
+            var randomSquareWait = SKAction()
             
+            for (squareIndex, squareLocationAndColor) in game.shuffledSquareShades.enumerated() {
+                squareLocationAndColor.square.run(.sequence([randomSquareWait, animationSequanceManager(animation: 1)]), completion: {foodSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, randomSquareWait: randomSquareWait)})
+                randomSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
+            }
         }
         
         // 5
-//        func foodSquareAnimationEnding(square: SKShapeNode) {
-//            square.run(.sequence([animationSequanceManager(animation: 2)]))
-////            square.fillColor = foodSquareColor
+        func foodSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor, randomSquareWait: SKAction) {
+            squareLocationAndColor.square.run(SKAction.colorTransitionActionFill(fromColor: .red, toColor: squareLocationAndColor.color, duration: 0.5))
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + randomSquareWait.duration) {
 //
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                self.firstAnimationSequanceHasCompleted = true
-//                self.gamboardAnimationEnded = true
-//                if self.pathFindingAlgorithimChoice == 0 {
-//                    // No pathfinding animation on player node, enable the buttons after inital animation.
-//                    self.animationDualButtonManager(buttonsEnabled: true)
-//                }
+////                foodSquareAnimationBegining()
 //            }
-//        }
+        }
+        
         gameBoardAnimation(gameBoard)
     }
     
