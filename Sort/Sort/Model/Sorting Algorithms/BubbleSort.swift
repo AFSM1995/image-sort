@@ -78,7 +78,11 @@ class BubbleSort {
         }
         
         for (index, i) in (scene.gameBoard).enumerated() {
-            i.square.fillColor = tempStructure[index]
+            if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
+                if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
+                    i.square.fillColor = scene.gameboardSquareColor
+                }
+            }
         }
         
         return swapSquareAndColor

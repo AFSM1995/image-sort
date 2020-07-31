@@ -452,7 +452,7 @@ class GameScene: SKScene {
         // 3
         var randomAnimationCalled = false
         func snakeBodyAnimationEnding(squareAndLocation: SkNodeLocationAndColor, snakeBodySquareWait: SKAction) {
-            squareAndLocation.square.run(SKAction.colorTransitionActionFill(fromColor: .white, toColor: squareAndLocation.color, duration: 0.5))
+            squareAndLocation.square.run(SKAction.colorTransitionActionFill(fromColor: gameboardSquareColor, toColor: squareAndLocation.color, duration: 0.5))
             
             DispatchQueue.main.asyncAfter(deadline: .now() + snakeBodySquareWait.duration) {
                 if randomAnimationCalled == false {
@@ -474,12 +474,11 @@ class GameScene: SKScene {
         
         // 5
         func foodSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor, randomSquareWait: SKAction) {
-            squareLocationAndColor.square.run(SKAction.colorTransitionActionFill(fromColor: .red, toColor: squareLocationAndColor.color, duration: 0.5))
+            squareLocationAndColor.square.run(SKAction.colorTransitionActionFill(fromColor: squareLocationAndColor.square.fillColor, toColor: squareLocationAndColor.color, duration: 0.5))
             
-//            DispatchQueue.main.asyncAfter(deadline: .now() + randomSquareWait.duration) {
-//
-////                foodSquareAnimationBegining()
-//            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + randomSquareWait.duration) {
+                self.gamboardAnimationEnded = true
+            }
         }
         
         gameBoardAnimation(gameBoard)
