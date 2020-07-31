@@ -445,7 +445,7 @@ class GameScene: SKScene {
             
             for (squareIndex, squareLocationAndColor) in game.orderedSquareShades.enumerated() {
                 squareLocationAndColor.square.run(.sequence([snakeBodySquareWait, animationSequanceManager(animation: 1)]), completion: {snakeBodyAnimationEnding(squareAndLocation: squareLocationAndColor, snakeBodySquareWait: snakeBodySquareWait)})
-                snakeBodySquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
+                snakeBodySquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.002) // 0.085
             }
         }
         
@@ -468,7 +468,7 @@ class GameScene: SKScene {
             
             for (squareIndex, squareLocationAndColor) in game.shuffledSquareShades.enumerated() {
                 squareLocationAndColor.square.run(.sequence([randomSquareWait, animationSequanceManager(animation: 1)]), completion: {foodSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, randomSquareWait: randomSquareWait)})
-                randomSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
+                randomSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.002) // 0.085
             }
         }
         

@@ -350,17 +350,25 @@ class GameManager {
         barrierNodesWaitingToBeRemoved.removeAll()
     }
     
+    var gameAnimationsWereRemoved = false
     func checkIfPaused() {
         if UserDefaults.standard.bool(forKey: "Game Is Paused Setting") && scene.gamboardAnimationEnded {
             for i in scene.gameBoard {
                 i.square.removeAllActions()
+                i.square.strokeColor = .clear
+                i.square.run(SKAction.scale(to: 1.0, duration: 0))
             }
+            gameAnimationsWereRemoved = true
             scene.squareColoringWhileSnakeIsMoving()
             paused = true
         } else {
-            scene.animatedVisitedSquareCount = 0
-            scene.animatedQueuedSquareCount = 0
-            gameSpeed = UserDefaults.standard.float(forKey: "Snake Move Speed")
+            if gameAnimationsWereRemoved == true {
+                pathSelector()
+                gameAnimationsWereRemoved = false
+            }
+//            scene.animatedVisitedSquareCount = 0
+//            scene.animatedQueuedSquareCount = 0
+//            gameSpeed = UserDefaults.standard.float(forKey: "Snake Move Speed")
             paused = false
         }
     }
