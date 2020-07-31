@@ -390,22 +390,29 @@ class GameScene: SKScene {
                 let squareLocation = Tuple(x: Int(squareLocationAsString![0])!, y: Int(squareLocationAsString![1])!)
                 let vibration = UIImpactFeedbackGenerator(style: .medium)
                 
+                var redOne: CGFloat = 0
+                var greenOne: CGFloat = 0
+                var blueOne: CGFloat = 0
+                var alphaOne: CGFloat = 0
+                
                 if squareLocation.x != 0 && squareLocation.x != (rowCount - 1) {
                     if squareLocation.y != 0 && squareLocation.y != (columnCount - 1) {
                         if !(IsSquareOccupied(squareLocation: squareLocation)) {
                             if self.viewController?.barrierButton.isEnabled == true {
+                                selectedSquare.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
                                 if defaults.bool(forKey: "Add Barrier Mode On Setting") {
 //                                    updateScoreButtonText()
-                                    game.barrierNodesWaitingToBeDisplayed.append(SkNodeAndLocation(square: selectedSquare, location: squareLocation))
-//                                    selectedSquare.fillColor = barrierSquareColor
+//                                    game.barrierNodesWaitingToBeDisplayed.append(SkNodeAndLocation(square: selectedSquare, location: squareLocation))
+                                    selectedSquare.fillColor = selectedSquare.fillColor.withAlphaComponent(alphaOne + 0.05)
 //                                    colorTheBarriers()
-                                    game.matrix[squareLocation.x][squareLocation.y] = 7
+//                                    game.matrix[squareLocation.x][squareLocation.y] = 7
                                 } else {
 //                                    updateScoreButtonText()
-                                    game.barrierNodesWaitingToBeRemoved.append(SkNodeAndLocation(square: selectedSquare, location: squareLocation))
-                                    selectedSquare.fillColor = gameboardSquareColor
-                                    colorTheBarriers()
-                                    game.matrix[squareLocation.x][squareLocation.y] = 0
+//                                    game.barrierNodesWaitingToBeRemoved.append(SkNodeAndLocation(square: selectedSquare, location: squareLocation))
+//                                    selectedSquare.fillColor = gameboardSquareColor
+//                                    colorTheBarriers()
+                                    selectedSquare.fillColor = selectedSquare.fillColor.withAlphaComponent(alphaOne - 0.05)
+//                                    game.matrix[squareLocation.x][squareLocation.y] = 0
                                 }
                             }
                             vibration.impactOccurred()
