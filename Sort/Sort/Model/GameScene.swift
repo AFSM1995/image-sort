@@ -428,48 +428,40 @@ class GameScene: SKScene {
             for (squareIndex, squareAndLocation) in nodes.enumerated() {
                 if squareIndex != lastIndex {
                     squareAndLocation.square.run(.sequence([gameBoardSquareWait, animationSequanceManager(animation: 1)]))
-                } else {
-//                    squareAndLocation.square.run(.sequence([gameBoardSquareWait, animationSequanceManager(animation: 1)]), completion: {snakeBodyAnimationBegining()})
                 }
-                gameBoardSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.003
+                gameBoardSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.003) // 0.003
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + gameBoardSquareWait.duration) {
-                self.gamboardAnimationEnded = true
+//                self.gamboardAnimationEnded = true
+                snakeBodyAnimationBegining()
             }
         }
         
         // 2
-//        func snakeBodyAnimationBegining() {
+        func snakeBodyAnimationBegining() {
 //            let lastIndex = ((game.snakeBodyPos.count) - 1)
-//            var snakeBodySquareWait = SKAction()
-//
-//            for (squareIndex, squareAndLocation) in game.snakeBodyPos.enumerated() {
-//                squareAndLocation.square.run(.sequence([snakeBodySquareWait]), completion: {snakeBodyAnimationEnding(square: squareAndLocation.square, squareIndex: squareIndex, lastIndex: lastIndex)})
-//                snakeBodySquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.0085) // 0.085
-//            }
-//        }
+            var snakeBodySquareWait = SKAction()
+            
+            for (squareIndex, squareLocationAndColor) in game.orderedSquareShades.enumerated() {
+                squareLocationAndColor.square.run(.sequence([snakeBodySquareWait, animationSequanceManager(animation: 1)]), completion: {snakeBodyAnimationEnding(squareAndLocation: squareLocationAndColor, snakeBodySquareWait: snakeBodySquareWait)})
+                snakeBodySquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
+            }
+        }
         
         // 3
-//        func snakeBodyAnimationEnding(square: SKShapeNode, squareIndex: Int, lastIndex: Int) {
-//            square.run(.sequence([animationSequanceManager(animation: 2)]))
-//            if squareIndex == 0 {
-////                square.fillColor = snakeHeadSquareColor
-//            } else {
-////                square.fillColor = snakeBodySquareColor
-//            }
-//
-//            if squareIndex == lastIndex {
-//                foodSquareAnimationBegining()
-//            }
-//        }
+        func snakeBodyAnimationEnding(squareAndLocation: SkNodeLocationAndColor, snakeBodySquareWait: SKAction) {
+            squareAndLocation.square.run(SKAction.colorTransitionActionFill(fromColor: .white, toColor: squareAndLocation.color, duration: 0.5))
+            DispatchQueue.main.asyncAfter(deadline: .now() + snakeBodySquareWait.duration) {
+//                self.gamboardAnimationEnded = true
+                foodSquareAnimationBegining()
+            }
+        }
         
         // 4
-//        func foodSquareAnimationBegining() {
-//            for squareAndLocation in game.foodPosition {
-//                squareAndLocation.square.run(.sequence([animationSequanceManager(animation: 3)]), completion: {foodSquareAnimationEnding(square: squareAndLocation.square)})
-//            }
-//        }
+        func foodSquareAnimationBegining() {
+            
+        }
         
         // 5
 //        func foodSquareAnimationEnding(square: SKShapeNode) {

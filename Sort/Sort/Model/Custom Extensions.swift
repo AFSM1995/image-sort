@@ -51,8 +51,7 @@ func lerp(a : CGFloat, b : CGFloat, fraction : CGFloat) -> CGFloat {
 }
 
 extension SKAction {
-    static func colorTransitionAction(fromColor : UIColor, toColor : UIColor, duration : Double = 0.4) -> SKAction
-    {
+    static func colorTransitionAction(fromColor : UIColor, toColor : UIColor, duration : Double = 0.4) -> SKAction {
         return SKAction.customAction(withDuration: duration, actionBlock: { (node : SKNode!, elapsedTime : CGFloat) -> Void in
             let fraction = CGFloat(elapsedTime / CGFloat(duration))
             let startColorComponents = fromColor.toComponents()
@@ -62,6 +61,20 @@ extension SKAction {
                                      blue: lerp(a: startColorComponents.blue, b: endColorComponents.blue, fraction: fraction),
                                      alpha: lerp(a: startColorComponents.alpha, b: endColorComponents.alpha, fraction: fraction))
             (node as? SKShapeNode)?.strokeColor = transColor
+        }
+        )
+    }
+    
+    static func colorTransitionActionFill(fromColor : UIColor, toColor : UIColor, duration : Double = 0.4) -> SKAction {
+        return SKAction.customAction(withDuration: duration, actionBlock: { (node : SKNode!, elapsedTime : CGFloat) -> Void in
+            let fraction = CGFloat(elapsedTime / CGFloat(duration))
+            let startColorComponents = fromColor.toComponents()
+            let endColorComponents = toColor.toComponents()
+            let transColor = UIColor(red: lerp(a: startColorComponents.red, b: endColorComponents.red, fraction: fraction),
+                                     green: lerp(a: startColorComponents.green, b: endColorComponents.green, fraction: fraction),
+                                     blue: lerp(a: startColorComponents.blue, b: endColorComponents.blue, fraction: fraction),
+                                     alpha: lerp(a: startColorComponents.alpha, b: endColorComponents.alpha, fraction: fraction))
+            (node as? SKShapeNode)?.fillColor = transColor
         }
         )
     }

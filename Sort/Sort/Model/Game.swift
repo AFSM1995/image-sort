@@ -36,9 +36,6 @@ class GameManager {
     var horizontalMinBoundry = Int()
     var foodPosition: [SkNodeAndLocation] = []
     
-    // Sort
-    var randomSquare: [SkNodeAndLocation] = []
-    
     init(scene: GameScene) {
         self.scene = scene
         
@@ -47,6 +44,10 @@ class GameManager {
             self.viewController = (vc.presentedViewController as? GameScreenViewController)
         }
     }
+    
+    // Sort
+    var orderedSquareShades: [SkNodeLocationAndColor] = []
+    var shuffledSquareShades: [SkNodeLocationAndColor] = []
     
     var swapSquareAndColor = [[SkNodeLocationAndColor]]()
     func initaitateRandomSquares() {
@@ -58,12 +59,13 @@ class GameManager {
         
         // Animation 1: Displays colors in order
         // Use pointers instead of array value removals.
+//        var orderedSquareShades: [UIColor] = []
         var colorArrayTwo = colorArray
         for (skNodeAndLocation) in scene.gameBoard {
             if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
                 if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
                     skNodeAndLocation.square.fillColor = scene.squareColor.withAlphaComponent(CGFloat(colorArrayTwo.first ?? 1.0))
-                    randomSquare.append(SkNodeAndLocation(square: skNodeAndLocation.square, location: skNodeAndLocation.location))
+                    orderedSquareShades.append(SkNodeLocationAndColor(square: skNodeAndLocation.square, location: skNodeAndLocation.location, color: skNodeAndLocation.square.fillColor))
                     colorArrayTwo.removeFirst()
                 }
             }
@@ -75,7 +77,7 @@ class GameManager {
             if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
                 if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
                     skNodeAndLocation.square.fillColor = scene.squareColor.withAlphaComponent(CGFloat(colorArray.first ?? 1.0))
-                    randomSquare.append(SkNodeAndLocation(square: skNodeAndLocation.square, location: skNodeAndLocation.location))
+                    shuffledSquareShades.append(SkNodeLocationAndColor(square: skNodeAndLocation.square, location: skNodeAndLocation.location, color: skNodeAndLocation.square.fillColor))
                     colorArray.removeFirst()
                 }
             }
