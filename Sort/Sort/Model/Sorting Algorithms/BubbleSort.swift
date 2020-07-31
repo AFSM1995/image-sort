@@ -22,7 +22,7 @@ class BubbleSort {
         self.scene = scene
     }
     
-    func bubbleSort(gameboard: [SkNodeAndLocation]) -> [[SkNodeLocationAndColor]] {
+    func bubbleSort(gameboard: [SkNodeAndLocation], resuming: Bool) -> [[SkNodeLocationAndColor]] {
         var isSorted = false
         
         var tempStructure: [UIColor] = []
@@ -77,10 +77,20 @@ class BubbleSort {
             }
         }
         
-        for (index, i) in (scene.gameBoard).enumerated() {
-            if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-                if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-                    i.square.fillColor = scene.gameboardSquareColor
+        if resuming == false {
+            for (index, i) in (scene.gameBoard).enumerated() {
+                if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
+                    if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
+                        i.square.fillColor = scene.gameboardSquareColor
+                    }
+                }
+            }
+        } else {
+            for (index, i) in (scene.gameBoard).enumerated() {
+                if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
+                    if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
+                        i.square.fillColor = tempStructure[index]
+                    }
                 }
             }
         }

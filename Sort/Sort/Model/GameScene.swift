@@ -115,7 +115,7 @@ class GameScene: SKScene {
                 i.square.strokeColor = .clear
                 i.square.run(SKAction.scale(to: 1.0, duration: 0))
             }
-            game.pathSelector()
+            game.pathSelector(resuming: true)
         }
         // Render the changed square color live.
         settingsChangeSquareColorManager()
@@ -737,7 +737,7 @@ class GameScene: SKScene {
             for i in gameboardEdgeSquares {
                 i.square.fillColor = gameboardSquareColor
             }
-            game.pathSelector()
+            game.pathSelector(resuming: true)
             defaults.set(false, forKey: "Settings Value Modified")
             defaults.set(false, forKey: "Settings Dismissed")
         }
