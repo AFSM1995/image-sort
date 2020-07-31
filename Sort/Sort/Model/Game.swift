@@ -351,7 +351,10 @@ class GameManager {
     }
     
     func checkIfPaused() {
-        if UserDefaults.standard.bool(forKey: "Game Is Paused Setting") {
+        if UserDefaults.standard.bool(forKey: "Game Is Paused Setting") && scene.gamboardAnimationEnded {
+            for i in scene.gameBoard {
+                i.square.removeAllActions()
+            }
             scene.squareColoringWhileSnakeIsMoving()
             paused = true
         } else {

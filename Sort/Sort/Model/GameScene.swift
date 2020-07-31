@@ -51,7 +51,7 @@ class GameScene: SKScene {
         
         game = GameManager(scene: self)
         // Disable buttons for initial animation.
-        animationDualButtonManager(buttonsEnabled: true)
+        animationDualButtonManager(buttonsEnabled: false)
         settingLoader(firstRun: true)
         createScreenLabels()
         createGameBoard()
@@ -478,6 +478,7 @@ class GameScene: SKScene {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + randomSquareWait.duration) {
                 self.gamboardAnimationEnded = true
+                self.animationDualButtonManager(buttonsEnabled: true)
             }
         }
         
@@ -761,10 +762,10 @@ class GameScene: SKScene {
 //                UserDefaults.standard.set(animatedQueuedSquareCount, forKey: "highScore")
 //                UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
             }
-            else {
-                // new
-                animationDualButtonManager(buttonsEnabled: false)
-            }
+            
+        } else {
+            // new
+//            animationDualButtonManager(buttonsEnabled: false)
         }
         game.update(time: currentTime)
     }
