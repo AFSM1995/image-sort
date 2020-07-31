@@ -46,8 +46,8 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     func loadButtonStyling() {
         var options = ["Speed: Slow", "Speed: Normal", "Speed: Fast", "Speed: Extreme"]
         fourOptionButtonLoader(targetButton: snakeSpeedButton, key: "Snake Speed Text Setting", optionArray: options)
-        options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large", "Size: One Row"]
-        fiveOptionButtonLoader(targetButton: squareSizeButton, key: "Square Size Setting", optionArray: options)
+        options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large"]
+        fourOptionButtonLoader(targetButton: squareSizeButton, key: "Square Size Setting", optionArray: options)
         options = ["Food Count: 1", "Food Count: 2", "Food Count: 3", "Food Count: 5"]
         fourOptionButtonLoader(targetButton: foodCountButton, key: "Food Count Setting", optionArray: options)
         
@@ -119,8 +119,8 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func squareSizeButtonTapped(_ sender: UIButton) {
-        let options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large", "Size: One Row"]
-        fiveOptionButtonResponder(sender, isSpeedButton: false, key: "Square Size Setting", optionArray: options)
+        let options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large"]
+        fourOptionButtonResponder(sender, isSpeedButton: false, key: "Square Size Setting", optionArray: options)
     }
     
     @IBAction func foodCountButtonTapped(_ sender: UIButton) {

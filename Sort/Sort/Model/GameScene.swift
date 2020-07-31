@@ -18,8 +18,11 @@ class GameScene: SKScene {
     var gameBackground: SKShapeNode!
     var gameBoard: [SkNodeAndLocation] = []
     var gameboardEdgeSquares: [SkNodeAndLocation] = []
-    var rowCount = 3 // 7.5 Temp gets updated when the gameboard gets created.
-    var columnCount = 25 // 14 Temp gets updated when the gameboard gets created.
+    var rowCount = 3
+    var columnCount = 25
+    var squareWidth = CGFloat()
+    var currentSquareSizeOption = Int()
+    var respectRowCount = false
     let pathFindingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Path Finding Algorithim")
     let mazeGeneratingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Maze Algorithim")
     
@@ -49,6 +52,8 @@ class GameScene: SKScene {
             self.viewController = (vc.presentedViewController as? GameScreenViewController)
         }
         
+        currentSquareSizeOption = UserDefaults.standard.integer(forKey: "Square Size Setting")
+        squareSizeManager(squareSizeId: currentSquareSizeOption)
         game = GameManager(scene: self)
         // Disable buttons for initial animation.
         animationDualButtonManager(buttonsEnabled: false)
@@ -103,7 +108,12 @@ class GameScene: SKScene {
 //            self.viewController?.scoreButton.layer.backgroundColor = scoreButtonColor.withAlphaComponent(0.5).cgColor
             
             // Check and respond to clear button interactions.
-//            clearButtonManager()
+//
+            let prospectSquareSizeOption = UserDefaults.standard.integer(forKey: "Square Size Setting")
+            if currentSquareSizeOption != prospectSquareSizeOption {
+                squareSizeManager(squareSizeId: prospectSquareSizeOption)
+            }
+            
             var redOne: CGFloat = 0
             var greenOne: CGFloat = 0
             var blueOne: CGFloat = 0
@@ -130,45 +140,23 @@ class GameScene: SKScene {
 //    }
     
     // Effects happen in real time.
-//    func clearButtonManager() {
-//        if defaults.bool(forKey: "Clear All Setting") {
-//            // Visually convert each square back to a gameboard square.
-//            for i in (game.displayFronteerSquareArray) {
-//                for j in i {
-//                    j.square.fillColor = gameboardSquareColor
-//                    game.matrix[j.location.x][j.location.y] = 0
-//                }
-//            }
-//
-//            // Prevent barriers from respawning.
-//            game.barrierNodesWaitingToBeDisplayed.removeAll()
-//            game.barrierNodesWaitingToBeRemoved.removeAll()
-//            clearAllWasTapped = true
-//            defaults.set(false, forKey: "Clear All Setting")
-//
-//        } else if (defaults.bool(forKey: "Clear Barrier Setting")) {
-//            // Visually convert each square back to a gameboard square.
-//            for i in (game.barrierNodesWaitingToBeDisplayed) {
-//                i.square.fillColor = gameboardSquareColor
-//                game.matrix[i.location.x][i.location.y] = 0
-//            }
-//
-//            // Prevent barriers from respawning.
-//            game.barrierNodesWaitingToBeDisplayed.removeAll()
-//            game.barrierNodesWaitingToBeRemoved.removeAll()
-//            clearBarriersWasTapped = true
-//            defaults.set(false, forKey: "Clear Barrier Setting")
-//
-//        } else if (defaults.bool(forKey: "Clear Path Setting")) {
-//            // Visually convert each square back to a gameboard square.
-//            for i in (game.displayPathSquareArray) {
-//                i.square.fillColor = gameboardSquareColor
-//                game.matrix[i.location.x][i.location.y] = 0
-//            }
-//            clearPathWasTapped = true
-//            defaults.set(false, forKey: "Clear Path Setting")
-//        }
-//    }
+    func squareSizeManager(squareSizeId: Int) {
+//        if squareSizeId == 0 {
+//            squareWidth: CGFloat = 25
+//        } else if
+        switch squareSizeId {
+        case 1:
+            squareWidth = 25
+        case 2:
+            squareWidth = 35
+        case 3:
+            squareWidth = 40
+        case 5:
+            squareWidth = 50
+        default:
+            squareWidth = 35
+        }
+    }
     
     // Contains duplicate functions.
     func settingsChangeSquareColorManager() {
@@ -243,9 +231,8 @@ class GameScene: SKScene {
             self.addChild(gameBackground)
         }
         
-        let squareWidth: CGFloat = 51
         // Creates the correct number of rows and columns based on screen size.
-        // temp removal
+        
         let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
         let realColumnCount = Int(((frame.size.width)/squareWidth).rounded(.up)) // 30
         rowCount = realRowCount
