@@ -22,7 +22,8 @@ class GameScene: SKScene {
     var columnCount = 25
     var squareWidth = CGFloat()
     var currentSquareSizeOption = Int()
-    var respectRowCount = false
+    var currentRowOrGridOption = UserDefaults.standard.bool(forKey: "Display Grid Setting")
+    var respectRowCount = Bool()
     let pathFindingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Path Finding Algorithim")
     let mazeGeneratingAlgorithimChoice = UserDefaults.standard.integer(forKey: "Selected Maze Algorithim")
     
@@ -50,6 +51,12 @@ class GameScene: SKScene {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if let vc = appDelegate.window?.rootViewController {
             self.viewController = (vc.presentedViewController as? GameScreenViewController)
+        }
+        
+        if currentRowOrGridOption == true {
+            respectRowCount = false
+        } else {
+            respectRowCount = true
         }
         
         currentSquareSizeOption = UserDefaults.standard.integer(forKey: "Square Size Setting")
@@ -110,7 +117,17 @@ class GameScene: SKScene {
             // Check and respond to clear button interactions.
 //
             let prospectSquareSizeOption = UserDefaults.standard.integer(forKey: "Square Size Setting")
-            if currentSquareSizeOption != prospectSquareSizeOption {
+            if currentSquareSizeOption != prospectSquareSizeOption || currentRowOrGridOption != defaults.bool(forKey: "Display Grid Setting") {
+                if currentRowOrGridOption != defaults.bool(forKey: "Display Grid Setting") {
+                    if defaults.bool(forKey: "Display Grid Setting") {
+                        respectRowCount = false
+                        currentRowOrGridOption = true
+                    } else {
+                        currentRowOrGridOption = false
+                        respectRowCount = true
+                        rowCount = 3
+                    }
+                }
                 squareSizeManager(squareSizeId: prospectSquareSizeOption)
                 depopulateGameBoard()
                 createGameBoard()
@@ -239,11 +256,13 @@ class GameScene: SKScene {
             self.addChild(gameBackground)
         }
         
-        // Creates the correct number of rows and columns based on screen size.
+        // Enter if grid
+        if respectRowCount == false {
+            let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
+            rowCount = realRowCount
+        }
         
-        let realRowCount = Int(((frame.size.height)/squareWidth).rounded(.up)) // 17
         let realColumnCount = Int(((frame.size.width)/squareWidth).rounded(.up)) // 30
-        rowCount = realRowCount
         columnCount = realColumnCount
         
         var matrix = [[Int]]()
@@ -338,8 +357,9 @@ class GameScene: SKScene {
 //            self.game.initiateSnakeStartingPosition()
 //            self.game.spawnFoodBlock()
             self.game.initaitateRandomSquares()
+            self.startingAnimationAndSquareColoring()
         }
-        startingAnimationAndSquareColoring()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -478,6 +498,7 @@ class GameScene: SKScene {
         func foodSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor, randomSquareWait: SKAction) {
             squareLocationAndColor.square.run(SKAction.colorTransitionActionFill(fromColor: squareLocationAndColor.square.fillColor, toColor: squareLocationAndColor.color, duration: 0.5))
             
+            // Note this is run to many way to many times.
             DispatchQueue.main.asyncAfter(deadline: .now() + randomSquareWait.duration) {
                 self.gamboardAnimationEnded = true
                 self.animationDualButtonManager(buttonsEnabled: true)
