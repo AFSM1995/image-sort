@@ -112,6 +112,10 @@ class GameScene: SKScene {
             let prospectSquareSizeOption = UserDefaults.standard.integer(forKey: "Square Size Setting")
             if currentSquareSizeOption != prospectSquareSizeOption {
                 squareSizeManager(squareSizeId: prospectSquareSizeOption)
+                depopulateGameBoard()
+                createGameBoard()
+                gamboardAnimationEnded = false
+                startTheGame()
             }
             
             var redOne: CGFloat = 0
@@ -219,7 +223,11 @@ class GameScene: SKScene {
         algorithimChoiceName.position = CGPoint(x: 0, y: 185)
         algorithimChoiceName.zPosition = 1
         self.addChild(algorithimChoiceName)
-    }   
+    }
+    
+    func depopulateGameBoard() {
+        gameBoard.removeAll()
+    }
     
     private func createGameBoard() {
         func createBackground() {
