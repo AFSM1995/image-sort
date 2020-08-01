@@ -72,6 +72,7 @@ class GameScene: SKScene {
         print("-")
     }
     
+    var boardLayoutOption = Int()
     func settingLoader(firstRun: Bool) {
         settingsWereChanged = true
         
@@ -80,6 +81,12 @@ class GameScene: SKScene {
         
         // Update pathfinding animation speed
         pathFindingAnimationSpeed = (defaults.float(forKey: "Snake Move Speed") * 2.4)
+        
+        // Update to display reset option
+        boardLayoutOption = defaults.integer(forKey: "Reset Setting")
+        if boardLayoutOption != 0 {
+            
+        }
         
         // Update square colors, seen by the user in the next frame update.
         squareColor = colors[legendData[0][1] as! Int]

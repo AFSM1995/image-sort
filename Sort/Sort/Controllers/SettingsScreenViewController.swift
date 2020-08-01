@@ -48,15 +48,15 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         fourOptionButtonLoader(targetButton: snakeSpeedButton, key: "Snake Speed Text Setting", optionArray: options)
         options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large"]
         fourOptionButtonLoader(targetButton: squareSizeButton, key: "Square Size Setting", optionArray: options)
-        options = ["No Changes", "Reset: Board", "Reset: Most", "Reser: Few", "Reset: Few Unique", "Reset: Left", "Reset: Center", "Reset: Right", "Reset: Reverse Sorted", "Reset: Sorted"]
-        tenOptionButtonLoader(targetButton: resetButton, key: "Reset Setting", optionArray: options)
+        
+        resetButton.setTitle("No Changes", for: .normal)
+        defaults.set(1, forKey: "Reset Setting")
         
         boolButtonLoader(isIconButton: false, targetButton: displayFormatButton, key: "Display Grid Setting", trueOption: "Format: Grid", falseOption: "Format: Row")
         boolButtonLoader(isIconButton: true, targetButton: soundButton, key: "Volume On Setting", trueOption: "Volume_On_Icon_Set", falseOption: "Volume_Mute_Icon_Set")
         boolButtonLoader(isIconButton: true, targetButton: stepOrPlayPauseButton, key: "Step Mode On Setting", trueOption: "Step_Icon_Set", falseOption: "Play_Icon_Set")
         boolButtonLoader(isIconButton: true, targetButton: darkOrLightModeButton, key: "Dark Mode On Setting", trueOption: "Dark_Mode_Icon_Set", falseOption: "Light_Mode_Icon_Set")
     }
-
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return legendData.count
