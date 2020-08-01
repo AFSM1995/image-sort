@@ -110,7 +110,7 @@ func fourOptionButtonLoader(targetButton: UIButton, key: String, optionArray: [S
     }
 }
 
-func fiveOptionButtonLoader(targetButton: UIButton, key: String, optionArray: [String]) {
+func sixOptionButtonLoader(targetButton: UIButton, key: String, optionArray: [String]) {
     let buttonSetting = UserDefaults.standard.integer(forKey: key)
     if buttonSetting == 1 {
         targetButton.setTitle(optionArray[0], for: .normal)
@@ -120,8 +120,10 @@ func fiveOptionButtonLoader(targetButton: UIButton, key: String, optionArray: [S
         targetButton.setTitle(optionArray[2], for: .normal)
     } else if buttonSetting == 4 {
         targetButton.setTitle(optionArray[3], for: .normal)
-    } else {
+    } else if buttonSetting == 5 {
         targetButton.setTitle(optionArray[4], for: .normal)
+    } else {
+        targetButton.setTitle(optionArray[5], for: .normal)
     }
 }
 
@@ -178,7 +180,7 @@ func fourOptionButtonResponder(_ sender: UIButton, isSpeedButton: Bool, key: Str
     changeNotifier()
 }
 
-func fiveOptionButtonResponder(_ sender: UIButton, isSpeedButton: Bool, key: String, optionArray: [String]) {
+func sixOptionButtonResponder(_ sender: UIButton, isSpeedButton: Bool, key: String, optionArray: [String]) {
     var gameMoveSpeed = Float()
     sender.tag = UserDefaults.standard.integer(forKey: key)
 
@@ -198,6 +200,10 @@ func fiveOptionButtonResponder(_ sender: UIButton, isSpeedButton: Bool, key: Str
     } else if sender.tag == 4 {
         sender.setTitle(optionArray[4], for: .normal)
         sender.tag = 5
+        if isSpeedButton {gameMoveSpeed = 0.01}
+    } else if sender.tag == 5 {
+        sender.setTitle(optionArray[5], for: .normal)
+        sender.tag = 6
         if isSpeedButton {gameMoveSpeed = 0.01}
     } else {
         sender.setTitle(optionArray[0], for: .normal)

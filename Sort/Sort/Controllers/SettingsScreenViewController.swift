@@ -17,7 +17,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     // Text Buttons
     @IBOutlet weak var clearBarrierButton: UIButton!
     @IBOutlet weak var clearPathButton: UIButton!
-    @IBOutlet weak var godModeButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var snakeSpeedButton: UIButton!
     @IBOutlet weak var squareSizeButton: UIButton!
     @IBOutlet weak var displayFormatButton: UIButton!
@@ -50,7 +50,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         fourOptionButtonLoader(targetButton: squareSizeButton, key: "Square Size Setting", optionArray: options)
         
         boolButtonLoader(isIconButton: false, targetButton: displayFormatButton, key: "Display Grid Setting", trueOption: "Format: Grid", falseOption: "Format: Row")
-        boolButtonLoader(isIconButton: false, targetButton: godModeButton, key: "God Button On Setting", trueOption: "God Mode: On", falseOption: "God Mode: Off")
+        boolButtonLoader(isIconButton: false, targetButton: resetButton, key: "God Button On Setting", trueOption: "God Mode: On", falseOption: "God Mode: Off")
         boolButtonLoader(isIconButton: true, targetButton: soundButton, key: "Volume On Setting", trueOption: "Volume_On_Icon_Set", falseOption: "Volume_Mute_Icon_Set")
         boolButtonLoader(isIconButton: true, targetButton: stepOrPlayPauseButton, key: "Step Mode On Setting", trueOption: "Step_Icon_Set", falseOption: "Play_Icon_Set")
         boolButtonLoader(isIconButton: true, targetButton: darkOrLightModeButton, key: "Dark Mode On Setting", trueOption: "Dark_Mode_Icon_Set", falseOption: "Light_Mode_Icon_Set")
@@ -126,7 +126,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         boolButtonResponder(sender, isIconButton: false, key: "Display Grid Setting", trueOption: "Format: Grid", falseOption: "Format: Row")
     }
     
-    @IBAction func godButtonTapped(_ sender: UIButton) {
+    @IBAction func resetButtonTapped(_ sender: UIButton) {
         boolButtonResponder(sender, isIconButton: false, key: "God Button On Setting", trueOption: "God Mode: On", falseOption: "God Mode: Off")
     }
     

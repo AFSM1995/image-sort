@@ -386,11 +386,11 @@
                                                 <rect key="frame" x="0.0" y="210" width="400" height="40"/>
                                                 <color key="backgroundColor" name="UI Button"/>
                                                 <fontDescription key="fontDescription" name="Dogica_Pixel" family="Dogica Pixel" pointSize="11"/>
-                                                <state key="normal" title="God Mode: Off">
+                                                <state key="normal" title="Reset: Gameboard">
                                                     <color key="titleColor" name="Text"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="godButtonTapped:" destination="x7L-u7-4Ti" eventType="touchUpInside" id="1BS-yH-73U"/>
+                                                    <action selector="resetButtonTapped:" destination="x7L-u7-4Ti" eventType="touchUpInside" id="1BS-yH-73U"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -625,8 +625,8 @@
                         <outlet property="clearPathButton" destination="A0B-4l-xoA" id="yvY-C1-V4t"/>
                         <outlet property="darkOrLightModeButton" destination="NXh-5F-g45" id="bRt-7t-iWt"/>
                         <outlet property="displayFormatButton" destination="dca-WQ-y2k" id="Dux-Oa-fPG"/>
-                        <outlet property="godModeButton" destination="Iw0-3b-GoY" id="Ckc-gV-Yki"/>
                         <outlet property="leftView" destination="gzl-h0-Vcb" id="OkJ-Dt-LNb"/>
+                        <outlet property="resetButton" destination="Iw0-3b-GoY" id="Ckc-gV-Yki"/>
                         <outlet property="returnButton" destination="8uq-B1-7Ui" id="SHd-6Z-lhm"/>
                         <outlet property="rightView" destination="xDg-9d-HTP" id="mW3-Gc-OAn"/>
                         <outlet property="snakeSpeedButton" destination="2Q6-95-HQk" id="gyA-vP-cVS"/>
