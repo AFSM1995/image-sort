@@ -110,7 +110,7 @@ func fourOptionButtonLoader(targetButton: UIButton, key: String, optionArray: [S
     }
 }
 
-func sixOptionButtonLoader(targetButton: UIButton, key: String, optionArray: [String]) {
+func tenOptionButtonLoader(targetButton: UIButton, key: String, optionArray: [String]) {
     let buttonSetting = UserDefaults.standard.integer(forKey: key)
     if buttonSetting == 1 {
         targetButton.setTitle(optionArray[0], for: .normal)
@@ -122,8 +122,16 @@ func sixOptionButtonLoader(targetButton: UIButton, key: String, optionArray: [St
         targetButton.setTitle(optionArray[3], for: .normal)
     } else if buttonSetting == 5 {
         targetButton.setTitle(optionArray[4], for: .normal)
-    } else {
+    } else if buttonSetting == 6 {
         targetButton.setTitle(optionArray[5], for: .normal)
+    } else if buttonSetting == 7 {
+        targetButton.setTitle(optionArray[6], for: .normal)
+    } else if buttonSetting == 8 {
+        targetButton.setTitle(optionArray[7], for: .normal)
+    } else if buttonSetting == 9 {
+        targetButton.setTitle(optionArray[8], for: .normal)
+    } else {
+        targetButton.setTitle(optionArray[9], for: .normal)
     }
 }
 
@@ -180,7 +188,7 @@ func fourOptionButtonResponder(_ sender: UIButton, isSpeedButton: Bool, key: Str
     changeNotifier()
 }
 
-func sixOptionButtonResponder(_ sender: UIButton, isSpeedButton: Bool, key: String, optionArray: [String]) {
+func tenOptionButtonResponder(_ sender: UIButton, isSpeedButton: Bool, key: String, optionArray: [String]) {
     var gameMoveSpeed = Float()
     sender.tag = UserDefaults.standard.integer(forKey: key)
 
@@ -204,6 +212,22 @@ func sixOptionButtonResponder(_ sender: UIButton, isSpeedButton: Bool, key: Stri
     } else if sender.tag == 5 {
         sender.setTitle(optionArray[5], for: .normal)
         sender.tag = 6
+        if isSpeedButton {gameMoveSpeed = 0.01}
+    } else if sender.tag == 6 {
+        sender.setTitle(optionArray[6], for: .normal)
+        sender.tag = 7
+        if isSpeedButton {gameMoveSpeed = 0.01}
+    } else if sender.tag == 7 {
+        sender.setTitle(optionArray[7], for: .normal)
+        sender.tag = 8
+        if isSpeedButton {gameMoveSpeed = 0.01}
+    } else if sender.tag == 8 {
+        sender.setTitle(optionArray[8], for: .normal)
+        sender.tag = 9
+        if isSpeedButton {gameMoveSpeed = 0.01}
+    } else if sender.tag == 9 {
+        sender.setTitle(optionArray[9], for: .normal)
+        sender.tag = 10
         if isSpeedButton {gameMoveSpeed = 0.01}
     } else {
         sender.setTitle(optionArray[0], for: .normal)

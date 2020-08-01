@@ -48,9 +48,10 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         fourOptionButtonLoader(targetButton: snakeSpeedButton, key: "Snake Speed Text Setting", optionArray: options)
         options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large"]
         fourOptionButtonLoader(targetButton: squareSizeButton, key: "Square Size Setting", optionArray: options)
+        options = ["No Changes", "Reset: Board", "Reset: Most", "Reser: Few", "Reset: Few Unique", "Reset: Left", "Reset: Center", "Reset: Right", "Reset: Reverse Sorted", "Reset: Sorted"]
+        tenOptionButtonLoader(targetButton: resetButton, key: "Reset Setting", optionArray: options)
         
         boolButtonLoader(isIconButton: false, targetButton: displayFormatButton, key: "Display Grid Setting", trueOption: "Format: Grid", falseOption: "Format: Row")
-        boolButtonLoader(isIconButton: false, targetButton: resetButton, key: "God Button On Setting", trueOption: "God Mode: On", falseOption: "God Mode: Off")
         boolButtonLoader(isIconButton: true, targetButton: soundButton, key: "Volume On Setting", trueOption: "Volume_On_Icon_Set", falseOption: "Volume_Mute_Icon_Set")
         boolButtonLoader(isIconButton: true, targetButton: stepOrPlayPauseButton, key: "Step Mode On Setting", trueOption: "Step_Icon_Set", falseOption: "Play_Icon_Set")
         boolButtonLoader(isIconButton: true, targetButton: darkOrLightModeButton, key: "Dark Mode On Setting", trueOption: "Dark_Mode_Icon_Set", falseOption: "Light_Mode_Icon_Set")
@@ -127,7 +128,8 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func resetButtonTapped(_ sender: UIButton) {
-        boolButtonResponder(sender, isIconButton: false, key: "God Button On Setting", trueOption: "God Mode: On", falseOption: "God Mode: Off")
+        let options = ["No Changes", "Reset: Board", "Reset: Most", "Reser: Few", "Reset: Few Unique", "Reset: Left", "Reset: Center", "Reset: Right", "Reset: Reverse Sorted", "Reset: Sorted"]
+        tenOptionButtonResponder(sender, isSpeedButton: false, key: "Reset Setting", optionArray: options)
     }
     
     @IBAction func returnButtonTapped(_ sender: UIButton) {
