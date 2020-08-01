@@ -20,7 +20,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var godModeButton: UIButton!
     @IBOutlet weak var snakeSpeedButton: UIButton!
     @IBOutlet weak var squareSizeButton: UIButton!
-    @IBOutlet weak var foodCountButton: UIButton!
+    @IBOutlet weak var displayFormatButton: UIButton!
     
     // Icon Buttons
     @IBOutlet weak var returnButton: UIButton!
@@ -48,9 +48,8 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         fourOptionButtonLoader(targetButton: snakeSpeedButton, key: "Snake Speed Text Setting", optionArray: options)
         options = ["Size: Extra Small", "Size: Small", "Size: Medium", "Size: Large"]
         fourOptionButtonLoader(targetButton: squareSizeButton, key: "Square Size Setting", optionArray: options)
-        options = ["Food Count: 1", "Food Count: 2", "Food Count: 3", "Food Count: 5"]
-        fourOptionButtonLoader(targetButton: foodCountButton, key: "Food Count Setting", optionArray: options)
         
+        boolButtonLoader(isIconButton: false, targetButton: displayFormatButton, key: "Display Grid Setting", trueOption: "Format: Grid", falseOption: "Format: Row")
         boolButtonLoader(isIconButton: false, targetButton: godModeButton, key: "God Button On Setting", trueOption: "God Mode: On", falseOption: "God Mode: Off")
         boolButtonLoader(isIconButton: true, targetButton: soundButton, key: "Volume On Setting", trueOption: "Volume_On_Icon_Set", falseOption: "Volume_Mute_Icon_Set")
         boolButtonLoader(isIconButton: true, targetButton: stepOrPlayPauseButton, key: "Step Mode On Setting", trueOption: "Step_Icon_Set", falseOption: "Play_Icon_Set")
@@ -123,9 +122,8 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         fourOptionButtonResponder(sender, isSpeedButton: false, key: "Square Size Setting", optionArray: options)
     }
     
-    @IBAction func foodCountButtonTapped(_ sender: UIButton) {
-        let options = ["Food Count: 1", "Food Count: 2", "Food Count: 3", "Food Count: 5"]
-        fourOptionButtonResponder(sender, isSpeedButton: false, key: "Food Count Setting", optionArray: options)
+    @IBAction func displayFormatButtonTapped(_ sender: UIButton) {
+        boolButtonResponder(sender, isIconButton: false, key: "Display Grid Setting", trueOption: "Format: Grid", falseOption: "Format: Row")
     }
     
     @IBAction func godButtonTapped(_ sender: UIButton) {
