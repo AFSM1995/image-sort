@@ -84,9 +84,6 @@ class GameScene: SKScene {
         
         // Update to display reset option
         boardLayoutOption = defaults.integer(forKey: "Reset Setting")
-        if boardLayoutOption != 0 {
-            
-        }
         
         // Update square colors, seen by the user in the next frame update.
         squareColor = colors[legendData[0][1] as! Int]

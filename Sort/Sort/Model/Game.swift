@@ -71,8 +71,35 @@ class GameManager {
             }
         }
         
+        // 2 Board
+        // 5 Few Unique
+        // 6 Left
+        // 7 Center
+        // 8 Right
+        // 9 Reverse Sorted
+        // 10 Sorted
+        
+        if scene.boardLayoutOption == 3 { // 3 Most
+            let arrayCount = Int(colorArray.count/6)
+            let upperSortedSquares = (colorArray.count) - arrayCount
+            colorArray[arrayCount...upperSortedSquares].shuffle()
+        } else if scene.boardLayoutOption == 4 { // 4 Few
+            let arrayCount = Int(colorArray.count/6)
+            let upperSortedSquares = (colorArray.count) - arrayCount
+            colorArray[...arrayCount].shuffle()
+            colorArray[upperSortedSquares...].shuffle()
+        } else if scene.boardLayoutOption == 6 { // 6 Top
+            let validTopSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
+            colorArray[...(validTopSquares - 1)].shuffle()
+        } else if scene.boardLayoutOption == 8 { // 6 Bottom
+           let validBottomSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
+            colorArray[((colorArray.count - validBottomSquares) + 1)...].shuffle()
+        }
+//        else {
+//            colorArray.shuffle()
+//        }
+        
         // Animation 2: Squares are suffled
-        colorArray.shuffle()
         for (skNodeAndLocation) in scene.gameBoard {
             if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
                 if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
