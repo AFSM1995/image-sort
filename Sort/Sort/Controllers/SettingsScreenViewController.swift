@@ -16,7 +16,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     
     // Text Buttons
     @IBOutlet weak var clearBarrierButton: UIButton!
-    @IBOutlet weak var clearPathButton: UIButton!
+    @IBOutlet weak var animationButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var snakeSpeedButton: UIButton!
     @IBOutlet weak var squareSizeButton: UIButton!
@@ -96,7 +96,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     @IBAction func clearAllButtonTapped(_ sender: UIButton) {
         sender.setTitle("Gameboard Cleared", for: .normal)
         clearBarrierButton.setTitle("Barriers Cleared", for: .normal)
-        clearPathButton.setTitle("Path Cleared", for: .normal)
+//        animationButton.setTitle("Path Cleared", for: .normal)
         defaults.set(true, forKey: "Clear All Setting")
         defaults.set(true, forKey: "Settings Value Modified")
     }
@@ -107,10 +107,10 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         defaults.set(true, forKey: "Settings Value Modified")
     }
     
-    @IBAction func clearPathButtonTapped(_ sender: UIButton) {
-        sender.setTitle("Path Cleared", for: .normal)
-        defaults.set(true, forKey: "Clear Path Setting")
-        defaults.set(true, forKey: "Settings Value Modified")
+    @IBAction func animationButtonTapped(_ sender: UIButton) {
+//        sender.setTitle("Path Cleared", for: .normal)
+//        defaults.set(true, forKey: "Clear Path Setting")
+//        defaults.set(true, forKey: "Settings Value Modified")
     }
     
     @IBAction func snakeSpeedButtonTapped(_ sender: UIButton) {
