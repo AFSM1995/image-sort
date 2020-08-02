@@ -50,16 +50,29 @@ class GameManager {
     var shuffledSquareShades: [SkNodeLocationAndColor] = []
     
     var swapSquareAndColor = [[SkNodeLocationAndColor]]()
+    
+    func roundUp(factor: Int, n: Int) -> Int {
+        return (n + 24) / 25 * 25;
+    }
+    
     func initaitateRandomSquares() {
         var colorArray = [Float]()
         let playableGameboardSize = scene!.playableGameboardSize
-        for i in 0...playableGameboardSize {
-            colorArray.append(1 - Float(i)/Float(playableGameboardSize))
+        
+        if scene.boardLayoutOption == 5 { // 5 Few Unique
+            let divideFactor = playableGameboardSize/6
+            for i in 1...playableGameboardSize+1 {
+                let newI = roundUp(factor: divideFactor, n: i)
+                colorArray.append(1 - Float(newI)/Float(playableGameboardSize))
+            }
+        } else {
+            for i in 0...playableGameboardSize {
+                colorArray.append(1 - Float(i)/Float(playableGameboardSize))
+            }
         }
         
         // Animation 1: Displays colors in order
         // Use pointers instead of array value removals.
-//        var orderedSquareShades: [UIColor] = []
         var colorArrayTwo = colorArray
         for (skNodeAndLocation) in scene.gameBoard {
             if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
@@ -71,9 +84,7 @@ class GameManager {
             }
         }
         
-        // 5 Few Unique
-        
-        if scene.boardLayoutOption == 2 { // Board
+        if scene.boardLayoutOption == 1 || scene.boardLayoutOption == 2 { // Board
             colorArray.shuffle()
         } else if scene.boardLayoutOption == 3 { // 3 Most
             let arrayCount = Int(colorArray.count/6)
@@ -96,7 +107,7 @@ class GameManager {
         } else if scene.boardLayoutOption == 9 { // 9 Reverse Sorted
             colorArray.reverse()
         } else if scene.boardLayoutOption == 10 { // 10 Sorted
-            
+            // Do nothing
         }
         
         // Animation 2: Squares are suffled
