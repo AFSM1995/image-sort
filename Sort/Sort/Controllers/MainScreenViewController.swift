@@ -46,7 +46,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             defaults.set(true, forKey: "Food Count Setting")
             defaults.set(false, forKey: "God Button On Setting")
             defaults.set(true, forKey: "Volume On Setting")
-            defaults.set(false, forKey: "Step Mode On Setting")
+            defaults.set(false, forKey: "Vibrate On Setting")
             defaults.set(true, forKey: "Dark Mode On Setting")
             defaults.set(true, forKey: "Not First Launch")
             defaults.set(true, forKey: "Game Is Paused Setting")
