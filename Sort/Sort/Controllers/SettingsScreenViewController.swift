@@ -128,7 +128,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @IBAction func resetButtonTapped(_ sender: UIButton) {
-        let options = ["No Changes", "Reset: Board", "Reset: Most", "Reser: Few", "Reset: Few Unique", "Reset: Left", "Reset: Center", "Reset: Right", "Reset: Reverse Sorted", "Reset: Sorted"]
+        let options = ["No Changes", "Randomize: Board", "Randomize: Most", "Randomize: Few", "Randomize: Few Unique", "Randomize: Top", "Randomize: Center", "Randomize: Bottom", "Randomize: Reverse Sorted", "Randomize: Sorted"]
         tenOptionButtonResponder(sender, isSpeedButton: false, key: "Reset Setting", optionArray: options)
     }
     

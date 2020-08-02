@@ -91,7 +91,10 @@ class GameManager {
         } else if scene.boardLayoutOption == 6 { // 6 Top
             let validTopSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
             colorArray[...(validTopSquares - 1)].shuffle()
-        } else if scene.boardLayoutOption == 8 { // 6 Bottom
+        } else if scene.boardLayoutOption == 7 { // 7 Center
+           let validCenterSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
+            colorArray[validCenterSquares...((colorArray.count - validCenterSquares) - 2)].shuffle()
+        } else if scene.boardLayoutOption == 8 { // 8 Bottom
            let validBottomSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
             colorArray[((colorArray.count - validBottomSquares) + 1)...].shuffle()
         }
