@@ -25,7 +25,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     // Icon Buttons
     @IBOutlet weak var returnButton: UIButton!
     @IBOutlet weak var soundButton: UIButton!
-    @IBOutlet weak var stepOrPlayPauseButton: UIButton!
+    @IBOutlet weak var vibrationButton: UIButton!
     @IBOutlet weak var darkOrLightModeButton: UIButton!
     
     weak var gameScreenViewController: GameScreenViewController!
@@ -54,7 +54,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         
         boolButtonLoader(isIconButton: false, targetButton: displayFormatButton, key: "Display Grid Setting", trueOption: "Format: Grid", falseOption: "Format: Row")
         boolButtonLoader(isIconButton: true, targetButton: soundButton, key: "Volume On Setting", trueOption: "Volume_On_Icon_Set", falseOption: "Volume_Mute_Icon_Set")
-        boolButtonLoader(isIconButton: true, targetButton: stepOrPlayPauseButton, key: "Step Mode On Setting", trueOption: "Step_Icon_Set", falseOption: "Play_Icon_Set")
+        boolButtonLoader(isIconButton: true, targetButton: vibrationButton, key: "Step Mode On Setting", trueOption: "Step_Icon_Set", falseOption: "Play_Icon_Set")
         boolButtonLoader(isIconButton: true, targetButton: darkOrLightModeButton, key: "Dark Mode On Setting", trueOption: "Dark_Mode_Icon_Set", falseOption: "Light_Mode_Icon_Set")
     }
     
@@ -141,7 +141,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         boolButtonResponder(sender, isIconButton: true, key: "Volume On Setting", trueOption: "Volume_On_Icon_Set", falseOption: "Volume_Mute_Icon_Set")
     }
     
-    @IBAction func stepButtonTapped(_ sender: UIButton) {
+    @IBAction func vibrateButtonTapped(_ sender: UIButton) {
         boolButtonResponder(sender, isIconButton: true, key: "Step Mode On Setting", trueOption: "Step_Icon_Set", falseOption: "Play_Icon_Set")
     }
     
