@@ -434,7 +434,9 @@ class GameScene: SKScene {
 //                                    game.matrix[squareLocation.x][squareLocation.y] = 0
                                 }
                             }
-                            vibration.impactOccurred()
+                            if defaults.bool(forKey: "Vibrate On Setting") {
+                                vibration.impactOccurred()
+                            }
                         }
                     }
                 }
