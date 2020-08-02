@@ -84,7 +84,7 @@ class GameManager {
             }
         }
         
-        if scene.boardLayoutOption == 1 || scene.boardLayoutOption == 2 { // Board
+        if scene.boardLayoutOption == 1 || scene.boardLayoutOption == 2 || scene.boardLayoutOption == 5 { // No Change, Randomize Board, Few Unique
             colorArray.shuffle()
         } else if scene.boardLayoutOption == 3 { // 3 Most
             let arrayCount = Int(colorArray.count/6)
