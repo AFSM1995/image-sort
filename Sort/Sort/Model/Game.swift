@@ -71,15 +71,13 @@ class GameManager {
             }
         }
         
-        // 2 Board
         // 5 Few Unique
-        // 6 Left
-        // 7 Center
-        // 8 Right
-        // 9 Reverse Sorted
+        // 2 Board
         // 10 Sorted
         
-        if scene.boardLayoutOption == 3 { // 3 Most
+        if scene.boardLayoutOption == 2 { // Board
+            colorArray.shuffle()
+        } else if scene.boardLayoutOption == 3 { // 3 Most
             let arrayCount = Int(colorArray.count/6)
             let upperSortedSquares = (colorArray.count) - arrayCount
             colorArray[arrayCount...upperSortedSquares].shuffle()
@@ -97,10 +95,9 @@ class GameManager {
         } else if scene.boardLayoutOption == 8 { // 8 Bottom
            let validBottomSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
             colorArray[((colorArray.count - validBottomSquares) + 1)...].shuffle()
+        } else if scene.boardLayoutOption == 9 { // 9 Reverse Sorted
+            colorArray.reverse()
         }
-//        else {
-//            colorArray.shuffle()
-//        }
         
         // Animation 2: Squares are suffled
         for (skNodeAndLocation) in scene.gameBoard {
