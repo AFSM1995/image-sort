@@ -72,8 +72,6 @@ class GameManager {
         }
         
         // 5 Few Unique
-        // 2 Board
-        // 10 Sorted
         
         if scene.boardLayoutOption == 2 { // Board
             colorArray.shuffle()
@@ -97,6 +95,8 @@ class GameManager {
             colorArray[((colorArray.count - validBottomSquares) + 1)...].shuffle()
         } else if scene.boardLayoutOption == 9 { // 9 Reverse Sorted
             colorArray.reverse()
+        } else if scene.boardLayoutOption == 10 { // 10 Sorted
+            
         }
         
         // Animation 2: Squares are suffled
