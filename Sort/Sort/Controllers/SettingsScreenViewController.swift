@@ -15,7 +15,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableVIew: UITableView!
     
     // Text Buttons
-    @IBOutlet weak var clearBarrierButton: UIButton!
+    @IBOutlet weak var sortStyleButton: UIButton!
     @IBOutlet weak var animationButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var snakeSpeedButton: UIButton!
@@ -95,16 +95,16 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
     
     @IBAction func clearAllButtonTapped(_ sender: UIButton) {
         sender.setTitle("Gameboard Cleared", for: .normal)
-        clearBarrierButton.setTitle("Barriers Cleared", for: .normal)
+        sortStyleButton.setTitle("Barriers Cleared", for: .normal)
 //        animationButton.setTitle("Path Cleared", for: .normal)
         defaults.set(true, forKey: "Clear All Setting")
         defaults.set(true, forKey: "Settings Value Modified")
     }
     
-    @IBAction func clearBarrierButtonTapped(_ sender: UIButton) {
-        sender.setTitle("Barriers Cleared", for: .normal)
-        defaults.set(true, forKey: "Clear Barrier Setting")
-        defaults.set(true, forKey: "Settings Value Modified")
+    @IBAction func sortStyleButtonTapped(_ sender: UIButton) {
+//        sender.setTitle("Barriers Cleared", for: .normal)
+//        defaults.set(true, forKey: "Clear Barrier Setting")
+//        defaults.set(true, forKey: "Settings Value Modified")
     }
     
     @IBAction func animationButtonTapped(_ sender: UIButton) {

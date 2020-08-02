@@ -317,11 +317,11 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="195" height="40"/>
                                                         <color key="backgroundColor" name="UI Button"/>
                                                         <fontDescription key="fontDescription" name="Dogica_Pixel" family="Dogica Pixel" pointSize="11"/>
-                                                        <state key="normal" title="Clear Barriers">
+                                                        <state key="normal" title="Sort: Diagonal">
                                                             <color key="titleColor" name="Text"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="clearBarrierButtonTapped:" destination="x7L-u7-4Ti" eventType="touchUpInside" id="xvZ-0b-6O4"/>
+                                                            <action selector="sortStyleButtonTapped:" destination="x7L-u7-4Ti" eventType="touchUpInside" id="xvZ-0b-6O4"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fhp-fz-olc">
@@ -622,7 +622,6 @@
                     <navigationItem key="navigationItem" id="nZT-ks-2kZ"/>
                     <connections>
                         <outlet property="animationButton" destination="A0B-4l-xoA" id="yvY-C1-V4t"/>
-                        <outlet property="clearBarrierButton" destination="Pb4-yG-aAq" id="nSH-de-A4i"/>
                         <outlet property="darkOrLightModeButton" destination="NXh-5F-g45" id="bRt-7t-iWt"/>
                         <outlet property="displayFormatButton" destination="dca-WQ-y2k" id="Dux-Oa-fPG"/>
                         <outlet property="leftView" destination="gzl-h0-Vcb" id="OkJ-Dt-LNb"/>
@@ -630,6 +629,7 @@
                         <outlet property="returnButton" destination="8uq-B1-7Ui" id="SHd-6Z-lhm"/>
                         <outlet property="rightView" destination="xDg-9d-HTP" id="mW3-Gc-OAn"/>
                         <outlet property="snakeSpeedButton" destination="2Q6-95-HQk" id="gyA-vP-cVS"/>
+                        <outlet property="sortStyleButton" destination="Pb4-yG-aAq" id="nSH-de-A4i"/>
                         <outlet property="soundButton" destination="rF9-Fn-yKR" id="bBc-g9-Njf"/>
                         <outlet property="squareSizeButton" destination="hDw-Gg-rpE" id="erG-Iv-rgd"/>
                         <outlet property="stepOrPlayPauseButton" destination="GfL-tN-qLN" id="o3V-bq-97q"/>
