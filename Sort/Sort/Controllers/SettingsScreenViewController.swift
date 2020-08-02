@@ -93,12 +93,12 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         changeNotifier()
     }
     
-    @IBAction func clearAllButtonTapped(_ sender: UIButton) {
-        sender.setTitle("Gameboard Cleared", for: .normal)
-        sortStyleButton.setTitle("Barriers Cleared", for: .normal)
+    @IBAction func sortByButtonTapped(_ sender: UIButton) {
+//        sender.setTitle("Gameboard Cleared", for: .normal)
+//        sortStyleButton.setTitle("Barriers Cleared", for: .normal)
 //        animationButton.setTitle("Path Cleared", for: .normal)
-        defaults.set(true, forKey: "Clear All Setting")
-        defaults.set(true, forKey: "Settings Value Modified")
+//        defaults.set(true, forKey: "Clear All Setting")
+//        defaults.set(true, forKey: "Settings Value Modified")
     }
     
     @IBAction func sortStyleButtonTapped(_ sender: UIButton) {

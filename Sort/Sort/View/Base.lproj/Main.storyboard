@@ -281,11 +281,11 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="195" height="40"/>
                                                         <color key="backgroundColor" name="UI Button"/>
                                                         <fontDescription key="fontDescription" name="Dogica_Pixel" family="Dogica Pixel" pointSize="11"/>
-                                                        <state key="normal" title="Clear All">
+                                                        <state key="normal" title="Sort By: Hue">
                                                             <color key="titleColor" name="Text"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="clearAllButtonTapped:" destination="x7L-u7-4Ti" eventType="touchUpInside" id="C9J-sb-DR2"/>
+                                                            <action selector="sortByButtonTapped:" destination="x7L-u7-4Ti" eventType="touchUpInside" id="C9J-sb-DR2"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bI-XU-0x1">
