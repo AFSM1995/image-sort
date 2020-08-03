@@ -504,7 +504,7 @@ class GameScene: SKScene {
         func foodSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor, randomSquareWait: SKAction) {
             squareLocationAndColor.square.run(SKAction.colorTransitionActionFill(fromColor: squareLocationAndColor.square.fillColor, toColor: squareLocationAndColor.color, duration: 0.5))
             
-            // Note this is run to many way to many times.
+            // Note this is run to many way to many times. !!!
             DispatchQueue.main.asyncAfter(deadline: .now() + randomSquareWait.duration) {
                 self.gamboardAnimationEnded = true
                 self.animationDualButtonManager(buttonsEnabled: true)
@@ -523,6 +523,7 @@ class GameScene: SKScene {
     var animatedVisitedSquareCount = Float()
     var animatedQueuedSquareCount = Float()
     
+    var endingAnimationCount = Double()
     func pathFindingAnimationsAndSquareColoring() {
 //        func visitedSquareAnimationBegining() {
 //            // Color all squares while in animation mode.
@@ -565,9 +566,9 @@ class GameScene: SKScene {
             for (squareIndex, innerSquareArray) in game.swapSquareAndColor.enumerated() {
                 for squareLocationAndColor in innerSquareArray {
                     if innerSquareArray.count != 1 {
-                        squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: true)})
+                        squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: true, duration: queuedSquareWait)})
                     } else {
-                        squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: false)})
+                        squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {queuedSquareAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: false, duration: queuedSquareWait)})
                     }
                 }
 //                print("-----", pathFindingAnimationSpeed)
@@ -576,11 +577,13 @@ class GameScene: SKScene {
             }
         }
         
-        func queuedSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor, swap: Bool) {
+        
+        func queuedSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor, swap: Bool, duration: SKAction) {
             // Make sure the game dosent animate over food and the snake head.
             // Cant animate the head or food after the fact becouse it will ruin the animation. (Big-O).
             // Snake body and barriers will never be a consern since pathfinding animation ignores them.
 //            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
+            var sortEndAnimation = SKAction()
             squareLocationAndColor.square.run(.sequence([animationSequanceManager(animation: 2)]))
             squareLocationAndColor.square.fillColor = squareLocationAndColor.color
             squareLocationAndColor.square.lineWidth = 5
@@ -590,18 +593,32 @@ class GameScene: SKScene {
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: comparisonHaloColor, toColor: .clear, duration: 0.5))
                 animatedQueuedSquareCount += 0.5
                 animatedVisitedSquareCount += 0.5
+                endingAnimationCount += 1.0
             } else {
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: swapHaloColor, duration: 0.5))
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: swapHaloColor, toColor: .clear, duration: 0.5))
                 animatedVisitedSquareCount += 1
+                endingAnimationCount += 1.0
             }
             
             UserDefaults.standard.set(animatedQueuedSquareCount, forKey: "highScore")
             UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
             updateScoreButtonText()
-
+            
+//            sortEndAnimation = .wait(forDuration: TimeInterval(endingAnimationCount) * 1.0)
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration.duration + endingAnimationCount) {
+                self.gamboardAnimationEnded = true
+                self.animationDualButtonManager(buttonsEnabled: true)
+                searchAnimation()
+            }
 //            }
             
+        }
+        
+        func searchAnimation() {
+            for i in gameBoard {
+                i.square.fillColor = .orange
+            }
         }
         
 //        func pathSquareAnimationBegining(run: Bool) {

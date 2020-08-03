@@ -91,6 +91,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         var choice = Int()
         segControl.selectedSegmentIndex == 0 ? (choice = selectedPathAlgorithim) : (choice = selectedMazeAlgorithim)
+        defaults.set(segControl.selectedSegmentIndex, forKey: "Main Screen Segmented Control Choice")
         tableView.selectRow(at: [0, choice], animated: true, scrollPosition: UITableView.ScrollPosition.none)
     }
     

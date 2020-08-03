@@ -124,7 +124,11 @@ class GameManager {
 //        let dupli = scene.gameBoard
         
         // Animation 3 Squares are sorted
-        pathSelector(resuming: false)
+        if UserDefaults.standard.integer(forKey: "Main Screen Segmented Control Choice") == 0 {
+            pathSelector(resuming: false)
+        } else {
+            print("sdf")
+        }
         
 //        let old = scene.gameBoard
 //        for i in dupli {
