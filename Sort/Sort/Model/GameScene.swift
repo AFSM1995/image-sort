@@ -524,6 +524,7 @@ class GameScene: SKScene {
     var animatedQueuedSquareCount = Float()
     
     var hasRun = false
+    var sucssesfullyFound = false
     
     var endingAnimationCount = Double()
     func pathFindingAnimationsAndSquareColoring() {
@@ -627,13 +628,20 @@ class GameScene: SKScene {
             var searchWaitTime = SKAction()
             
             for (squareIndex, squareLocationAndColor) in game.searchHistory.enumerated() {
-                squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]), completion: {searchAnimationEnding(squareLocationAndColor: squareLocationAndColor)})
+                squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]), completion: {searchAnimationEnding(searchWaitTime: searchWaitTime, squareLocationAndColor: squareLocationAndColor)})
                 searchWaitTime = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
             }
         }
         
-        func searchAnimationEnding(squareLocationAndColor: SkNodeAndLocation) {
+        func searchAnimationEnding(searchWaitTime: SKAction, squareLocationAndColor: SkNodeAndLocation) {
             squareLocationAndColor.square.strokeColor = .green
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + searchWaitTime.duration) {
+                if self.sucssesfullyFound == false {
+                    self.game.target[0].square.strokeColor = .brown
+                    self.sucssesfullyFound = true
+                }
+            }
         }
         
 //        func pathSquareAnimationBegining(run: Bool) {
