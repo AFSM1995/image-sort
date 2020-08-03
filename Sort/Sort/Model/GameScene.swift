@@ -628,17 +628,17 @@ class GameScene: SKScene {
 //                i.square.strokeColor = .green
 //            }
             
-//            var searchWaitTime = SKAction()
-//
-//            for (squareIndex, squareLocationAndColor) in game.searchHistory.enumerated() {
-//                squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]), completion: {searchAnimationEnding(squareLocationAndColor: squareLocationAndColor)})
-//                searchWaitTime = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
-//            }
+            var searchWaitTime = SKAction()
+            
+            for (squareIndex, squareLocationAndColor) in game.searchHistory.enumerated() {
+                squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]), completion: {searchAnimationEnding(squareLocationAndColor: squareLocationAndColor)})
+                searchWaitTime = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
+            }
         }
         
-//        func searchAnimationEnding(squareLocationAndColor: SkNodeAndLocation) {
-//            squareLocationAndColor.square.strokeColor = .green
-//        }
+        func searchAnimationEnding(squareLocationAndColor: SkNodeAndLocation) {
+            squareLocationAndColor.square.strokeColor = .green
+        }
         
 //        func pathSquareAnimationBegining(run: Bool) {
 //            let lastIndex = ((game.pathSquareArray.count) - 1)
