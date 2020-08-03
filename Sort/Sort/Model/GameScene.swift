@@ -523,6 +523,8 @@ class GameScene: SKScene {
     var animatedVisitedSquareCount = Float()
     var animatedQueuedSquareCount = Float()
     
+    var hasRun = false
+    
     var endingAnimationCount = Double()
     func pathFindingAnimationsAndSquareColoring() {
 //        func visitedSquareAnimationBegining() {
@@ -577,7 +579,7 @@ class GameScene: SKScene {
             }
         }
         
-        
+        let totalAnimationRuns = (game.swapSquareAndColor).count
         func queuedSquareAnimationEnding(squareLocationAndColor: SkNodeLocationAndColor, swap: Bool, duration: SKAction) {
             // Make sure the game dosent animate over food and the snake head.
             // Cant animate the head or food after the fact becouse it will ruin the animation. (Big-O).
@@ -606,20 +608,37 @@ class GameScene: SKScene {
             updateScoreButtonText()
             
 //            sortEndAnimation = .wait(forDuration: TimeInterval(endingAnimationCount) * 1.0)
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration.duration + endingAnimationCount) {
-                self.gamboardAnimationEnded = true
-                self.animationDualButtonManager(buttonsEnabled: true)
-                searchAnimation()
+            if hasRun == false {
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration.duration + endingAnimationCount) {
+                    if (self.hasRun == false) {
+                        self.gamboardAnimationEnded = true
+                        self.animationDualButtonManager(buttonsEnabled: true)
+                        searchAnimationBegining()
+                    }
+                    self.hasRun = true
+                }
             }
-//            }
-            
         }
         
-        func searchAnimation() {
-            for i in gameBoard {
-                i.square.fillColor = .orange
-            }
+        func searchAnimationBegining() {
+            print("called")
+            game.target[0].square.strokeColor = .systemPink
+            
+//            for i in game.searchHistory {
+//                i.square.strokeColor = .green
+//            }
+            
+//            var searchWaitTime = SKAction()
+//
+//            for (squareIndex, squareLocationAndColor) in game.searchHistory.enumerated() {
+//                squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]), completion: {searchAnimationEnding(squareLocationAndColor: squareLocationAndColor)})
+//                searchWaitTime = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
+//            }
         }
+        
+//        func searchAnimationEnding(squareLocationAndColor: SkNodeAndLocation) {
+//            squareLocationAndColor.square.strokeColor = .green
+//        }
         
 //        func pathSquareAnimationBegining(run: Bool) {
 //            let lastIndex = ((game.pathSquareArray.count) - 1)

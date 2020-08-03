@@ -36,6 +36,9 @@ class GameManager {
     var horizontalMinBoundry = Int()
     var foodPosition: [SkNodeAndLocation] = []
     
+    var target: [SkNodeAndLocation] = []
+    var searchHistory: [SkNodeAndLocation] = []
+    
     init(scene: GameScene) {
         self.scene = scene
         
@@ -54,6 +57,8 @@ class GameManager {
     func roundUp(factor: Int, n: Int) -> Int {
         return (n + 24) / 25 * 25;
     }
+    
+    
     
     func initaitateRandomSquares() {
         var colorArray = [Float]()
@@ -122,13 +127,32 @@ class GameManager {
         }
         
 //        let dupli = scene.gameBoard
+        pathSelector(resuming: false)
         
         // Animation 3 Squares are sorted
-        if UserDefaults.standard.integer(forKey: "Main Screen Segmented Control Choice") == 0 {
-            pathSelector(resuming: false)
-        } else {
-            print("sdf")
+//        if UserDefaults.standard.integer(forKey: "Selected Maze Algorithim") == 1 {
+        let randomX = Int.random(in: 1...7)
+        let randomY = Int.random(in: 1...13)
+        var targetFound = false
+        print(randomX, randomY)
+        target.append(scene.gameBoard.first(where: { $0.location == Tuple(x: randomX, y: randomY)})!)
+        
+        for i in 0...((scene!.gameBoard.count)-scene.columnCount-3) {
+            if targetFound == false {
+                if scene.gameBoard[i].location.x != 0 && scene.gameBoard[i].location.x != (scene.rowCount - 1) {
+                    if scene.gameBoard[i].location.y != 0 && scene.gameBoard[i].location.y != (scene.columnCount - 1) {
+                        searchHistory.append(scene.gameBoard[i])
+                        if scene.gameBoard[i].location == target[0].location {
+                            targetFound = true
+                        }
+                    }
+                }
+            } else {
+                break
+            }
         }
+        
+//        }
         
 //        let old = scene.gameBoard
 //        for i in dupli {
