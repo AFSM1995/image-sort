@@ -23,6 +23,7 @@
 		382F0F1924AD53660022E521 /* AlgorithmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1824AD53660022E521 /* AlgorithmHelper.swift */; };
 		382F0F1B24AD58080022E521 /* DepthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1A24AD58080022E521 /* DepthFirstSearch.swift */; };
 		382F0F1E24AD71990022E521 /* BreadthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1D24AD71990022E521 /* BreadthFirstSearch.swift */; };
+		3832DFDC24D8CCFE0082291C /* LinearSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3832DFDB24D8CCFE0082291C /* LinearSearch.swift */; };
 		3860665524CD0D5C00AD91DC /* BubbleSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3860665424CD0D5C00AD91DC /* BubbleSort.swift */; };
 		3868F97C2426960C008F7B34 /* HelpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868F97B2426960C008F7B34 /* HelpScreenViewController.swift */; };
 		3868F97E24269985008F7B34 /* GameScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868F97D24269985008F7B34 /* GameScreenViewController.swift */; };
@@ -57,6 +58,7 @@
 		382F0F1824AD53660022E521 /* AlgorithmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmHelper.swift; sourceTree = "<group>"; };
 		382F0F1A24AD58080022E521 /* DepthFirstSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthFirstSearch.swift; sourceTree = "<group>"; };
 		382F0F1D24AD71990022E521 /* BreadthFirstSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadthFirstSearch.swift; sourceTree = "<group>"; };
+		3832DFDB24D8CCFE0082291C /* LinearSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearSearch.swift; sourceTree = "<group>"; };
 		3860665424CD0D5C00AD91DC /* BubbleSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSort.swift; sourceTree = "<group>"; };
 		3868F97B2426960C008F7B34 /* HelpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpScreenViewController.swift; sourceTree = "<group>"; };
 		3868F97D24269985008F7B34 /* GameScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,14 @@
 			path = "Path Finding Algorithms";
 			sourceTree = "<group>";
 		};
+		3832DFDD24D8CD050082291C /* Search Algorithims */ = {
+			isa = PBXGroup;
+			children = (
+				3832DFDB24D8CCFE0082291C /* LinearSearch.swift */,
+			);
+			path = "Search Algorithims";
+			sourceTree = "<group>";
+		};
 		383DB19C24AC56190071EC65 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +162,7 @@
 				3803D89A2497F7D7002A6251 /* Custom UI Managers.swift */,
 				3803D89C2497F87A002A6251 /* Custom Extensions.swift */,
 				382F0F1624AD527B0022E521 /* Custom Data Structures.swift */,
+				3832DFDD24D8CD050082291C /* Search Algorithims */,
 				3860665624CD0D6400AD91DC /* Sorting Algorithms */,
 				3899197224B9752A0099EB5F /* Maze Generation Algorithms */,
 				382F0F1C24AD70750022E521 /* Path Finding Algorithms */,
@@ -290,6 +301,7 @@
 				382F0F1E24AD71990022E521 /* BreadthFirstSearch.swift in Sources */,
 				382F0F1924AD53660022E521 /* AlgorithmHelper.swift in Sources */,
 				3860665524CD0D5C00AD91DC /* BubbleSort.swift in Sources */,
+				3832DFDC24D8CCFE0082291C /* LinearSearch.swift in Sources */,
 				3868F9822426B5EC008F7B34 /* SettingsScreenTableViewCell.swift in Sources */,
 				3868F97E24269985008F7B34 /* GameScreenViewController.swift in Sources */,
 				3803D89B2497F7D7002A6251 /* Custom UI Managers.swift in Sources */,

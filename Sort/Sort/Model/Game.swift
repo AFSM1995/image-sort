@@ -36,6 +36,7 @@ class GameManager {
     var horizontalMinBoundry = Int()
     var foodPosition: [SkNodeAndLocation] = []
     
+    //
     var target: [SkNodeAndLocation] = []
     var searchHistory: [SkNodeAndLocation] = []
     var targetFound = false
@@ -132,27 +133,9 @@ class GameManager {
         
         // Animation 3 Squares are sorted
 //        if UserDefaults.standard.integer(forKey: "Selected Maze Algorithim") == 1 {
-        let randomX = Int.random(in: 1...7)
-        let randomY = Int.random(in: 1...13)
-        
-        print(randomX, randomY)
-        target.append(scene.gameBoard.first(where: { $0.location == Tuple(x: randomX, y: randomY)})!)
-        
-        for i in 0...((scene!.gameBoard.count)-scene.columnCount-3) {
-            if targetFound == false {
-                if scene.gameBoard[i].location.x != 0 && scene.gameBoard[i].location.x != (scene.rowCount - 1) {
-                    if scene.gameBoard[i].location.y != 0 && scene.gameBoard[i].location.y != (scene.columnCount - 1) {
-                        if scene.gameBoard[i].location == target[0].location {
-                            targetFound = true
-                        } else {
-                            searchHistory.append(scene.gameBoard[i])
-                        }
-                    }
-                }
-            } else {
-                break
-            }
-        }
+        let linear = (scene.gameBoard)
+        let ls = LinearSearch(scene: scene)
+        (searchHistory, targetFound, target) = ls.LinearSearch(gameboard: linear)
         
 //        }
         
