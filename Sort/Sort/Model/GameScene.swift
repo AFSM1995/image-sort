@@ -624,10 +624,6 @@ class GameScene: SKScene {
             print("called")
             game.target[0].square.strokeColor = .systemPink
             
-//            for i in game.searchHistory {
-//                i.square.strokeColor = .green
-//            }
-            
             var searchWaitTime = SKAction()
             
             for (squareIndex, squareLocationAndColor) in game.searchHistory.enumerated() {

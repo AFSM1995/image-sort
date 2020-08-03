@@ -141,9 +141,10 @@ class GameManager {
             if targetFound == false {
                 if scene.gameBoard[i].location.x != 0 && scene.gameBoard[i].location.x != (scene.rowCount - 1) {
                     if scene.gameBoard[i].location.y != 0 && scene.gameBoard[i].location.y != (scene.columnCount - 1) {
-                        searchHistory.append(scene.gameBoard[i])
                         if scene.gameBoard[i].location == target[0].location {
                             targetFound = true
+                        } else {
+                            searchHistory.append(scene.gameBoard[i])
                         }
                     }
                 }
