@@ -38,6 +38,7 @@ class GameManager {
     
     var target: [SkNodeAndLocation] = []
     var searchHistory: [SkNodeAndLocation] = []
+    var targetFound = false
     
     init(scene: GameScene) {
         self.scene = scene
@@ -133,7 +134,7 @@ class GameManager {
 //        if UserDefaults.standard.integer(forKey: "Selected Maze Algorithim") == 1 {
         let randomX = Int.random(in: 1...7)
         let randomY = Int.random(in: 1...13)
-        var targetFound = false
+        
         print(randomX, randomY)
         target.append(scene.gameBoard.first(where: { $0.location == Tuple(x: randomX, y: randomY)})!)
         

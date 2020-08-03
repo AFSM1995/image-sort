@@ -622,7 +622,6 @@ class GameScene: SKScene {
         }
         
         func searchAnimationBegining() {
-            print("called")
             game.target[0].square.strokeColor = .systemPink
             
             var searchWaitTime = SKAction()
@@ -638,8 +637,10 @@ class GameScene: SKScene {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + searchWaitTime.duration) {
                 if self.sucssesfullyFound == false {
-                    self.game.target[0].square.strokeColor = .brown
-                    self.sucssesfullyFound = true
+                    if (self.game.targetFound) == true {
+                        self.game.target[0].square.strokeColor = .brown
+                        self.sucssesfullyFound = true
+                    }
                 }
             }
         }
