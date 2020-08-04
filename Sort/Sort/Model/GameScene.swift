@@ -18,6 +18,7 @@ class GameScene: SKScene {
     var gameBackground: SKShapeNode!
     var gameBoard: [SkNodeAndLocation] = []
     var gameboardEdgeSquares: [SkNodeAndLocation] = []
+    var playableGameboard: [SkNodeAndLocation] = []
     var rowCount = 3
     var columnCount = 25
     var squareWidth = CGFloat()
@@ -305,6 +306,7 @@ class GameScene: SKScene {
                     row.append(0)
                     square.fillColor = gameboardSquareColor
                     playableGameboardSize += 1
+                    playableGameboard.append(SkNodeAndLocation(square: square, location: Tuple(x: x, y: y)))
                 }
                 
                 square.name = String(x) + "," + String(y)

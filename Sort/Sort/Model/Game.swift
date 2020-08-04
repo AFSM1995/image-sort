@@ -39,6 +39,7 @@ class GameManager {
     //
     var target: [SkNodeAndLocation] = []
     var searchHistory: [SkNodeAndLocation] = []
+    var binarySearHistory: [[SkNodeAndLocation]] = []
     var targetFound = false
     
     init(scene: GameScene) {
@@ -254,6 +255,10 @@ class GameManager {
             let linear = (scene.gameBoard)
             let ls = LinearSearch(scene: scene)
             (searchHistory, targetFound, target) = ls.LinearSearch(gameboard: linear)
+        } else if scene.mazeGeneratingAlgorithimChoice == 1 {
+            let binary = (scene.gameBoard)
+            let bis = BinarySearch(scene: scene)
+            (searchHistory, targetFound, target) = bis.binarySearchHandler()
         }
     }
     
