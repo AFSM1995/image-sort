@@ -37,7 +37,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func checkIfFirstRun() {
         if !defaults.bool(forKey: "Not First Launch") {
-            let legendData = [["Square", 15], ["Swap Halo", 6], ["Comparison Halo", 5], ["Verification Halo", 0], ["Gameboard", 0]]
+            let legendData = [["Square", 15], ["Swap Halo", 6], ["Comparison Halo", 5], ["Verification Halo", 1], ["Gameboard", 0], ["Search Halo", 9], ["Found Halo", 12], ["Target Halo", 17]]
             
             defaults.set(legendData, forKey: "Legend Preferences")
             defaults.set(2, forKey: "Snake Speed Text Setting")

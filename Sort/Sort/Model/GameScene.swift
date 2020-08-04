@@ -34,6 +34,9 @@ class GameScene: SKScene {
     var clearBarriersWasTapped = Bool()
     var clearPathWasTapped = Bool()
     
+    var targetHaloColor = UIColor()
+    var searchHaloColor = UIColor()
+    var foundHaloColor = UIColor()
     var squareColor = UIColor()
     var swapHaloColor = UIColor()
     var comparisonHaloColor = UIColor()
@@ -86,6 +89,9 @@ class GameScene: SKScene {
         boardLayoutOption = defaults.integer(forKey: "Reset Setting")
         
         // Update square colors, seen by the user in the next frame update.
+        targetHaloColor = colors[legendData[7][1] as! Int]
+        searchHaloColor = colors[legendData[5][1] as! Int]
+        foundHaloColor = colors[legendData[6][1] as! Int]
         squareColor = colors[legendData[0][1] as! Int]
         swapHaloColor = colors[legendData[1][1] as! Int]
         comparisonHaloColor = colors[legendData[2][1] as! Int]
@@ -623,7 +629,7 @@ class GameScene: SKScene {
         
         func searchAnimationBegining() {
             if game.target.count != 0 {
-                game.target[0].square.strokeColor = .systemPink
+                game.target[0].square.strokeColor = self.targetHaloColor
             
                 var searchWaitTime = SKAction()
                 
@@ -635,12 +641,12 @@ class GameScene: SKScene {
         }
         
         func searchAnimationEnding(searchWaitTime: SKAction, squareLocationAndColor: SkNodeAndLocation) {
-            squareLocationAndColor.square.strokeColor = .green
+            squareLocationAndColor.square.strokeColor = self.searchHaloColor
             
             DispatchQueue.main.asyncAfter(deadline: .now() + searchWaitTime.duration) {
                 if self.sucssesfullyFound == false {
                     if (self.game.targetFound) == true {
-                        self.game.target[0].square.strokeColor = .brown
+                        self.game.target[0].square.strokeColor = self.foundHaloColor
                         self.sucssesfullyFound = true
                     }
                 }
