@@ -655,49 +655,6 @@ class GameScene: SKScene {
             }
         }
         
-//        func pathSquareAnimationBegining(run: Bool) {
-//            let lastIndex = ((game.pathSquareArray.count) - 1)
-//            for (squareIndex, squareAndLocation) in game.pathSquareArray.enumerated() {
-//                squareAndLocation.square.run(.sequence([pathSquareWait,animationSequanceManager(animation: 3)]), completion: {pathSquareAnimationEnding(square: squareAndLocation.square, squareIndex: squareIndex, lastIndex: lastIndex)})
-//                pathSquareWait = .wait(forDuration: TimeInterval(squareIndex) * 0.005)
-//                game.pathSquareArray.remove(at: 0)
-//            }
-//        }
-//
-//        func pathSquareAnimationEnding(square: SKShapeNode, squareIndex: Int, lastIndex: Int) {
-//            // Make sure the game dosent animate over food and the snake head.
-//            // Cant animate the head or food after the fact becouse it will ruin the animation. (Big-O).
-//            // Snake body and barriers will never be a consern since pathfinding animation ignores them.
-//            if squareIndex != 0 && squareIndex != lastIndex {
-//                square.run(.sequence([animationSequanceManager(animation: 2)]))
-////                square.fillColor = pathSquareColor
-//                updateScoreButtonText()
-//            }
-//
-//            // runs one time.
-//            if !pathSquareDispatchCalled {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + pathSquareWait.duration) {
-//                    // Animation ended re-enable the buttons.
-//                    self.animationDualButtonManager(buttonsEnabled: true)
-//                    self.pathFindingAnimationsHaveEnded = true
-//                    self.firstAnimationSequanceHasCompleted = true
-//
-//                    // new potential clean up needed.
-//                    // only when step mode is off should this run
-//                    if self.pathFindingAlgorithimChoice != 0 {
-//                        if !(UserDefaults.standard.bool(forKey: "Step Mode On Setting")) {
-//                            // temp change from 6
-//                            if self.game.snakeBodyPos.count != 26 {
-//                                UserDefaults.standard.set(false, forKey: "Game Is Paused Setting")
-//                                self.game.paused = false
-//                            }
-//                        }
-//                    }
-//                }
-//                pathSquareDispatchCalled = true
-//            }
-//        }
-        
         visitedSquareDispatchCalled = false
         pathSquareDispatchCalled = false
         queuedSquareAnimationBegining()
