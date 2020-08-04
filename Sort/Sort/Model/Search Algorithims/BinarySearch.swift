@@ -10,62 +10,60 @@ import Foundation
 import SpriteKit
 
 class BinarySearch {
-    var iterations: [[Int]] = []
     weak var scene: GameScene!
-    var swapSquareAndColor = [[SkNodeLocationAndColor]]()
-    var searchTarget: [SkNodeAndLocation] = []
+    var searchTargetSquare: [SkNodeAndLocation] = []
     var searchHistory: [SkNodeAndLocation] = []
-    var targetFound = false
+    var targetSquareFound = false
+    var playableGameboard: [SkNodeAndLocation] = []
+    var playableGameBoardSize = Int()
     
     init(scene: GameScene) {
         self.scene = scene
+        playableGameboard = scene.playableGameboard
+        playableGameBoardSize = scene.playableGameboard.count
     }
     
     func binarySearchHandler() -> ([SkNodeAndLocation], Bool, [SkNodeAndLocation]) {
-        let qq = scene.playableGameboard
-        let randomNum = Int.random(in: 1...7)
-        searchTarget.append(qq[randomNum])
+        let randomGameboardSquareIndex = Int.random(in: 1...(playableGameBoardSize-1))
+        searchTargetSquare.append(playableGameboard[randomGameboardSquareIndex])
         let playableBoardSize = scene!.playableGameboard.count
         
-        for (index, i) in (scene.playableGameboard).enumerated() {
-            qq[index].square.name = String(index)
-            print(scene.playableGameboard[index].location.x, scene.playableGameboard[index].location.y, "index", scene.playableGameboard[index].square.name)
+        for (index, _) in (scene.playableGameboard).enumerated() {
+            playableGameboard[index].square.name = String(index)
         }
         
-        let searchResult = BinarySearch(targetArray: scene!.playableGameboard, target: randomNum, frontPointer: 0, tailPointer: (playableBoardSize-1))
-        return(searchHistory, targetFound, searchTarget)
+        _ = BinarySearch(targetArray: scene!.playableGameboard, target: randomGameboardSquareIndex, frontPointer: 0, tailPointer: (playableBoardSize-1))
+        return(searchHistory, targetSquareFound, searchTargetSquare)
     }
     
     func BinarySearch(targetArray: [SkNodeAndLocation], target: Int, frontPointer: Int, tailPointer: Int) -> Int {
         let center = Int((tailPointer - frontPointer)/2)
-        let sdf = scene.playableGameboard
-        searchHistory.append(sdf[frontPointer])
-        searchHistory.append(sdf[center])
-        searchHistory.append(sdf[tailPointer])
         var result = -1
         
-//        if target > scene.playableGameboard[(scene.playableGameboard.count - 1)] || target < scene.playableGameboard[0] {
-//            return -1
-//        }
+        searchHistory.append(playableGameboard[frontPointer])
+        searchHistory.append(playableGameboard[center])
+        searchHistory.append(playableGameboard[tailPointer])
         
-//        let s = sdf[center]
+        if target > Int(playableGameboard[playableGameBoardSize - 1].square.name!)! || target < Int(playableGameboard[0].square.name!)! {
+            return -1
+        }
         
-        if Int(sdf[center].square.name!) == target {
+        if Int(playableGameboard[center].square.name!) == target {
             return center
-        } else if Int(sdf[frontPointer].square.name!) == target {
+        } else if Int(playableGameboard[frontPointer].square.name!) == target {
             return frontPointer
-        } else if Int(sdf[tailPointer].square.name!) == target {
+        } else if Int(playableGameboard[tailPointer].square.name!) == target {
             return tailPointer
-        } else if Int(sdf[center].square.name!)! > target {
+        } else if Int(playableGameboard[center].square.name!)! > target {
             result = BinarySearch(targetArray: scene!.playableGameboard, target: target, frontPointer: frontPointer+1, tailPointer: center-1)
-        } else if Int(sdf[center].square.name!)! < target {
+        } else if Int(playableGameboard[center].square.name!)! < target {
             result = BinarySearch(targetArray: scene!.playableGameboard, target: target, frontPointer: center+1, tailPointer: tailPointer-1)
         } else if ((frontPointer+1) == center) {
             return -1
         }
         
         if result == target {
-            targetFound = true
+            targetSquareFound = true
         }
         return result
     }
