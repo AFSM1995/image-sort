@@ -19,6 +19,7 @@
 		3812394E23C68E2C0066B3FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3812394D23C68E2C0066B3FA /* Assets.xcassets */; };
 		3812395123C68E2C0066B3FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3812394F23C68E2C0066B3FA /* LaunchScreen.storyboard */; };
 		3812395923C68F450066B3FA /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812395823C68F450066B3FA /* Game.swift */; };
+		3828412F24D91BAC00850BE2 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828412E24D91BAC00850BE2 /* BinarySearch.swift */; };
 		382F0F1724AD527B0022E521 /* Custom Data Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1624AD527B0022E521 /* Custom Data Structures.swift */; };
 		382F0F1924AD53660022E521 /* AlgorithmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1824AD53660022E521 /* AlgorithmHelper.swift */; };
 		382F0F1B24AD58080022E521 /* DepthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1A24AD58080022E521 /* DepthFirstSearch.swift */; };
@@ -54,6 +55,7 @@
 		3812395023C68E2C0066B3FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3812395223C68E2C0066B3FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3812395823C68F450066B3FA /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		3828412E24D91BAC00850BE2 /* BinarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
 		382F0F1624AD527B0022E521 /* Custom Data Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom Data Structures.swift"; sourceTree = "<group>"; };
 		382F0F1824AD53660022E521 /* AlgorithmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmHelper.swift; sourceTree = "<group>"; };
 		382F0F1A24AD58080022E521 /* DepthFirstSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthFirstSearch.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				3832DFDB24D8CCFE0082291C /* LinearSearch.swift */,
+				3828412E24D91BAC00850BE2 /* BinarySearch.swift */,
 			);
 			path = "Search Algorithims";
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				3812394723C68E290066B3FA /* GameScene.swift in Sources */,
 				387FD13B241DC51C0004FD78 /* MainScreenTableViewCell.swift in Sources */,
 				3899197424B975810099EB5F /* MazeDepthFirstSearch.swift in Sources */,
+				3828412F24D91BAC00850BE2 /* BinarySearch.swift in Sources */,
 				382F0F1B24AD58080022E521 /* DepthFirstSearch.swift in Sources */,
 				3899197124B93F0C0099EB5F /* DijkstrasSearch.swift in Sources */,
 				3812395923C68F450066B3FA /* Game.swift in Sources */,
