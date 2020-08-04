@@ -34,8 +34,6 @@
 		388DAEF324B792FD00DD4007 /* UniformCostSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DAEF224B792FD00DD4007 /* UniformCostSearch.swift */; };
 		3899196F24B90CF90099EB5F /* AStarSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3899196E24B90CF80099EB5F /* AStarSearch.swift */; };
 		3899197124B93F0C0099EB5F /* DijkstrasSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3899197024B93F0C0099EB5F /* DijkstrasSearch.swift */; };
-		3899197424B975810099EB5F /* MazeDepthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3899197324B975810099EB5F /* MazeDepthFirstSearch.swift */; };
-		3899197624BBEAE90099EB5F /* MazeAlgorithmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3899197524BBEAE90099EB5F /* MazeAlgorithmHelper.swift */; };
 		38B35F34248858D9009E2613 /* sfx_coin_single3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 38B35F33248858D9009E2613 /* sfx_coin_single3.wav */; };
 		38B35F3624885B11009E2613 /* sfx_coin_double3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 38B35F3524885B11009E2613 /* sfx_coin_double3.wav */; };
 /* End PBXBuildFile section */
@@ -70,8 +68,6 @@
 		388DAEF224B792FD00DD4007 /* UniformCostSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformCostSearch.swift; sourceTree = "<group>"; };
 		3899196E24B90CF80099EB5F /* AStarSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AStarSearch.swift; sourceTree = "<group>"; };
 		3899197024B93F0C0099EB5F /* DijkstrasSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DijkstrasSearch.swift; sourceTree = "<group>"; };
-		3899197324B975810099EB5F /* MazeDepthFirstSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeDepthFirstSearch.swift; sourceTree = "<group>"; };
-		3899197524BBEAE90099EB5F /* MazeAlgorithmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MazeAlgorithmHelper.swift; sourceTree = "<group>"; };
 		38B35F33248858D9009E2613 /* sfx_coin_single3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_coin_single3.wav; sourceTree = "<group>"; };
 		38B35F3524885B11009E2613 /* sfx_coin_double3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_coin_double3.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,7 +163,6 @@
 				382F0F1624AD527B0022E521 /* Custom Data Structures.swift */,
 				3832DFDD24D8CD050082291C /* Search Algorithims */,
 				3860665624CD0D6400AD91DC /* Sorting Algorithms */,
-				3899197224B9752A0099EB5F /* Maze Generation Algorithms */,
 				382F0F1C24AD70750022E521 /* Path Finding Algorithms */,
 				3812394623C68E290066B3FA /* GameScene.swift */,
 				3812395823C68F450066B3FA /* Game.swift */,
@@ -202,15 +197,6 @@
 				3860665424CD0D5C00AD91DC /* BubbleSort.swift */,
 			);
 			path = "Sorting Algorithms";
-			sourceTree = "<group>";
-		};
-		3899197224B9752A0099EB5F /* Maze Generation Algorithms */ = {
-			isa = PBXGroup;
-			children = (
-				3899197524BBEAE90099EB5F /* MazeAlgorithmHelper.swift */,
-				3899197324B975810099EB5F /* MazeDepthFirstSearch.swift */,
-			);
-			path = "Maze Generation Algorithms";
 			sourceTree = "<group>";
 		};
 		38BA7A4D23D3EAE300509984 /* View */ = {
@@ -308,10 +294,8 @@
 				3868F9822426B5EC008F7B34 /* SettingsScreenTableViewCell.swift in Sources */,
 				3868F97E24269985008F7B34 /* GameScreenViewController.swift in Sources */,
 				3803D89B2497F7D7002A6251 /* Custom UI Managers.swift in Sources */,
-				3899197624BBEAE90099EB5F /* MazeAlgorithmHelper.swift in Sources */,
 				3812394723C68E290066B3FA /* GameScene.swift in Sources */,
 				387FD13B241DC51C0004FD78 /* MainScreenTableViewCell.swift in Sources */,
-				3899197424B975810099EB5F /* MazeDepthFirstSearch.swift in Sources */,
 				3828412F24D91BAC00850BE2 /* BinarySearch.swift in Sources */,
 				382F0F1B24AD58080022E521 /* DepthFirstSearch.swift in Sources */,
 				3899197124B93F0C0099EB5F /* DijkstrasSearch.swift in Sources */,
