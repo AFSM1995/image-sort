@@ -71,7 +71,6 @@ class GameScene: SKScene {
         settingLoader(firstRun: true)
         createScreenLabels()
         createGameBoard()
-        swipeManager(swipeGesturesAreOn: true)
         startTheGame()
         print("-")
     }
@@ -327,42 +326,6 @@ class GameScene: SKScene {
         game.bringOvermatrix(tempMatrix: matrix)
     }
     
-    func swipeManager(swipeGesturesAreOn: Bool) {
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeU))
-        swipeUp.direction = .up
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeR))
-        swipeRight.direction = .right
-        
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeD))
-        swipeDown.direction = .down
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeL))
-        swipeLeft.direction = .left
-        
-        if swipeGesturesAreOn {
-            view!.addGestureRecognizer(swipeUp)
-            view!.addGestureRecognizer(swipeRight)
-            view!.addGestureRecognizer(swipeDown)
-            view!.addGestureRecognizer(swipeLeft)
-        } else {
-            view!.gestureRecognizers?.removeAll()
-        }
-    }
-    
-    @objc func swipeR() {
-        game.swipe(ID: 3)
-    }
-    @objc func swipeL() {
-        game.swipe(ID: 1)
-    }
-    @objc func swipeU() {
-        game.swipe(ID: 2)
-    }
-    @objc func swipeD() {
-        game.swipe(ID: 4)
-    }
-    
     private func startTheGame() {
         let topCenter = CGPoint(x: 0, y: (frame.size.height / 2) - 25)
         algorithimChoiceName.run(SKAction.move(to: topCenter, duration: 0.4)) {
@@ -376,17 +339,13 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if defaults.bool(forKey: "Game Is Paused Setting") {
-            swipeManager(swipeGesturesAreOn: false)
             barrierManager(touches: touches)
-            swipeManager(swipeGesturesAreOn: true)
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if defaults.bool(forKey: "Game Is Paused Setting") {
-            swipeManager(swipeGesturesAreOn: false)
             barrierManager(touches: touches)
-            swipeManager(swipeGesturesAreOn: true)
         }
     }
     
