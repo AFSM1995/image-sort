@@ -128,25 +128,9 @@ class GameManager {
             }
         }
         
-//        let dupli = scene.gameBoard
-        pathSelector(resuming: false)
-        
-        // Animation 3 Squares are sorted
-//        if UserDefaults.standard.integer(forKey: "Selected Maze Algorithim") == 1 {
-        let linear = (scene.gameBoard)
-        let ls = LinearSearch(scene: scene)
-        (searchHistory, targetFound, target) = ls.LinearSearch(gameboard: linear)
-        
-//        }
-        
-//        let old = scene.gameBoard
-//        for i in dupli {
-//            if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-//                if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-//                    old[i].
-//                }
-//            }
-//        }
+        sortSelector(resuming: false)
+        searchSelector()
+
     }
     
     var visitedNodeArray = [SkNodeAndLocation]()
@@ -246,8 +230,8 @@ class GameManager {
 //        }
 //    }
     
-    func pathSelector(resuming: Bool) {
-        if scene.pathFindingAlgorithimChoice == 0 {
+    func sortSelector(resuming: Bool) {
+        if scene.pathFindingAlgorithimChoice == 1 {
 //            var dupli = [SkNodeAndLocation]() as! NSCopying
             let dupli = (scene.gameBoard)
             let bs = BubbleSort(scene: scene)
@@ -263,48 +247,14 @@ class GameManager {
         } else {
             print("Out Of Bounds Error")
         }
-        
-//        for i in pathBlockCordinatesNotReversed {
-//            let node = scene.gameBoard.first(where: {$0.location == Tuple(x: i.y, y: i.x)})?.square
-//            pathSquareArray.append(SkNodeAndLocation(square: node!, location: Tuple(x: i.x, y: i.y)))
-//            displayPathSquareArray.append(SkNodeAndLocation(square: node!, location: Tuple(x: i.x, y: i.y)))
-//        }
-//
-//        if scene.pathFindingAlgorithimChoice != 0 {
-//            if displayPathSquareArray.count >= 2 {
-//                displayPathSquareArray.removeFirst()
-//                displayPathSquareArray.removeLast()
-//            }
-//        }
-//
-//        if UserDefaults.standard.bool(forKey: "Step Mode On Setting") {
-//            // working here may not need
-//            UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
-//            paused = true
-//            checkIfPaused()
-//            if scene.gamboardAnimationEnded == true {
-//                self.viewController?.reloadStepButtonSettings(isTheGamePaused: true)
-//            }
-//        } else {
-//            if scene.gamboardAnimationEnded == true {
-//                // working here may not need
-//                self.viewController?.reloadStepButtonSettings(isTheGamePaused: true)
-//            } else {
-//                // working here may not need
-//                UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
-//                paused = true
-//                checkIfPaused()
-//            }
-//        }
-//
-//        if scene.pathFindingAlgorithimChoice != 0 {
-//            scene.pathFindingAnimationsHaveEnded = false
-//            UserDefaults.standard.set(true, forKey: "Game Is Paused Setting")
-//            paused = true
-//            checkIfPaused()
-//        }
-//
-//        scene.updateScoreButtonHalo()
+    }
+    
+    func searchSelector() {
+        if scene.mazeGeneratingAlgorithimChoice == 2 {
+            let linear = (scene.gameBoard)
+            let ls = LinearSearch(scene: scene)
+            (searchHistory, targetFound, target) = ls.LinearSearch(gameboard: linear)
+        }
     }
     
 //    func pathManager() {
@@ -414,7 +364,7 @@ class GameManager {
             paused = true
         } else {
             if gameAnimationsWereRemoved == true {
-                pathSelector(resuming: true)
+                sortSelector(resuming: true)
                 gameAnimationsWereRemoved = false
             }
 //            scene.animatedVisitedSquareCount = 0

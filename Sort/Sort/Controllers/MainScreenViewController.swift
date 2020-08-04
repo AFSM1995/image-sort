@@ -20,9 +20,9 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //let mazeGenrationAlgorithimList = [["None","0","0"], ["Breadth-first search","1","0"], ["Depth-first search","1","0"], ["Eller's algorithm","1","1"], ["Hunt and kill algorithm","1","1"], ["Kruskal's algorithm","1","1"], ["Prim's algorithm","1","1"], ["Recursive backtracking algorithm","1","1"], ["Sidewinder algorithm","1","1"]]
     
-    let pathFindingAlgorithmList = [["Bubble Sort","0","0"], ["Insertion Sort","0","0"], ["Merge Sort","0","0"], ["Quick Sort","0","0"], ["Selection Sort","0","0"]]
+    let pathFindingAlgorithmList = [["None","0","0"], ["Bubble Sort","0","0"], ["Insertion Sort","0","0"], ["Merge Sort","0","0"], ["Quick Sort","0","0"], ["Selection Sort","0","0"]]
     
-    let mazeGenrationAlgorithimList = [["Binary Search","0","0"]]
+    let mazeGenrationAlgorithimList = [["None","0","0"], ["Binary Search","0","0"], ["Linear Search","0","0"]]
     
     let defaults = UserDefaults.standard
     var selectedPathAlgorithim = UserDefaults.standard.integer(forKey: "Selected Path Finding Algorithim")

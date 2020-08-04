@@ -150,7 +150,7 @@ class GameScene: SKScene {
                 i.square.strokeColor = .clear
                 i.square.run(SKAction.scale(to: 1.0, duration: 0))
             }
-            game.pathSelector(resuming: true)
+            game.sortSelector(resuming: true)
         }
         // Render the changed square color live.
         settingsChangeSquareColorManager()
@@ -622,13 +622,15 @@ class GameScene: SKScene {
         }
         
         func searchAnimationBegining() {
-            game.target[0].square.strokeColor = .systemPink
+            if game.target.count != 0 {
+                game.target[0].square.strokeColor = .systemPink
             
-            var searchWaitTime = SKAction()
-            
-            for (squareIndex, squareLocationAndColor) in game.searchHistory.enumerated() {
-                squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]), completion: {searchAnimationEnding(searchWaitTime: searchWaitTime, squareLocationAndColor: squareLocationAndColor)})
-                searchWaitTime = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
+                var searchWaitTime = SKAction()
+                
+                for (squareIndex, squareLocationAndColor) in game.searchHistory.enumerated() {
+                    squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]), completion: {searchAnimationEnding(searchWaitTime: searchWaitTime, squareLocationAndColor: squareLocationAndColor)})
+                    searchWaitTime = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
+                }
             }
         }
         
@@ -807,7 +809,7 @@ class GameScene: SKScene {
             for i in gameboardEdgeSquares {
                 i.square.fillColor = gameboardSquareColor
             }
-            game.pathSelector(resuming: true)
+            game.sortSelector(resuming: true)
             defaults.set(false, forKey: "Settings Value Modified")
             defaults.set(false, forKey: "Settings Dismissed")
         }
