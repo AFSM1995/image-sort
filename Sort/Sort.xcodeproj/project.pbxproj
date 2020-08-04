@@ -21,9 +21,6 @@
 		3812395923C68F450066B3FA /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812395823C68F450066B3FA /* Game.swift */; };
 		3828412F24D91BAC00850BE2 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828412E24D91BAC00850BE2 /* BinarySearch.swift */; };
 		382F0F1724AD527B0022E521 /* Custom Data Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1624AD527B0022E521 /* Custom Data Structures.swift */; };
-		382F0F1924AD53660022E521 /* AlgorithmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1824AD53660022E521 /* AlgorithmHelper.swift */; };
-		382F0F1B24AD58080022E521 /* DepthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1A24AD58080022E521 /* DepthFirstSearch.swift */; };
-		382F0F1E24AD71990022E521 /* BreadthFirstSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1D24AD71990022E521 /* BreadthFirstSearch.swift */; };
 		3832DFDC24D8CCFE0082291C /* LinearSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3832DFDB24D8CCFE0082291C /* LinearSearch.swift */; };
 		3860665524CD0D5C00AD91DC /* BubbleSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3860665424CD0D5C00AD91DC /* BubbleSort.swift */; };
 		3868F97C2426960C008F7B34 /* HelpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868F97B2426960C008F7B34 /* HelpScreenViewController.swift */; };
@@ -31,9 +28,6 @@
 		3868F98024269C1C008F7B34 /* SettingsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868F97F24269C1C008F7B34 /* SettingsScreenViewController.swift */; };
 		3868F9822426B5EC008F7B34 /* SettingsScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868F9812426B5EC008F7B34 /* SettingsScreenTableViewCell.swift */; };
 		387FD13B241DC51C0004FD78 /* MainScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD13A241DC51C0004FD78 /* MainScreenTableViewCell.swift */; };
-		388DAEF324B792FD00DD4007 /* UniformCostSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DAEF224B792FD00DD4007 /* UniformCostSearch.swift */; };
-		3899196F24B90CF90099EB5F /* AStarSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3899196E24B90CF80099EB5F /* AStarSearch.swift */; };
-		3899197124B93F0C0099EB5F /* DijkstrasSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3899197024B93F0C0099EB5F /* DijkstrasSearch.swift */; };
 		38B35F34248858D9009E2613 /* sfx_coin_single3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 38B35F33248858D9009E2613 /* sfx_coin_single3.wav */; };
 		38B35F3624885B11009E2613 /* sfx_coin_double3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 38B35F3524885B11009E2613 /* sfx_coin_double3.wav */; };
 /* End PBXBuildFile section */
@@ -55,9 +49,6 @@
 		3812395823C68F450066B3FA /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		3828412E24D91BAC00850BE2 /* BinarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
 		382F0F1624AD527B0022E521 /* Custom Data Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom Data Structures.swift"; sourceTree = "<group>"; };
-		382F0F1824AD53660022E521 /* AlgorithmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmHelper.swift; sourceTree = "<group>"; };
-		382F0F1A24AD58080022E521 /* DepthFirstSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthFirstSearch.swift; sourceTree = "<group>"; };
-		382F0F1D24AD71990022E521 /* BreadthFirstSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadthFirstSearch.swift; sourceTree = "<group>"; };
 		3832DFDB24D8CCFE0082291C /* LinearSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearSearch.swift; sourceTree = "<group>"; };
 		3860665424CD0D5C00AD91DC /* BubbleSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSort.swift; sourceTree = "<group>"; };
 		3868F97B2426960C008F7B34 /* HelpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpScreenViewController.swift; sourceTree = "<group>"; };
@@ -65,9 +56,6 @@
 		3868F97F24269C1C008F7B34 /* SettingsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenViewController.swift; sourceTree = "<group>"; };
 		3868F9812426B5EC008F7B34 /* SettingsScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTableViewCell.swift; sourceTree = "<group>"; };
 		387FD13A241DC51C0004FD78 /* MainScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenTableViewCell.swift; sourceTree = "<group>"; };
-		388DAEF224B792FD00DD4007 /* UniformCostSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformCostSearch.swift; sourceTree = "<group>"; };
-		3899196E24B90CF80099EB5F /* AStarSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AStarSearch.swift; sourceTree = "<group>"; };
-		3899197024B93F0C0099EB5F /* DijkstrasSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DijkstrasSearch.swift; sourceTree = "<group>"; };
 		38B35F33248858D9009E2613 /* sfx_coin_single3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_coin_single3.wav; sourceTree = "<group>"; };
 		38B35F3524885B11009E2613 /* sfx_coin_double3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_coin_double3.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,19 +105,6 @@
 			path = Sort;
 			sourceTree = "<group>";
 		};
-		382F0F1C24AD70750022E521 /* Path Finding Algorithms */ = {
-			isa = PBXGroup;
-			children = (
-				382F0F1824AD53660022E521 /* AlgorithmHelper.swift */,
-				3899196E24B90CF80099EB5F /* AStarSearch.swift */,
-				382F0F1D24AD71990022E521 /* BreadthFirstSearch.swift */,
-				382F0F1A24AD58080022E521 /* DepthFirstSearch.swift */,
-				3899197024B93F0C0099EB5F /* DijkstrasSearch.swift */,
-				388DAEF224B792FD00DD4007 /* UniformCostSearch.swift */,
-			);
-			path = "Path Finding Algorithms";
-			sourceTree = "<group>";
-		};
 		3832DFDD24D8CD050082291C /* Search Algorithims */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,7 +138,6 @@
 				382F0F1624AD527B0022E521 /* Custom Data Structures.swift */,
 				3832DFDD24D8CD050082291C /* Search Algorithims */,
 				3860665624CD0D6400AD91DC /* Sorting Algorithms */,
-				382F0F1C24AD70750022E521 /* Path Finding Algorithms */,
 				3812394623C68E290066B3FA /* GameScene.swift */,
 				3812395823C68F450066B3FA /* Game.swift */,
 			);
@@ -285,10 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				382F0F1724AD527B0022E521 /* Custom Data Structures.swift in Sources */,
-				388DAEF324B792FD00DD4007 /* UniformCostSearch.swift in Sources */,
 				3868F97C2426960C008F7B34 /* HelpScreenViewController.swift in Sources */,
-				382F0F1E24AD71990022E521 /* BreadthFirstSearch.swift in Sources */,
-				382F0F1924AD53660022E521 /* AlgorithmHelper.swift in Sources */,
 				3860665524CD0D5C00AD91DC /* BubbleSort.swift in Sources */,
 				3832DFDC24D8CCFE0082291C /* LinearSearch.swift in Sources */,
 				3868F9822426B5EC008F7B34 /* SettingsScreenTableViewCell.swift in Sources */,
@@ -297,12 +268,9 @@
 				3812394723C68E290066B3FA /* GameScene.swift in Sources */,
 				387FD13B241DC51C0004FD78 /* MainScreenTableViewCell.swift in Sources */,
 				3828412F24D91BAC00850BE2 /* BinarySearch.swift in Sources */,
-				382F0F1B24AD58080022E521 /* DepthFirstSearch.swift in Sources */,
-				3899197124B93F0C0099EB5F /* DijkstrasSearch.swift in Sources */,
 				3812395923C68F450066B3FA /* Game.swift in Sources */,
 				3812394923C68E290066B3FA /* MainScreenViewController.swift in Sources */,
 				3812394123C68E290066B3FA /* AppDelegate.swift in Sources */,
-				3899196F24B90CF90099EB5F /* AStarSearch.swift in Sources */,
 				3803D89D2497F87A002A6251 /* Custom Extensions.swift in Sources */,
 				3868F98024269C1C008F7B34 /* SettingsScreenViewController.swift in Sources */,
 			);
