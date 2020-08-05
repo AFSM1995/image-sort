@@ -237,10 +237,10 @@ class GameManager {
             let dupli = (scene.gameBoard)
             let bs = BubbleSort(scene: scene)
             swapSquareAndColor = bs.bubbleSort(gameboard: dupli, resuming: resuming)
-        } else if scene.pathFindingAlgorithimChoice == 1 {
-
         } else if scene.pathFindingAlgorithimChoice == 2 {
-
+            let ddd = (scene.gameBoard)
+            let iss = InsertionSort(scene: scene)
+            swapSquareAndColor = iss.insertionSort(gameboard: ddd, resuming: resuming)
         } else if scene.pathFindingAlgorithimChoice == 3 {
 
         } else if scene.pathFindingAlgorithimChoice == 4 {

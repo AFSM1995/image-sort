@@ -21,6 +21,7 @@
 		3812395923C68F450066B3FA /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3812395823C68F450066B3FA /* Game.swift */; };
 		3828412F24D91BAC00850BE2 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828412E24D91BAC00850BE2 /* BinarySearch.swift */; };
 		3828413124DA622000850BE2 /* InsertionSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828413024DA622000850BE2 /* InsertionSort.swift */; };
+		3828413324DB3D0300850BE2 /* SelectionSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3828413224DB3D0300850BE2 /* SelectionSort.swift */; };
 		382F0F1724AD527B0022E521 /* Custom Data Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382F0F1624AD527B0022E521 /* Custom Data Structures.swift */; };
 		3832DFDC24D8CCFE0082291C /* LinearSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3832DFDB24D8CCFE0082291C /* LinearSearch.swift */; };
 		3860665524CD0D5C00AD91DC /* BubbleSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3860665424CD0D5C00AD91DC /* BubbleSort.swift */; };
@@ -50,6 +51,7 @@
 		3812395823C68F450066B3FA /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		3828412E24D91BAC00850BE2 /* BinarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
 		3828413024DA622000850BE2 /* InsertionSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertionSort.swift; sourceTree = "<group>"; };
+		3828413224DB3D0300850BE2 /* SelectionSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionSort.swift; sourceTree = "<group>"; };
 		382F0F1624AD527B0022E521 /* Custom Data Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom Data Structures.swift"; sourceTree = "<group>"; };
 		3832DFDB24D8CCFE0082291C /* LinearSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearSearch.swift; sourceTree = "<group>"; };
 		3860665424CD0D5C00AD91DC /* BubbleSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleSort.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				3828413024DA622000850BE2 /* InsertionSort.swift */,
+				3828413224DB3D0300850BE2 /* SelectionSort.swift */,
 				3860665424CD0D5C00AD91DC /* BubbleSort.swift */,
 			);
 			path = "Sorting Algorithms";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3828413324DB3D0300850BE2 /* SelectionSort.swift in Sources */,
 				382F0F1724AD527B0022E521 /* Custom Data Structures.swift in Sources */,
 				3828413124DA622000850BE2 /* InsertionSort.swift in Sources */,
 				3868F97C2426960C008F7B34 /* HelpScreenViewController.swift in Sources */,
