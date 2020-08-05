@@ -28,6 +28,7 @@ class InsertionSort {
         }
         
         for (i, _) in scene.playableGameboard.enumerated() {
+            isSorted = true
             var j = i - 1
             var ii = i
             
@@ -45,7 +46,7 @@ class InsertionSort {
                 playableGameboard[j].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
             }
             
-            while j != -1 && ii != -1 && alphaOne < alphaTwo {
+            while j != -1 && ii != -1 && alphaOne > alphaTwo {
                 playableGameboard[ii].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
                 playableGameboard[j].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
                 
@@ -55,11 +56,12 @@ class InsertionSort {
                 
                 isSorted = false
                 
-//                let tempJ = array[j]
-//                array[j] = array[ii]
-//                array[ii] = tempJ
                 j = j - 1
                 ii = ii - 1
+                if j != -1 && ii != -1 {
+                    playableGameboard[ii].square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
+                    playableGameboard[j].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
+                }
             }
         }
         
