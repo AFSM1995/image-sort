@@ -16,6 +16,7 @@ class GameScreenViewController: UIViewController {
     @IBOutlet weak var settingsButton: UIButton!
     
     weak var mainScreenViewController: MainScreenViewController!
+    weak var gameScreenViewController: GameScreenViewController!
     
     let defaults = UserDefaults.standard
     let legendData = UserDefaults.standard.array(forKey: "Legend Preferences") as! [[Any]]
@@ -85,6 +86,15 @@ class GameScreenViewController: UIViewController {
     }
     
     @IBAction func homeButtonTapped(_ sender: UIButton) {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        if let vc = appDelegate.window?.rootViewController {
+//            self.gameScreenViewController = (vc.presentedViewController as? GameScreenViewController)
+
+//            for i in (currentGame!.scene.gameBoard) {
+//                i.square.removeAllActions()
+//            }
+//        }
+        
         self.dismiss(animated: true, completion: nil)
     }
     

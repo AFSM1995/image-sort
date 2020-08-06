@@ -11,15 +11,13 @@ import SpriteKit
 
 class InsertionSort {
     weak var scene: GameScene!
-    var swapSquareAndColor = [[SkNodeLocationAndColor]]()
-    var playableGameboard: [SkNodeAndLocation] = []
     
     init(scene: GameScene) {
         self.scene = scene
-        playableGameboard = scene.playableGameboard
     }
 
     func insertionSort(gameboard: [SkNodeAndLocation], resuming: Bool) -> [[SkNodeLocationAndColor]] {
+        var swapSquareAndColor = [[SkNodeLocationAndColor]]()
         var isSorted = false
         
         var tempStructure: [UIColor] = []
@@ -28,6 +26,7 @@ class InsertionSort {
         }
         
         for (i, _) in scene.playableGameboard.enumerated() {
+            let playableGameboard = scene.playableGameboard
             isSorted = true
             var j = i - 1
             var ii = i
