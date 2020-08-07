@@ -30,7 +30,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="oMK-L8-RaK" userLabel="Main Label Stack View">
                                         <rect key="frame" x="20" y="20" width="328" height="94"/>
                                         <subviews>
-                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sort" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OaO-jX-FWi">
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sort N Search" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OaO-jX-FWi">
                                                 <rect key="frame" x="0.0" y="0.0" width="328" height="40"/>
                                                 <color key="backgroundColor" name="Right View Background"/>
                                                 <accessibility key="accessibilityConfiguration">

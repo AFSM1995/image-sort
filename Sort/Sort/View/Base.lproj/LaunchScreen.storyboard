@@ -27,7 +27,7 @@
                                 <color key="textColor" name="Text"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Algo Snake" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NT7-2O-k5A">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Sort N Search" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NT7-2O-k5A">
                                 <rect key="frame" x="110.33333333333331" y="174.66666666666666" width="515.33333333333348" height="64.666666666666657"/>
                                 <color key="backgroundColor" name="Left View Background"/>
                                 <color key="textColor" name="Text"/>
