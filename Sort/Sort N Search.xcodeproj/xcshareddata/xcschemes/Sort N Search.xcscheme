@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3812393C23C68E290066B3FA"
-               BuildableName = "Sort.app"
-               BlueprintName = "Sort"
-               ReferencedContainer = "container:Sort.xcodeproj">
+               BuildableName = "Sort N Search.app"
+               BlueprintName = "Sort N Search"
+               ReferencedContainer = "container:Sort N Search.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3812393C23C68E290066B3FA"
-            BuildableName = "Sort.app"
-            BlueprintName = "Sort"
-            ReferencedContainer = "container:Sort.xcodeproj">
+            BuildableName = "Sort N Search.app"
+            BlueprintName = "Sort N Search"
+            ReferencedContainer = "container:Sort N Search.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3812393C23C68E290066B3FA"
-            BuildableName = "Sort.app"
-            BlueprintName = "Sort"
-            ReferencedContainer = "container:Sort.xcodeproj">
+            BuildableName = "Sort N Search.app"
+            BlueprintName = "Sort N Search"
+            ReferencedContainer = "container:Sort N Search.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
