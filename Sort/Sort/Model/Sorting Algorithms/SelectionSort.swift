@@ -58,13 +58,14 @@ class SelectionSort {
 //                print("---")
                 playableGameboard[jIndex].square.fillColor.getRed(&redJ, green: &greenJ, blue: &blueJ, alpha: &alphaJ)
                 let jValue = alphaJ
+                
+                let tempj = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: Tuple(x: playableGameboard[jIndex].location.y, y: playableGameboard[jIndex].location.x), color: UIColor(red: redJ, green: greenJ, blue: blueJ, alpha: alphaJ))
+                swapSquareAndColor.append([tempj])
+                
                 if jValue < currentMinimumValue {
                     playableGameboard[jIndex].square.fillColor.getRed(&redMin, green: &greenMin, blue: &blueMin, alpha: &alphaMin)
                     currentMinimumValue = jValue
                     currentMinimumIndex = jIndex
-                    
-                    let tempj = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: Tuple(x: playableGameboard[jIndex].location.y, y: playableGameboard[jIndex].location.x), color: UIColor(red: redJ, green: greenJ, blue: blueJ, alpha: alphaJ))
-                    swapSquareAndColor.append([tempj])
                 }
             }
             let tempIValue = playableGameboard[iIndex].square.fillColor
