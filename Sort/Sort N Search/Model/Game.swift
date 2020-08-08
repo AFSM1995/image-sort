@@ -241,12 +241,14 @@ class GameManager {
             let ddd = (scene.gameBoard)
             let iss = InsertionSort(scene: scene)
             swapSquareAndColor = iss.insertionSort(gameboard: ddd, resuming: resuming)
-        } else if scene.pathFindingAlgorithimChoice == 3 {
+        } else if scene.pathFindingAlgorithimChoice == 4 {
             let sce = (scene.gameBoard)
             let ss = SelectionSort(scene: scene)
             swapSquareAndColor = ss.selectionSort(gameboard: sce, resuming: resuming)
-        } else if scene.pathFindingAlgorithimChoice == 4 {
-
+        } else if scene.pathFindingAlgorithimChoice == 3 {
+            let quicscene = (scene.gameBoard)
+            let qs = QuickSort(scene: scene)
+            swapSquareAndColor = qs.quickSortHelper(gameboard: quicscene, resuming: resuming)
         } else {
             print("Out Of Bounds Error")
         }
