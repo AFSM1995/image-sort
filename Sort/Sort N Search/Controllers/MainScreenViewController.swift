@@ -20,7 +20,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //let mazeGenrationAlgorithimList = [["None","0","0"], ["Breadth-first search","1","0"], ["Depth-first search","1","0"], ["Eller's algorithm","1","1"], ["Hunt and kill algorithm","1","1"], ["Kruskal's algorithm","1","1"], ["Prim's algorithm","1","1"], ["Recursive backtracking algorithm","1","1"], ["Sidewinder algorithm","1","1"]]
     
-    let pathFindingAlgorithmList = [["None","0","0"], ["Bubble Sort","0","0"], ["Insertion Sort","0","0"], ["Merge Sort","0","0"], ["Quick Sort","0","0"], ["Selection Sort","0","0"]]
+    let pathFindingAlgorithmList = [["None","0","0"], ["Bubble Sort","0","0"], ["Insertion Sort","0","0"], ["Selection Sort","0","0"]]
     
     let mazeGenrationAlgorithimList = [["None","0","0"], ["Binary Search","0","0"], ["Linear Search","0","0"]]
     
@@ -37,7 +37,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func checkIfFirstRun() {
         if !defaults.bool(forKey: "Not First Launch") {
-            let legendData = [["Square", 15], ["Swap Halo", 6], ["Comparison Halo", 5], ["Verification Halo", 1], ["Gameboard", 0], ["Search Halo", 9], ["Found Halo", 12], ["Target Halo", 17]]
+            let legendData = [["Square", 15], ["Swap Halo", 6], ["Comparison Halo", 5], ["Gameboard", 0], ["Search Halo", 9], ["Found Halo", 12], ["Target Halo", 17]]
             
             defaults.set(legendData, forKey: "Legend Preferences")
             defaults.set(2, forKey: "Snake Speed Text Setting")

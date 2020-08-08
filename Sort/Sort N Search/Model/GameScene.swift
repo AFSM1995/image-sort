@@ -88,17 +88,17 @@ class GameScene: SKScene {
         boardLayoutOption = defaults.integer(forKey: "Reset Setting")
         
         // Update square colors, seen by the user in the next frame update.
-        targetHaloColor = colors[legendData[7][1] as! Int]
-        searchHaloColor = colors[legendData[5][1] as! Int]
-        foundHaloColor = colors[legendData[6][1] as! Int]
+        targetHaloColor = colors[legendData[6][1] as! Int]
+        searchHaloColor = colors[legendData[4][1] as! Int]
+        foundHaloColor = colors[legendData[5][1] as! Int]
         squareColor = colors[legendData[0][1] as! Int]
         swapHaloColor = colors[legendData[1][1] as! Int]
         comparisonHaloColor = colors[legendData[2][1] as! Int]
         verificationHaloColor = colors[legendData[2][1] as! Int]
         
         if defaults.bool(forKey: "Dark Mode On Setting") {
-            gameboardSquareColor = darkBackgroundColors[legendData[4][1] as! Int]
-            fadedGameBoardSquareColor = darkBackgroundColors[legendData[4][1] as! Int].withAlphaComponent(0.5)
+            gameboardSquareColor = darkBackgroundColors[legendData[3][1] as! Int]
+            fadedGameBoardSquareColor = darkBackgroundColors[legendData[3][1] as! Int].withAlphaComponent(0.5)
             gameBackgroundColor = UIColor(red: 0.11, green: 0.11, blue: 0.11, alpha: 1.00)
             screenLabelColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
             scoreButtonColor = squareColor
@@ -594,7 +594,8 @@ class GameScene: SKScene {
                 var searchWaitTime = SKAction()
                 
                 for (squareIndex, squareLocationAndColor) in game.searchHistory.enumerated() {
-                    squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]), completion: {searchAnimationEnding(searchWaitTime: searchWaitTime, squareLocationAndColor: squareLocationAndColor)})
+//                    squareLocationAndColor.square.run(.sequence([searchWaitTime, animationSequanceManager(animation: 2)]),
+                    squareLocationAndColor.square.run(.sequence([searchWaitTime]), completion: {searchAnimationEnding(searchWaitTime: searchWaitTime, squareLocationAndColor: squareLocationAndColor)})
                     searchWaitTime = .wait(forDuration: TimeInterval(squareIndex) * 0.02) // 0.085
                 }
             }
