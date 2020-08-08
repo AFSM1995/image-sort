@@ -8,12 +8,13 @@
 
 import Foundation
 
-var array = [5,0,1,8,7] // works
-//var array = [2,1,3] // works
+//var array = [5,0,1,8,7] // works
+//var array = [2,1,3,1,3,2,8,67,3,1] // works
 //var array = [2,1] // works
 //var array = [6,7,5,8] // works
-//var array = [6,7,5] // works
+//var array = [6,7,5] // works/
 //var array = [6,7] // works
+var array = [7,2,1,8,6,3,5,4]
 
 func quickSort(frontPointer: Int, endPointer: Int) {
     print("before", array, frontPointer, endPointer)
@@ -31,14 +32,16 @@ func quickSort(frontPointer: Int, endPointer: Int) {
     var iIndex = frontPointer-1
     
     for _ in (0...(endPointer-1)) {
-        if array[jIndex] >= pivot {
-            jIndex += 1
-        } else if array[jIndex] < pivot {
-            iIndex += 1
-            let tempIValue = array[iIndex]
-            array[iIndex] = array[jIndex]
-            array[jIndex] = tempIValue
-            jIndex += 1
+        if jIndex < (array.count-1) {
+            if array[jIndex] >= pivot {
+                jIndex += 1
+            } else if array[jIndex] < pivot {
+                iIndex += 1
+                let tempIValue = array[iIndex]
+                array[iIndex] = array[jIndex]
+                array[jIndex] = tempIValue
+                jIndex += 1
+            }
         }
     }
     let finalPivotLocation = array[iIndex+1]
@@ -48,11 +51,11 @@ func quickSort(frontPointer: Int, endPointer: Int) {
     
     if (endPointer - 1 != frontPointer) {
         quickSort(frontPointer: frontPointer, endPointer: iIndex)
-        if endPointer > pivot {
+//        if endPointer >= pivot {
             quickSort(frontPointer: iIndex+2, endPointer: endPointer)
-        } else {
-            print("not calling", frontPointer, endPointer)
-        }
+//        } else {
+//            print("not calling", frontPointer, endPointer)
+//        }
     } else {
         print("sdf")
     }
