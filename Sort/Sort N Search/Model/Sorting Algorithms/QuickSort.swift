@@ -60,6 +60,25 @@ class QuickSort {
                     jIndex += 1
                 }
             }
+            
+            if resuming == false {
+                for (index, i) in (scene.playableGameboard).enumerated() {
+                    if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
+                        if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
+                            i.square.fillColor = scene.gameboardSquareColor
+                        }
+                    }
+                }
+            } else {
+                for (index, i) in (scene.playableGameboard).enumerated() {
+                    if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
+                        if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
+                            i.square.fillColor = tempStructure[index]
+                        }
+                    }
+                }
+            }
+            
             // maybe color swap
             var redIP: CGFloat = 0
             var greenIP: CGFloat = 0
@@ -75,6 +94,8 @@ class QuickSort {
             (playableGameboard[endPointer]).square.fillColor.getRed(&redEND, green: &greenEND, blue: &blueEND, alpha: &alphaEND)
             let tempEnd = SkNodeLocationAndColor(square: playableGameboard[endPointer].square, location: Tuple(x: playableGameboard[endPointer].location.y, y: playableGameboard[endPointer].location.x), color: UIColor(red: redEND, green: greenEND, blue: blueEND, alpha: alphaEND))
             
+            swapSquareAndColor.append([tempEnd, tempi])
+            
             // i j min mix up
             let finalPivotValue = playableGameboard[iIndex+1].square.fillColor
             playableGameboard[iIndex+1].square.fillColor = fullPivotColor
@@ -86,23 +107,7 @@ class QuickSort {
             }
         }
         
-        if resuming == false {
-            for (index, i) in (scene.playableGameboard).enumerated() {
-                if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-                    if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-                        i.square.fillColor = scene.gameboardSquareColor
-                    }
-                }
-            }
-        } else {
-            for (index, i) in (scene.playableGameboard).enumerated() {
-                if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-                    if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-                        i.square.fillColor = tempStructure[index]
-                    }
-                }
-            }
-        }
+        quickSort(frontPointer: 0, endPointer: scene.playableGameboard.count-1)
         
         for i in scene.playableGameboard {
             print(i.square.fillColor)
