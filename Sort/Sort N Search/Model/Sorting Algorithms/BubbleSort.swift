@@ -17,13 +17,31 @@ class BubbleSort {
         self.scene = scene
     }
     
+    func initialGameBoardAperianceSaver() -> [UIColor] {
+        var initialGameboardLayout: [UIColor] = []
+        for i in scene.playableGameboard {
+            initialGameboardLayout.append(i.square.fillColor)
+        }
+        return initialGameboardLayout
+    }
+    
+    func initialGameBoardAperianceRestorer(resuming: Bool, initialGameboardLayout: [UIColor]) {
+        // Prevents sorted array grid from appering before initial animations begin.
+        // If animation has to restart, prevents sorted array grid from apperaing before animations begin.
+        if resuming == false {
+            for i in scene.playableGameboard {
+                i.square.fillColor = scene.gameboardSquareColor
+            }
+        } else {
+            for (index, i) in (scene.playableGameboard).enumerated() {
+                i.square.fillColor = initialGameboardLayout[index]
+            }
+        }
+    }
+    
     func bubbleSort(resuming: Bool) -> [[SkNodeLocationAndColor]] {
         var isSorted = false
-        
-        var tempStructure: [UIColor] = []
-        for i in scene.gameBoard {
-            tempStructure.append(i.square.fillColor)
-        }
+        let initialGameboardLayout = initialGameBoardAperianceSaver()
 
         while (!isSorted) {
             isSorted = true
@@ -61,22 +79,8 @@ class BubbleSort {
             }
         }
         
-        // Prevents sorted array grid from appering before initial animations begin.
-        // If animation has to restart, prevents sorted array grid from apperaing before animations begin.
-        if resuming == false {
-            for i in scene.playableGameboard {
-                i.square.fillColor = scene.gameboardSquareColor
-            }
-        } else {
-            for (index, i) in (scene.gameBoard).enumerated() {
-                if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-                    if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-                        i.square.fillColor = tempStructure[index]
-                    }
-                }
-            }
-        }
-        
+        // Restores grid back to pre-sort apperiance.
+        initialGameBoardAperianceRestorer(resuming: resuming, initialGameboardLayout: initialGameboardLayout)
         return swapSquareAndColor
     }
 }
