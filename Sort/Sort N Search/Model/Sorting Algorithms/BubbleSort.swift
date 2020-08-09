@@ -6,8 +6,7 @@
 //  Copyright © 2020 Álvaro Santillan. All rights reserved.
 //
 
-import Foundation
-import SpriteKit
+import UIKit
 
 class BubbleSort {
     weak var scene: GameScene!
@@ -39,7 +38,7 @@ class BubbleSort {
     }
     
     func bubbleSort(resuming: Bool) -> [[SkNodeLocationAndColor]] {
-        var swapSquareAndColor = [[SkNodeLocationAndColor]]()
+        var pendingAnimations = [[SkNodeLocationAndColor]]()
         let initialGameboardLayout = initialGameBoardAperianceSaver()
         var isSorted = false
 
@@ -49,23 +48,25 @@ class BubbleSort {
             for (i, _) in scene.playableGameboard.enumerated() {
                 if i != (scene.playableGameboard.count-1) {
                     let iPlusOne = i+1
-                    let iColor = scene.playableGameboard[i].square.fillColor
-                    let iPlusOneColor = scene.playableGameboard[iPlusOne].square.fillColor
                     let iColorComponents = scene.playableGameboard[i].square.fillColor.toComponents()
                     let iPlusOneColorComponents = scene.playableGameboard[iPlusOne].square.fillColor.toComponents()
 
                     if iColorComponents.alpha < iPlusOneColorComponents.alpha {
-                        scene.playableGameboard[i].square.fillColor = UIColor(red: iPlusOneColorComponents.red, green: iPlusOneColorComponents.green, blue: iPlusOneColorComponents.blue, alpha: iPlusOneColorComponents.alpha)
-                        scene.playableGameboard[iPlusOne].square.fillColor = UIColor(red: iColorComponents.red, green: iColorComponents.green, blue: iColorComponents.blue, alpha: iColorComponents.alpha)
+                        // Swap square colors on phisical board data structure for bubble sort.
+                        let tempIColor = scene.playableGameboard[i].square.fillColor
+                        scene.playableGameboard[i].square.fillColor = scene.playableGameboard[iPlusOne].square.fillColor
+                        scene.playableGameboard[iPlusOne].square.fillColor = tempIColor
 
-                        let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: Tuple(x: scene.playableGameboard[i].location.y, y: scene.playableGameboard[i].location.x), color: iPlusOneColor)
-                        let tempii = SkNodeLocationAndColor(square: scene.playableGameboard[iPlusOne].square, location: Tuple(x: scene.playableGameboard[iPlusOne].location.y, y: scene.playableGameboard[iPlusOne].location.x), color: iColor)
-                        swapSquareAndColor.append([tempi, tempii])
+                        // Swap square colors for animation data structure.
+                        let newI = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: scene.playableGameboard[i].location, color: scene.playableGameboard[i].square.fillColor)
+                        let newIPlusOne = SkNodeLocationAndColor(square: scene.playableGameboard[iPlusOne].square, location: scene.playableGameboard[iPlusOne].location, color: tempIColor)
+                        pendingAnimations.append([newI, newIPlusOne])
 
                         isSorted = false
                     } else {
-                        let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: Tuple(x: scene.playableGameboard[i].location.y, y: scene.playableGameboard[i].location.x), color: iPlusOneColor)
-                        swapSquareAndColor.append([tempi])
+                        // No swap added to animation.
+                        let newI = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: scene.playableGameboard[i].location, color: scene.playableGameboard[i].square.fillColor)
+                        pendingAnimations.append([newI])
                     }
                 }
             }
@@ -73,6 +74,6 @@ class BubbleSort {
         
         // Restores grid back to pre-sort apperiance before return.
         initialGameBoardAperianceRestorer(resuming: resuming, initialGameboardLayout: initialGameboardLayout)
-        return swapSquareAndColor
+        return pendingAnimations
     }
 }
