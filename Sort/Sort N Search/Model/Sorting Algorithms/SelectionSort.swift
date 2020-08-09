@@ -40,30 +40,23 @@ class SelectionSort {
     func selectionSort(gameboard: [SkNodeAndLocation], resuming: Bool) -> [[SkNodeLocationAndColor]] {
         var pendingAnimations = [[SkNodeLocationAndColor]]()
         let initialGameboardLayout = initialGameBoardAperianceSaver()
-        var currentMinimumValue = CGFloat()
+        var currentMinimumAlpha = CGFloat()
         var currentMinimumIndex = 0
         
         for (iIndex, _) in scene.playableGameboard.enumerated() {
-            var redMin: CGFloat = 0
-            var greenMin: CGFloat = 0
-            var blueMin: CGFloat = 0
-            var alphaMin: CGFloat = 0
-            
-            let iColorComponents = scene.playableGameboard[iIndex].square.fillColor.toComponents()
-            currentMinimumValue = iColorComponents.alpha
+            let iColorComponents = scene.playableGameboard[iIndex].square.fillColor
+            currentMinimumAlpha = iColorComponents.toComponents().alpha
             currentMinimumIndex = iIndex
-            alphaMin = iColorComponents.alpha
+            var minimumColor = iColorComponents
             
             for jIndex in (iIndex...(scene.playableGameboard.count-1)) {
-                let jColorComponents = scene.playableGameboard[jIndex].square.fillColor.toComponents()
-                let jValue = jColorComponents.alpha
+                let newJ = SkNodeLocationAndColor(square: scene.playableGameboard[jIndex].square, location: scene.playableGameboard[jIndex].location, color: scene.playableGameboard[jIndex].square.fillColor)
+                pendingAnimations.append([newJ])
                 
-                let tempj = SkNodeLocationAndColor(square: scene.playableGameboard[jIndex].square, location: scene.playableGameboard[jIndex].location, color: UIColor(red: jColorComponents.red, green: jColorComponents.green, blue: jColorComponents.blue, alpha: jColorComponents.alpha))
-                pendingAnimations.append([tempj])
-                
-                if jValue < currentMinimumValue {
-                    scene.playableGameboard[jIndex].square.fillColor.getRed(&redMin, green: &greenMin, blue: &blueMin, alpha: &alphaMin)
-                    currentMinimumValue = jValue
+                let jColorAlpha = scene.playableGameboard[jIndex].square.fillColor.toComponents().alpha
+                if jColorAlpha < currentMinimumAlpha {
+                    minimumColor = scene.playableGameboard[jIndex].square.fillColor
+                    currentMinimumAlpha = jColorAlpha
                     currentMinimumIndex = jIndex
                 }
             }
@@ -71,9 +64,8 @@ class SelectionSort {
             scene.playableGameboard[iIndex].square.fillColor = scene.playableGameboard[currentMinimumIndex].square.fillColor
             scene.playableGameboard[currentMinimumIndex].square.fillColor = tempIValue
             
-            let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[iIndex].square, location: scene.playableGameboard[iIndex].location, color: UIColor(red: redMin, green: greenMin, blue: blueMin, alpha: alphaMin))
-            
-            let tempMin = SkNodeLocationAndColor(square: scene.playableGameboard[currentMinimumIndex].square, location: scene.playableGameboard[currentMinimumIndex].location, color: UIColor(red: iColorComponents.red, green: iColorComponents.green, blue: iColorComponents.blue, alpha: iColorComponents.alpha))
+            let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[iIndex].square, location: scene.playableGameboard[iIndex].location, color: minimumColor)
+            let tempMin = SkNodeLocationAndColor(square: scene.playableGameboard[currentMinimumIndex].square, location: scene.playableGameboard[currentMinimumIndex].location, color: iColorComponents)
             
             pendingAnimations.append([tempMin, tempi])
         }
