@@ -6,8 +6,7 @@
 //  Copyright © 2020 Álvaro Santillan. All rights reserved.
 //
 
-import Foundation
-import SpriteKit
+import UIKit
 
 class SelectionSort {
     weak var scene: GameScene!
@@ -15,19 +14,36 @@ class SelectionSort {
     init(scene: GameScene) {
         self.scene = scene
     }
+    
+    func initialGameBoardAperianceSaver() -> [UIColor] {
+        var initialGameboardLayout: [UIColor] = []
+        for i in scene.playableGameboard {
+            initialGameboardLayout.append(i.square.fillColor)
+        }
+        return initialGameboardLayout
+    }
+    
+    func initialGameBoardAperianceRestorer(resuming: Bool, initialGameboardLayout: [UIColor]) {
+        // Prevents sorted array grid from appering before initial animations begin.
+        // If animation has to restart, prevents sorted array grid from apperaing before animations begin.
+        if resuming == false {
+            for i in scene.playableGameboard {
+                i.square.fillColor = scene.gameboardSquareColor
+            }
+        } else {
+            for (index, i) in (scene.playableGameboard).enumerated() {
+                i.square.fillColor = initialGameboardLayout[index]
+            }
+        }
+    }
 
     func selectionSort(gameboard: [SkNodeAndLocation], resuming: Bool) -> [[SkNodeLocationAndColor]] {
-        var swapSquareAndColor = [[SkNodeLocationAndColor]]()
-        let playableGameboard = scene.playableGameboard
+        var pendingAnimations = [[SkNodeLocationAndColor]]()
+        let initialGameboardLayout = initialGameBoardAperianceSaver()
         var currentMinimumValue = CGFloat()
         var currentMinimumIndex = 0
         
-        var tempStructure: [UIColor] = []
-        for i in scene.gameBoard {
-            tempStructure.append(i.square.fillColor)
-        }
-        
-        for (iIndex, _) in playableGameboard.enumerated() {
+        for (iIndex, _) in scene.playableGameboard.enumerated() {
             var redI: CGFloat = 0
             var greenI: CGFloat = 0
             var blueI: CGFloat = 0
@@ -41,7 +57,7 @@ class SelectionSort {
             var blueMin: CGFloat = 0
             var alphaMin: CGFloat = 0
             
-            playableGameboard[iIndex].square.fillColor.getRed(&redI, green: &greenI, blue: &blueI, alpha: &alphaI)
+            scene.playableGameboard[iIndex].square.fillColor.getRed(&redI, green: &greenI, blue: &blueI, alpha: &alphaI)
             currentMinimumValue = alphaI
             currentMinimumIndex = iIndex
             redMin = redI
@@ -49,48 +65,32 @@ class SelectionSort {
             blueMin = blueI
             alphaMin = alphaI
             
-            for jIndex in (iIndex...(playableGameboard.count-1)) {
-                playableGameboard[jIndex].square.fillColor.getRed(&redJ, green: &greenJ, blue: &blueJ, alpha: &alphaJ)
+            for jIndex in (iIndex...(scene.playableGameboard.count-1)) {
+                scene.playableGameboard[jIndex].square.fillColor.getRed(&redJ, green: &greenJ, blue: &blueJ, alpha: &alphaJ)
                 let jValue = alphaJ
                 
-                let tempj = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: Tuple(x: playableGameboard[jIndex].location.y, y: playableGameboard[jIndex].location.x), color: UIColor(red: redJ, green: greenJ, blue: blueJ, alpha: alphaJ))
-                swapSquareAndColor.append([tempj])
+                let tempj = SkNodeLocationAndColor(square: scene.playableGameboard[jIndex].square, location: Tuple(x: scene.playableGameboard[jIndex].location.y, y: scene.playableGameboard[jIndex].location.x), color: UIColor(red: redJ, green: greenJ, blue: blueJ, alpha: alphaJ))
+                pendingAnimations.append([tempj])
                 
                 if jValue < currentMinimumValue {
-                    playableGameboard[jIndex].square.fillColor.getRed(&redMin, green: &greenMin, blue: &blueMin, alpha: &alphaMin)
+                    scene.playableGameboard[jIndex].square.fillColor.getRed(&redMin, green: &greenMin, blue: &blueMin, alpha: &alphaMin)
                     currentMinimumValue = jValue
                     currentMinimumIndex = jIndex
                 }
             }
-            let tempIValue = playableGameboard[iIndex].square.fillColor
-            playableGameboard[iIndex].square.fillColor = playableGameboard[currentMinimumIndex].square.fillColor
-            playableGameboard[currentMinimumIndex].square.fillColor = tempIValue
+            let tempIValue = scene.playableGameboard[iIndex].square.fillColor
+            scene.playableGameboard[iIndex].square.fillColor = scene.playableGameboard[currentMinimumIndex].square.fillColor
+            scene.playableGameboard[currentMinimumIndex].square.fillColor = tempIValue
             
-            let tempi = SkNodeLocationAndColor(square: playableGameboard[iIndex].square, location: Tuple(x: playableGameboard[iIndex].location.y, y: playableGameboard[iIndex].location.x), color: UIColor(red: redMin, green: greenMin, blue: blueMin, alpha: alphaMin))
+            let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[iIndex].square, location: Tuple(x: scene.playableGameboard[iIndex].location.y, y: scene.playableGameboard[iIndex].location.x), color: UIColor(red: redMin, green: greenMin, blue: blueMin, alpha: alphaMin))
             
-            let tempMin = SkNodeLocationAndColor(square: playableGameboard[currentMinimumIndex].square, location: Tuple(x: playableGameboard[currentMinimumIndex].location.y, y: playableGameboard[currentMinimumIndex].location.x), color: UIColor(red: redI, green: greenI, blue: blueI, alpha: alphaI))
+            let tempMin = SkNodeLocationAndColor(square: scene.playableGameboard[currentMinimumIndex].square, location: Tuple(x: scene.playableGameboard[currentMinimumIndex].location.y, y: scene.playableGameboard[currentMinimumIndex].location.x), color: UIColor(red: redI, green: greenI, blue: blueI, alpha: alphaI))
             
-            swapSquareAndColor.append([tempMin, tempi])
+            pendingAnimations.append([tempMin, tempi])
         }
         
-        if resuming == false {
-            for (index, i) in (scene.playableGameboard).enumerated() {
-                if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-                    if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-                        i.square.fillColor = scene.gameboardSquareColor
-                    }
-                }
-            }
-        } else {
-            for (index, i) in (scene.playableGameboard).enumerated() {
-                if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-                    if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-                        i.square.fillColor = tempStructure[index]
-                    }
-                }
-            }
-        }
-        
-        return swapSquareAndColor
+        // Restores grid back to pre-sort apperiance before return.
+        initialGameBoardAperianceRestorer(resuming: resuming, initialGameboardLayout: initialGameboardLayout)
+        return pendingAnimations
     }
 }
