@@ -11,7 +11,6 @@ import SpriteKit
 
 class BubbleSort {
     weak var scene: GameScene!
-    var swapSquareAndColor = [[SkNodeLocationAndColor]]()
     
     init(scene: GameScene) {
         self.scene = scene
@@ -40,46 +39,39 @@ class BubbleSort {
     }
     
     func bubbleSort(resuming: Bool) -> [[SkNodeLocationAndColor]] {
-        var isSorted = false
+        var swapSquareAndColor = [[SkNodeLocationAndColor]]()
         let initialGameboardLayout = initialGameBoardAperianceSaver()
+        var isSorted = false
 
+        // Is sorted can be used for step mode.
         while (!isSorted) {
             isSorted = true
             for (i, _) in scene.playableGameboard.enumerated() {
                 if i != (scene.playableGameboard.count-1) {
-                    var ii = i+1
+                    let iPlusOne = i+1
+                    let iColor = scene.playableGameboard[i].square.fillColor
+                    let iPlusOneColor = scene.playableGameboard[iPlusOne].square.fillColor
+                    let iColorComponents = scene.playableGameboard[i].square.fillColor.toComponents()
+                    let iPlusOneColorComponents = scene.playableGameboard[iPlusOne].square.fillColor.toComponents()
 
-                    var redOne: CGFloat = 0
-                    var greenOne: CGFloat = 0
-                    var blueOne: CGFloat = 0
-                    var alphaOne: CGFloat = 0
-                    var redTwo: CGFloat = 0
-                    var greenTwo: CGFloat = 0
-                    var blueTwo: CGFloat = 0
-                    var alphaTwo: CGFloat = 0
+                    if iColorComponents.alpha < iPlusOneColorComponents.alpha {
+                        scene.playableGameboard[i].square.fillColor = UIColor(red: iPlusOneColorComponents.red, green: iPlusOneColorComponents.green, blue: iPlusOneColorComponents.blue, alpha: iPlusOneColorComponents.alpha)
+                        scene.playableGameboard[iPlusOne].square.fillColor = UIColor(red: iColorComponents.red, green: iColorComponents.green, blue: iColorComponents.blue, alpha: iColorComponents.alpha)
 
-                    scene.playableGameboard[i].square.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
-                    scene.playableGameboard[ii].square.fillColor.getRed(&redTwo, green: &greenTwo, blue: &blueTwo, alpha: &alphaTwo)
-
-
-                    if alphaOne < alphaTwo {
-                        scene.playableGameboard[i].square.fillColor = UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo)
-                        scene.playableGameboard[ii].square.fillColor = UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne)
-
-                        let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: Tuple(x: scene.playableGameboard[i].location.y, y: scene.playableGameboard[i].location.x), color: UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo))
-                        let tempii = SkNodeLocationAndColor(square: scene.playableGameboard[ii].square, location: Tuple(x: scene.playableGameboard[ii].location.y, y: scene.playableGameboard[ii].location.x), color: UIColor(red: redOne, green: greenOne, blue: blueOne, alpha: alphaOne))
+                        let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: Tuple(x: scene.playableGameboard[i].location.y, y: scene.playableGameboard[i].location.x), color: iPlusOneColor)
+                        let tempii = SkNodeLocationAndColor(square: scene.playableGameboard[iPlusOne].square, location: Tuple(x: scene.playableGameboard[iPlusOne].location.y, y: scene.playableGameboard[iPlusOne].location.x), color: iColor)
                         swapSquareAndColor.append([tempi, tempii])
 
                         isSorted = false
                     } else {
-                        let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: Tuple(x: scene.playableGameboard[i].location.y, y: scene.playableGameboard[i].location.x), color: UIColor(red: redTwo, green: greenTwo, blue: blueTwo, alpha: alphaTwo))
+                        let tempi = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: Tuple(x: scene.playableGameboard[i].location.y, y: scene.playableGameboard[i].location.x), color: iPlusOneColor)
                         swapSquareAndColor.append([tempi])
                     }
                 }
             }
         }
         
-        // Restores grid back to pre-sort apperiance.
+        // Restores grid back to pre-sort apperiance before return.
         initialGameBoardAperianceRestorer(resuming: resuming, initialGameboardLayout: initialGameboardLayout)
         return swapSquareAndColor
     }
