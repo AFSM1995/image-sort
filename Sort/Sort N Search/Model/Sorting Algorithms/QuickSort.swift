@@ -33,14 +33,14 @@ class QuickSort {
                 return
             }
             
-            var redP: CGFloat = 0
-            var greenP: CGFloat = 0
-            var blueP: CGFloat = 0
-            var alphaP: CGFloat = 0
-            var redJ: CGFloat = 0
-            var greenJ: CGFloat = 0
-            var blueJ: CGFloat = 0
-            var alphaJ: CGFloat = 0
+            var redP: CGFloat = 1
+            var greenP: CGFloat = 1
+            var blueP: CGFloat = 1
+            var alphaP: CGFloat = 1
+            var redJ: CGFloat = 1
+            var greenJ: CGFloat = 1
+            var blueJ: CGFloat = 1
+            var alphaJ: CGFloat = 1
             let fullPivotColor = (playableGameboard[endPointer]).square.fillColor
             (playableGameboard[endPointer]).square.fillColor.getRed(&redP, green: &greenP, blue: &blueP, alpha: &alphaP)
             let pivot = alphaP
@@ -51,98 +51,65 @@ class QuickSort {
             for _ in (0...(endPointer-1)) {
                 if jIndex < (playableGameboard.count-1) {
                     playableGameboard[jIndex].square.fillColor.getRed(&redJ, green: &greenJ, blue: &blueJ, alpha: &alphaJ)
+                    for i in playableGameboard {
+                        print(i.square.fillColor)
+                    }
                     if alphaJ < alphaP {
                         iIndex += 1
                         let tempIValue = playableGameboard[iIndex].square.fillColor
                         playableGameboard[iIndex].square.fillColor = playableGameboard[jIndex].square.fillColor
                         playableGameboard[jIndex].square.fillColor = tempIValue
+                        print("sdfg", playableGameboard[iIndex].square.fillColor, playableGameboard[jIndex].square.fillColor)
                         
-                        var redII: CGFloat = 0
-                        var greenII: CGFloat = 0
-                        var blueII: CGFloat = 0
-                        var alphaII: CGFloat = 0
-                        (playableGameboard[iIndex]).square.fillColor.getRed(&redII, green: &greenII, blue: &blueII, alpha: &alphaII)
-                        let tempii = SkNodeLocationAndColor(square: playableGameboard[iIndex].square, location: Tuple(x: playableGameboard[iIndex].location.y, y: playableGameboard[iIndex].location.x), color: tempIValue)
+                        var redIII: CGFloat = 1
+                        var greenIII: CGFloat = 1
+                        var blueIII: CGFloat = 1
+                        var alphaIII: CGFloat = 1
+                        playableGameboard[iIndex].square.fillColor.getRed(&redIII, green: &greenIII, blue: &blueIII, alpha: &alphaIII)
+                        let tempjj = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: Tuple(x: playableGameboard[jIndex].location.y, y: playableGameboard[jIndex].location.x), color: UIColor(red: redIII, green: greenIII, blue: blueIII, alpha: alphaIII))
                         
-                        var redJJ: CGFloat = 0
-                        var greenJJ: CGFloat = 0
-                        var blueJJ: CGFloat = 0
-                        var alphaJJ: CGFloat = 0
-                        (playableGameboard[jIndex]).square.fillColor.getRed(&redJJ, green: &greenJJ, blue: &blueJJ, alpha: &alphaJJ)
-                        let tempjj = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: Tuple(x: playableGameboard[jIndex].location.y, y: playableGameboard[jIndex].location.x), color: UIColor(red: redII, green: greenII, blue: blueII, alpha: alphaII))
+                        var redJJJ: CGFloat = 1
+                        var greenJJJ: CGFloat = 1
+                        var blueJJJ: CGFloat = 1
+                        var alphaJJJ: CGFloat = 1
+                        playableGameboard[jIndex].square.fillColor.getRed(&redJJJ, green: &greenJJJ, blue: &blueJJJ, alpha: &alphaJJJ)
+                        let tempii = SkNodeLocationAndColor(square: playableGameboard[iIndex].square, location: Tuple(x: playableGameboard[iIndex].location.y, y: playableGameboard[iIndex].location.x), color: UIColor(red: redJJJ, green: greenJJJ, blue: blueJJJ, alpha: alphaJJJ))
+                        
 
-                        swapSquareAndColor.append([tempjj, tempii])
-                        
-//                        for i in scene.playableGameboard {
-//                            print(i.square.fillColor)
-//                        }
-//                        print("-")
+                        print("Inner S", "j", tempjj.color, "i", tempii.color)
+                        for i in playableGameboard {
+                            print(i.square.fillColor)
+                        }
+                        print("-----")
+                        swapSquareAndColor.append([tempii, tempjj])
+                    } else {
+                        let tempjj = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: Tuple(x: playableGameboard[jIndex].location.y, y: playableGameboard[jIndex].location.x), color: UIColor(red: redJ, green: greenJ, blue: blueJ, alpha: alphaJ))
+                        print(jIndex, alphaJ)
+                        swapSquareAndColor.append([tempjj])
                     }
                     jIndex += 1
-//                    for i in scene.playableGameboard {
-//                        print(i.square.fillColor)
-//                    }
-//                    print("New")
-
                 }
             }
-            
-//            if resuming == false {
-//                for (index, i) in (scene.playableGameboard).enumerated() {
-//                    if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-//                        if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-//                            i.square.fillColor = scene.gameboardSquareColor
-//                        }
-//                    }
-//                }
-//            } else {
-//                for (index, i) in (scene.playableGameboard).enumerated() {
-//                    if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-//                        if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-//                            i.square.fillColor = tempStructure[index]
-//                        }
-//                    }
-//                }
-//            }
-            
-            // maybe color swap
-            var redIP: CGFloat = 0
-            var greenIP: CGFloat = 0
-            var blueIP: CGFloat = 0
-            var alphaIP: CGFloat = 0
-            (playableGameboard[iIndex+1]).square.fillColor.getRed(&redIP, green: &greenIP, blue: &blueIP, alpha: &alphaIP)
-            let tempi = SkNodeLocationAndColor(square: playableGameboard[iIndex+1].square, location: Tuple(x: playableGameboard[iIndex+1].location.y, y: playableGameboard[iIndex+1].location.x), color: UIColor(red: redIP, green: greenIP, blue: blueIP, alpha: alphaIP))
-            
-            var redEND: CGFloat = 0
-            var greenEND: CGFloat = 0
-            var blueEND: CGFloat = 0
-            var alphaEND: CGFloat = 0
-            (playableGameboard[endPointer]).square.fillColor.getRed(&redEND, green: &greenEND, blue: &blueEND, alpha: &alphaEND)
-            let tempEnd = SkNodeLocationAndColor(square: playableGameboard[endPointer].square, location: Tuple(x: playableGameboard[endPointer].location.y, y: playableGameboard[endPointer].location.x), color: UIColor(red: redEND, green: greenEND, blue: blueEND, alpha: alphaEND))
-            
-            swapSquareAndColor.append([tempEnd, tempi])
             
             // i j min mix up
             let finalPivotValue = playableGameboard[iIndex+1].square.fillColor
             playableGameboard[iIndex+1].square.fillColor = fullPivotColor
             playableGameboard[endPointer].square.fillColor = finalPivotValue
             
+            // maybe color swap
+            let tempiPlusOne = SkNodeLocationAndColor(square: playableGameboard[iIndex+1].square, location: Tuple(x: playableGameboard[iIndex+1].location.y, y: playableGameboard[iIndex+1].location.x), color: fullPivotColor)
+            
+            let tempEnd = SkNodeLocationAndColor(square: playableGameboard[endPointer].square, location: Tuple(x: playableGameboard[endPointer].location.y, y: playableGameboard[endPointer].location.x), color: finalPivotValue)
+            
+            swapSquareAndColor.append([tempEnd, tempiPlusOne])
+            
             if (endPointer - 1 != frontPointer) {
                 quickSort(frontPointer: frontPointer, endPointer: iIndex)
                 quickSort(frontPointer: iIndex+2, endPointer: endPointer)
             }
-            
-//            for i in scene.playableGameboard {
-//                print(i.square.fillColor)
-//            }
-//            print("-")
         }
         
         quickSort(frontPointer: 0, endPointer: scene.playableGameboard.count-1)
-        
-//        for i in scene.playableGameboard {
-//            print(i.square.fillColor)
-//        }
         return swapSquareAndColor
     }
 }
