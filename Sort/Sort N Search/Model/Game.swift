@@ -236,7 +236,7 @@ class GameManager {
 //            var dupli = [SkNodeAndLocation]() as! NSCopying
             let dupli = (scene.gameBoard)
             let bs = BubbleSort(scene: scene)
-            swapSquareAndColor = bs.bubbleSort(gameboard: dupli, resuming: resuming)
+            swapSquareAndColor = bs.bubbleSort(resuming: resuming)
         } else if scene.pathFindingAlgorithimChoice == 2 {
             let ddd = (scene.gameBoard)
             let iss = InsertionSort(scene: scene)
