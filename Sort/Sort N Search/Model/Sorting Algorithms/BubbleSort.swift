@@ -9,11 +9,6 @@
 import Foundation
 import SpriteKit
 
-struct ColorAndLocation: Hashable {
-    var color: UIColor
-    var location: Tuple
-}
-
 class BubbleSort {
     weak var scene: GameScene!
     var swapSquareAndColor = [[SkNodeLocationAndColor]]()
@@ -77,13 +72,11 @@ class BubbleSort {
             }
         }
         
+        // Prevents sorted array grid from appering before initial animations begin.
+        // If animation has to restart, prevents sorted array grid from apperaing before animations begin.
         if resuming == false {
-            for (index, i) in (scene.gameBoard).enumerated() {
-                if i.location.x != 0 && i.location.x != (scene.rowCount - 1) {
-                    if i.location.y != 0 && i.location.y != (scene.columnCount - 1) {
-                        i.square.fillColor = scene.gameboardSquareColor
-                    }
-                }
+            for i in scene.playableGameboard {
+                i.square.fillColor = scene.gameboardSquareColor
             }
         } else {
             for (index, i) in (scene.gameBoard).enumerated() {

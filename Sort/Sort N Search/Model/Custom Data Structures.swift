@@ -13,6 +13,11 @@ struct Tuple: Hashable {
     var y: Int
 }
 
+struct ColorAndLocation: Hashable {
+    var color: UIColor
+    var location: Tuple
+}
+
 struct SkNodeAndLocation: Hashable {
     var square: SKShapeNode
     var location: Tuple
