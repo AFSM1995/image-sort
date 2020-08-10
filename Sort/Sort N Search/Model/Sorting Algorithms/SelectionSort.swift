@@ -40,33 +40,34 @@ class SelectionSort {
     func selectionSort(resuming: Bool) -> [[SkNodeLocationAndColor]] {
         var pendingAnimations = [[SkNodeLocationAndColor]]()
         let initialGameboardLayout = initialGameBoardAperianceSaver()
+        let playableGameboard = scene.playableGameboard
         
-        for (iIndex, _) in scene.playableGameboard.enumerated() {
-            let iColor = scene.playableGameboard[iIndex].square.fillColor
+        for (iIndex, _) in playableGameboard.enumerated() {
+            let iColor = playableGameboard[iIndex].square.fillColor
             var currentMinimumColor = iColor
             var currentMinimumAlpha = iColor.toComponents().alpha
             var currentMinimumIndex = iIndex
             
-            for jIndex in (iIndex...(scene.playableGameboard.count-1)) {
+            for jIndex in (iIndex...(playableGameboard.count-1)) {
                 // No swap added to animation.
-                let newJ = SkNodeLocationAndColor(square: scene.playableGameboard[jIndex].square, location: scene.playableGameboard[jIndex].location, color: scene.playableGameboard[jIndex].square.fillColor)
+                let newJ = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: playableGameboard[jIndex].location, color: playableGameboard[jIndex].square.fillColor)
                 pendingAnimations.append([newJ])
                 
-                let jColorAlpha = scene.playableGameboard[jIndex].square.fillColor.toComponents().alpha
+                let jColorAlpha = playableGameboard[jIndex].square.fillColor.toComponents().alpha
                 if jColorAlpha < currentMinimumAlpha {
-                    currentMinimumColor = scene.playableGameboard[jIndex].square.fillColor
+                    currentMinimumColor = playableGameboard[jIndex].square.fillColor
                     currentMinimumAlpha = jColorAlpha
                     currentMinimumIndex = jIndex
                 }
             }
             // Swap square colors on phisical board data structure for Selection sort.
-            let tempIValue = scene.playableGameboard[iIndex].square.fillColor
-            scene.playableGameboard[iIndex].square.fillColor = scene.playableGameboard[currentMinimumIndex].square.fillColor
-            scene.playableGameboard[currentMinimumIndex].square.fillColor = tempIValue
+            let tempIValue = playableGameboard[iIndex].square.fillColor
+            playableGameboard[iIndex].square.fillColor = playableGameboard[currentMinimumIndex].square.fillColor
+            playableGameboard[currentMinimumIndex].square.fillColor = tempIValue
             
             // Swap square colors for animation data structure.
-            let newI = SkNodeLocationAndColor(square: scene.playableGameboard[iIndex].square, location: scene.playableGameboard[iIndex].location, color: currentMinimumColor)
-            let newMin = SkNodeLocationAndColor(square: scene.playableGameboard[currentMinimumIndex].square, location: scene.playableGameboard[currentMinimumIndex].location, color: iColor)
+            let newI = SkNodeLocationAndColor(square: playableGameboard[iIndex].square, location: playableGameboard[iIndex].location, color: currentMinimumColor)
+            let newMin = SkNodeLocationAndColor(square: playableGameboard[currentMinimumIndex].square, location: playableGameboard[currentMinimumIndex].location, color: iColor)
             pendingAnimations.append([newMin, newI])
         }
         

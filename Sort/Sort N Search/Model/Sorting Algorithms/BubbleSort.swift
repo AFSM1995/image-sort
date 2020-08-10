@@ -40,32 +40,33 @@ class BubbleSort {
     func bubbleSort(resuming: Bool) -> [[SkNodeLocationAndColor]] {
         var pendingAnimations = [[SkNodeLocationAndColor]]()
         let initialGameboardLayout = initialGameBoardAperianceSaver()
+        let playableGameboard = scene.playableGameboard
         var isSorted = false
 
         // Is sorted can be used for step mode.
         while (!isSorted) {
             isSorted = true
-            for (i, _) in scene.playableGameboard.enumerated() {
-                if i != (scene.playableGameboard.count-1) {
+            for (i, _) in playableGameboard.enumerated() {
+                if i != (playableGameboard.count-1) {
                     let iPlusOne = i+1
-                    let iColorComponents = scene.playableGameboard[i].square.fillColor.toComponents()
-                    let iPlusOneColorComponents = scene.playableGameboard[iPlusOne].square.fillColor.toComponents()
+                    let iColorComponents = playableGameboard[i].square.fillColor.toComponents()
+                    let iPlusOneColorComponents = playableGameboard[iPlusOne].square.fillColor.toComponents()
 
                     if iColorComponents.alpha < iPlusOneColorComponents.alpha {
                         // Swap square colors on phisical board data structure for Bubble sort.
-                        let tempIColor = scene.playableGameboard[i].square.fillColor
-                        scene.playableGameboard[i].square.fillColor = scene.playableGameboard[iPlusOne].square.fillColor
-                        scene.playableGameboard[iPlusOne].square.fillColor = tempIColor
+                        let tempIColor = playableGameboard[i].square.fillColor
+                        playableGameboard[i].square.fillColor = playableGameboard[iPlusOne].square.fillColor
+                        playableGameboard[iPlusOne].square.fillColor = tempIColor
 
                         // Swap square colors for animation data structure.
-                        let newI = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: scene.playableGameboard[i].location, color: scene.playableGameboard[i].square.fillColor)
-                        let newIPlusOne = SkNodeLocationAndColor(square: scene.playableGameboard[iPlusOne].square, location: scene.playableGameboard[iPlusOne].location, color: tempIColor)
+                        let newI = SkNodeLocationAndColor(square: playableGameboard[i].square, location: playableGameboard[i].location, color: playableGameboard[i].square.fillColor)
+                        let newIPlusOne = SkNodeLocationAndColor(square: playableGameboard[iPlusOne].square, location: playableGameboard[iPlusOne].location, color: tempIColor)
                         pendingAnimations.append([newI, newIPlusOne])
 
                         isSorted = false
                     } else {
                         // No swap added to animation.
-                        let newI = SkNodeLocationAndColor(square: scene.playableGameboard[i].square, location: scene.playableGameboard[i].location, color: scene.playableGameboard[i].square.fillColor)
+                        let newI = SkNodeLocationAndColor(square: playableGameboard[i].square, location: playableGameboard[i].location, color: playableGameboard[i].square.fillColor)
                         pendingAnimations.append([newI])
                     }
                 }

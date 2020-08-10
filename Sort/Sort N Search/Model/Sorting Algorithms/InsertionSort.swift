@@ -40,9 +40,9 @@ class InsertionSort {
     func insertionSort(resuming: Bool) -> [[SkNodeLocationAndColor]] {
         var pendingAnimations = [[SkNodeLocationAndColor]]()
         let initialGameboardLayout = initialGameBoardAperianceSaver()
+        let playableGameboard = scene.playableGameboard
         
-        for (i, _) in scene.playableGameboard.enumerated() {
-            let playableGameboard = scene.playableGameboard
+        for (i, _) in playableGameboard.enumerated() {
             var j = i - 1
             var i = i
 
