@@ -6,8 +6,7 @@
 //  Copyright © 2020 Álvaro Santillan. All rights reserved.
 //
 
-import Foundation
-import SpriteKit
+import UIKit
 
 class QuickSort {
     weak var scene: GameScene!
@@ -16,14 +15,32 @@ class QuickSort {
         self.scene = scene
     }
     
-    func quickSortHelper(gameboard: [SkNodeAndLocation], resuming: Bool) -> [[SkNodeLocationAndColor]] {
-        var swapSquareAndColor = [[SkNodeLocationAndColor]]()
-        let playableGameboard = scene.playableGameboard
-        
-        var tempStructure: [UIColor] = []
-        for i in scene.gameBoard {
-            tempStructure.append(i.square.fillColor)
+    func initialGameBoardAperianceSaver() -> [UIColor] {
+        var initialGameboardLayout: [UIColor] = []
+        for i in scene.playableGameboard {
+            initialGameboardLayout.append(i.square.fillColor)
         }
+        return initialGameboardLayout
+    }
+    
+    func initialGameBoardAperianceRestorer(resuming: Bool, initialGameboardLayout: [UIColor]) {
+        // Prevents sorted array grid from appering before initial animations begin.
+        // If animation has to restart, prevents sorted array grid from apperaing before animations begin.
+        if resuming == false {
+            for i in scene.playableGameboard {
+                i.square.fillColor = scene.gameboardSquareColor
+            }
+        } else {
+            for (index, i) in (scene.playableGameboard).enumerated() {
+                i.square.fillColor = initialGameboardLayout[index]
+            }
+        }
+    }
+    
+    func quickSortHelper(gameboard: [SkNodeAndLocation], resuming: Bool) -> [[SkNodeLocationAndColor]] {
+        var pendingAnimations = [[SkNodeLocationAndColor]]()
+        let initialGameboardLayout = initialGameBoardAperianceSaver()
+        let playableGameboard = scene.playableGameboard
         
         func quickSort(frontPointer: Int, endPointer: Int) {
             
@@ -81,11 +98,11 @@ class QuickSort {
                             print(i.square.fillColor)
                         }
                         print("-----")
-                        swapSquareAndColor.append([tempii, tempjj])
+                        pendingAnimations.append([tempii, tempjj])
                     } else {
                         let tempjj = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: Tuple(x: playableGameboard[jIndex].location.y, y: playableGameboard[jIndex].location.x), color: UIColor(red: redJ, green: greenJ, blue: blueJ, alpha: alphaJ))
                         print(jIndex, alphaJ)
-                        swapSquareAndColor.append([tempjj])
+                        pendingAnimations.append([tempjj])
                     }
                     jIndex += 1
                 }
@@ -101,7 +118,7 @@ class QuickSort {
             
             let tempEnd = SkNodeLocationAndColor(square: playableGameboard[endPointer].square, location: Tuple(x: playableGameboard[endPointer].location.y, y: playableGameboard[endPointer].location.x), color: finalPivotValue)
             
-            swapSquareAndColor.append([tempEnd, tempiPlusOne])
+            pendingAnimations.append([tempEnd, tempiPlusOne])
             
             if (endPointer - 1 != frontPointer) {
                 quickSort(frontPointer: frontPointer, endPointer: iIndex)
@@ -110,6 +127,9 @@ class QuickSort {
         }
         
         quickSort(frontPointer: 0, endPointer: scene.playableGameboard.count-1)
-        return swapSquareAndColor
+        
+        // Restores grid back to pre-sort apperiance before return.
+        initialGameBoardAperianceRestorer(resuming: resuming, initialGameboardLayout: initialGameboardLayout)
+        return pendingAnimations
     }
 }
