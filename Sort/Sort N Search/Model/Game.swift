@@ -242,9 +242,8 @@ class GameManager {
             let ss = SelectionSort(scene: scene)
             swapSquareAndColor = ss.selectionSort(resuming: resuming)
         } else if scene.pathFindingAlgorithimChoice == 3 {
-            let quicscene = (scene.gameBoard)
             let qs = QuickSort(scene: scene)
-            swapSquareAndColor = qs.quickSortHelper(gameboard: quicscene, resuming: resuming)
+            swapSquareAndColor = qs.quickSortHelper(resuming: resuming)
         } else {
             print("Out Of Bounds Error")
         }
