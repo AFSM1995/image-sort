@@ -48,15 +48,16 @@ class InsertionSort {
 
             if j != -1 && i != -1 {
                 var iColor = playableGameboard[i].square.fillColor
-                let iColorAlpha = iColor.toComponents().alpha
+                var iColorAlpha = iColor.toComponents().alpha
                 var jColor = playableGameboard[j].square.fillColor
-                let jColorAlpha = jColor.toComponents().alpha
+                var jColorAlpha = jColor.toComponents().alpha
             
                 while j != -1 && i != -1 && iColorAlpha > jColorAlpha {
-
+                    // Swap square colors on phisical board data structure for Bubble sort.
                     playableGameboard[i].square.fillColor = jColor
                     playableGameboard[j].square.fillColor = iColor
                     
+                    // Swap square colors for animation data structure.
                     let newI = SkNodeLocationAndColor(square: playableGameboard[i].square, location: playableGameboard[i].location, color: jColor)
                     let newJ = SkNodeLocationAndColor(square: playableGameboard[j].square, location: playableGameboard[j].location, color: iColor)
                     pendingAnimations.append([newI, newJ])
@@ -65,7 +66,9 @@ class InsertionSort {
                     i = i - 1
                     if j != -1 && i != -1 {
                         iColor = playableGameboard[i].square.fillColor
+                        iColorAlpha = iColor.toComponents().alpha
                         jColor = playableGameboard[j].square.fillColor
+                        jColorAlpha = jColor.toComponents().alpha
                     }
                 }
             }
