@@ -59,38 +59,42 @@ class QuickSort {
         
         let endPointerColor = playableGameboard[endPointer].square.fillColor
         let endPointerAlpha = endPointerColor.toComponents().alpha
-        let fullPivotColor = endPointerColor
         var jIndex = frontPointer
         var iIndex = frontPointer-1
         
         for _ in (0...(endPointer-1)) {
             if jIndex < (playableGameboard.count-1) {
                 let jIndexColorAlpha = playableGameboard[jIndex].square.fillColor.toComponents().alpha
+                let jIndexColor = playableGameboard[jIndex].square.fillColor
                 if jIndexColorAlpha < endPointerAlpha {
                     iIndex += 1
                     let tempIValue = playableGameboard[iIndex].square.fillColor
                     playableGameboard[iIndex].square.fillColor = playableGameboard[jIndex].square.fillColor
                     playableGameboard[jIndex].square.fillColor = tempIValue
                     
-                    let newIIndex = SkNodeLocationAndColor(square: playableGameboard[iIndex].square, location: playableGameboard[iIndex].location, color: tempIValue)
+                    let newIIndex = SkNodeLocationAndColor(square: playableGameboard[iIndex].square, location: playableGameboard[iIndex].location, color: jIndexColor)
                     let newJIndex = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: playableGameboard[jIndex].location, color: tempIValue)
                     pendingAnimations.append([newJIndex, newIIndex])
+                } else {
+//                    let newIIndex = SkNodeLocationAndColor(square: playableGameboard[iIndex].square, location: playableGameboard[iIndex].location, color: playableGameboard[iIndex].square.fillColor)
+//                    pendingAnimations.append([newIIndex])
+                    let newJIndex = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: playableGameboard[jIndex].location, color: playableGameboard[jIndex].square.fillColor)
+                    pendingAnimations.append([newJIndex])
                 }
                 jIndex += 1
-                for i in scene.playableGameboard {
-                    print(i.square.fillColor)
-                }
-                print("New")
+//                for i in scene.playableGameboard {
+//                    print(i.square.fillColor)
+//                }
+//                print("New")
             }
         }
-        
-        let newIPlusOneColor = SkNodeLocationAndColor(square: playableGameboard[iIndex+1].square, location: playableGameboard[iIndex+1].location, color: playableGameboard[iIndex+1].square.fillColor)
-        let newEndPointerColor = SkNodeLocationAndColor(square: playableGameboard[endPointer].square, location: playableGameboard[endPointer].location, color: playableGameboard[endPointer].square.fillColor)
-        pendingAnimations.append([newEndPointerColor, newIPlusOneColor])
-        
         let finalPivotValue = playableGameboard[iIndex+1].square.fillColor
-        playableGameboard[iIndex+1].square.fillColor = fullPivotColor
+        playableGameboard[iIndex+1].square.fillColor = endPointerColor
         playableGameboard[endPointer].square.fillColor = finalPivotValue
+        
+        let newIPlusOneColor = SkNodeLocationAndColor(square: playableGameboard[iIndex+1].square, location: playableGameboard[iIndex+1].location, color: endPointerColor)
+        let newEndPointerColor = SkNodeLocationAndColor(square: playableGameboard[endPointer].square, location: playableGameboard[endPointer].location, color: finalPivotValue)
+        pendingAnimations.append([newEndPointerColor, newIPlusOneColor])
         
         if endPointer-1 != frontPointer {
             quickSort(frontPointer: frontPointer, endPointer: iIndex)
