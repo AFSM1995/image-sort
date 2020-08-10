@@ -52,7 +52,7 @@ class BubbleSort {
                     let iPlusOneColorComponents = scene.playableGameboard[iPlusOne].square.fillColor.toComponents()
 
                     if iColorComponents.alpha < iPlusOneColorComponents.alpha {
-                        // Swap square colors on phisical board data structure for bubble sort.
+                        // Swap square colors on phisical board data structure for Bubble sort.
                         let tempIColor = scene.playableGameboard[i].square.fillColor
                         scene.playableGameboard[i].square.fillColor = scene.playableGameboard[iPlusOne].square.fillColor
                         scene.playableGameboard[iPlusOne].square.fillColor = tempIColor
