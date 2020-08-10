@@ -37,7 +37,7 @@ class SelectionSort {
         }
     }
 
-    func selectionSort(gameboard: [SkNodeAndLocation], resuming: Bool) -> [[SkNodeLocationAndColor]] {
+    func selectionSort(resuming: Bool) -> [[SkNodeLocationAndColor]] {
         var pendingAnimations = [[SkNodeLocationAndColor]]()
         let initialGameboardLayout = initialGameBoardAperianceSaver()
         

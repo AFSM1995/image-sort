@@ -233,18 +233,14 @@ class GameManager {
     
     func sortSelector(resuming: Bool) {
         if scene.pathFindingAlgorithimChoice == 1 {
-//            var dupli = [SkNodeAndLocation]() as! NSCopying
-            let dupli = (scene.gameBoard)
             let bs = BubbleSort(scene: scene)
             swapSquareAndColor = bs.bubbleSort(resuming: resuming)
         } else if scene.pathFindingAlgorithimChoice == 2 {
-            let ddd = (scene.gameBoard)
             let iss = InsertionSort(scene: scene)
-            swapSquareAndColor = iss.insertionSort(gameboard: ddd, resuming: resuming)
+            swapSquareAndColor = iss.insertionSort(resuming: resuming)
         } else if scene.pathFindingAlgorithimChoice == 4 {
-            let sce = (scene.gameBoard)
             let ss = SelectionSort(scene: scene)
-            swapSquareAndColor = ss.selectionSort(gameboard: sce, resuming: resuming)
+            swapSquareAndColor = ss.selectionSort(resuming: resuming)
         } else if scene.pathFindingAlgorithimChoice == 3 {
             let quicscene = (scene.gameBoard)
             let qs = QuickSort(scene: scene)
