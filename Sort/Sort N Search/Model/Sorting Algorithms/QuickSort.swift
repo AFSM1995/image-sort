@@ -62,7 +62,7 @@ class QuickSort {
         var jIndex = frontPointer
         var iIndex = frontPointer-1
         
-        for _ in (0...(endPointer-1)) {
+        for _ in (frontPointer...(endPointer-1)) {
             if jIndex < (playableGameboard.count-1) {
                 let jIndexColorAlpha = playableGameboard[jIndex].square.fillColor.toComponents().alpha
                 let jIndexColor = playableGameboard[jIndex].square.fillColor
@@ -76,16 +76,10 @@ class QuickSort {
                     let newJIndex = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: playableGameboard[jIndex].location, color: tempIValue)
                     pendingAnimations.append([newJIndex, newIIndex])
                 } else {
-//                    let newIIndex = SkNodeLocationAndColor(square: playableGameboard[iIndex].square, location: playableGameboard[iIndex].location, color: playableGameboard[iIndex].square.fillColor)
-//                    pendingAnimations.append([newIIndex])
                     let newJIndex = SkNodeLocationAndColor(square: playableGameboard[jIndex].square, location: playableGameboard[jIndex].location, color: playableGameboard[jIndex].square.fillColor)
                     pendingAnimations.append([newJIndex])
                 }
                 jIndex += 1
-//                for i in scene.playableGameboard {
-//                    print(i.square.fillColor)
-//                }
-//                print("New")
             }
         }
         let finalPivotValue = playableGameboard[iIndex+1].square.fillColor
