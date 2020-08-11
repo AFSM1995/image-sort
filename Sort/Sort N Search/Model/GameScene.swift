@@ -103,8 +103,8 @@ class GameScene: SKScene {
             screenLabelColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
             scoreButtonColor = squareColor
         } else {
-            gameboardSquareColor = lightBackgroundColors[legendData[4][1] as! Int]
-            fadedGameBoardSquareColor = lightBackgroundColors[legendData[4][1] as! Int].withAlphaComponent(0.5)
+            gameboardSquareColor = lightBackgroundColors[legendData[3][1] as! Int]
+            fadedGameBoardSquareColor = lightBackgroundColors[legendData[3][1] as! Int].withAlphaComponent(0.5)
             gameBackgroundColor = UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00)
             screenLabelColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.00)
             scoreButtonColor = squareColor
