@@ -95,4 +95,32 @@ class QuickSort {
             quickSort(frontPointer: iIndex+2, endPointer: endPointer)
         }
     }
+    
+    func medianOfMedians(frontPointer: Int, endPointer: Int) -> Int {
+        
+        if (endPointer - frontPointer) < 5 {
+            quickSort(targetArray: array, frontPointer: frontPointer, endPointer: endPointer)
+            let median = Int(ceil((Float(endPointer) - Float(frontPointer))/2))
+            print(array[median])
+            return median
+        }
+        
+        var medians = [Int]()
+        var lastChunckEnd = frontPointer
+        
+        while (lastChunckEnd + 4) < endPointer {
+            let currentChunkEnd = lastChunckEnd + 4
+            quickSort(targetArray: array, frontPointer: lastChunckEnd, endPointer: currentChunkEnd)
+            medians.append(array[lastChunckEnd+2])
+            lastChunckEnd = currentChunkEnd+1
+        }
+        
+
+        quickSort(targetArray: medians, frontPointer: 0, endPointer: medians.count-1)
+        
+        print(medians)
+        print(array)
+        print(array[Int(ceil(Float(medians.count)/2))])
+        return medians[Int(ceil(Float(medians.count)/2))]
+    }
 }
