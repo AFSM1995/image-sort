@@ -42,20 +42,23 @@ class QuickSort {
         // Save the gameboard apperiance before animations.
         let initialGameboardLayout = initialGameBoardAperianceSaver()
         // Run Quick sort on the graph.
-        quickSort(frontPointer: 0, endPointer: scene.playableGameboard.count-1)
+        quickSort(array: scene.playableGameboard, frontPointer: 0, endPointer: scene.playableGameboard.count-1)
         // Restores grid back to pre-sort apperiance before return.
         initialGameBoardAperianceRestorer(resuming: resuming, initialGameboardLayout: initialGameboardLayout)
         return pendingAnimations
     }
     
-    func quickSort(frontPointer: Int, endPointer: Int) {
-        let playableGameboard = scene.playableGameboard
+    func quickSort(array: [SkNodeAndLocation], frontPointer: Int, endPointer: Int) {
+        let playableGameboard = array
         
         if frontPointer == endPointer {
             return
         } else if endPointer < frontPointer {
             return
         }
+        
+        let pivotValue = medianOfMedians(array: playableGameboard, frontPointer: frontPointer, endPointer: endPointer)
+        let pivotAlpha = pivotValue.square.fillColor.toComponents().alpha
         
         let endPointerColor = playableGameboard[endPointer].square.fillColor
         let endPointerAlpha = endPointerColor.toComponents().alpha
@@ -66,7 +69,7 @@ class QuickSort {
             if jIndex < (playableGameboard.count-1) {
                 let jIndexColorAlpha = playableGameboard[jIndex].square.fillColor.toComponents().alpha
                 let jIndexColor = playableGameboard[jIndex].square.fillColor
-                if jIndexColorAlpha < endPointerAlpha {
+                if jIndexColorAlpha < pivotAlpha {
                     iIndex += 1
                     let tempIValue = playableGameboard[iIndex].square.fillColor
                     playableGameboard[iIndex].square.fillColor = playableGameboard[jIndex].square.fillColor
@@ -91,36 +94,42 @@ class QuickSort {
         pendingAnimations.append([newEndPointerColor, newIPlusOneColor])
         
         if endPointer-1 != frontPointer {
-            quickSort(frontPointer: frontPointer, endPointer: iIndex)
-            quickSort(frontPointer: iIndex+2, endPointer: endPointer)
+            quickSort(array: playableGameboard, frontPointer: frontPointer, endPointer: iIndex)
+            quickSort(array: playableGameboard, frontPointer: iIndex+2, endPointer: endPointer)
         }
     }
     
-    func medianOfMedians(frontPointer: Int, endPointer: Int) -> Int {
+    func medianOfMedians(array: [SkNodeAndLocation], frontPointer: Int, endPointer: Int) -> SkNodeAndLocation {
         
         if (endPointer - frontPointer) < 5 {
-            quickSort(targetArray: array, frontPointer: frontPointer, endPointer: endPointer)
-            let median = Int(ceil((Float(endPointer) - Float(frontPointer))/2))
-            print(array[median])
-            return median
+//            quickSort(array: scene.playableGameboard, frontPointer: frontPointer, endPointer: endPointer)
+//            let median = Int(ceil((Float(endPointer) - Float(frontPointer))/2))
+//            print(array[median])
+            return array[endPointer]
         }
         
-        var medians = [Int]()
+        var mediansAlphas = [CGFloat]()
+        var mediansObjects = [SkNodeAndLocation]()
         var lastChunckEnd = frontPointer
         
         while (lastChunckEnd + 4) < endPointer {
             let currentChunkEnd = lastChunckEnd + 4
-            quickSort(targetArray: array, frontPointer: lastChunckEnd, endPointer: currentChunkEnd)
-            medians.append(array[lastChunckEnd+2])
+            quickSort(array: scene.playableGameboard, frontPointer: lastChunckEnd, endPointer: currentChunkEnd)
+            mediansAlphas.append(array[lastChunckEnd+2].square.fillColor.toComponents().alpha)
+            mediansObjects.append(array[lastChunckEnd+2])
             lastChunckEnd = currentChunkEnd+1
         }
         
 
-        quickSort(targetArray: medians, frontPointer: 0, endPointer: medians.count-1)
+        quickSort(array: mediansObjects, frontPointer: 0, endPointer: mediansAlphas.count-1)
+//        print(medians)
+//        print(array)
+//        print(array[Int(ceil(Float(medians.count)/2))])
         
-        print(medians)
-        print(array)
-        print(array[Int(ceil(Float(medians.count)/2))])
-        return medians[Int(ceil(Float(medians.count)/2))]
+        if mediansObjects.count == 1 {
+            return mediansObjects[0]
+        } else {
+            return mediansObjects[Int(ceil(Float(mediansAlphas.count)/2))]
+        }
     }
 }
