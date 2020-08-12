@@ -255,7 +255,6 @@ class GameManager {
             let ls = LinearSearch(scene: scene)
             (searchHistory, targetFound, target) = ls.LinearSearch(gameboard: linear)
         } else if scene.mazeGeneratingAlgorithimChoice == 1 {
-            let binary = (scene.gameBoard)
             let bis = BinarySearch(scene: scene)
             (searchHistory, targetFound, target) = bis.binarySearchHandler()
         }
