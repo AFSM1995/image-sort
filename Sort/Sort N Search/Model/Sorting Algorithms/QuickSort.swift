@@ -59,9 +59,8 @@ class QuickSort {
         
         let pivotValue = medianOfMedians(array: playableGameboard, frontPointer: frontPointer, endPointer: endPointer)
         let pivotAlpha = pivotValue.square.fillColor.toComponents().alpha
+        let pivotColor = pivotValue.square.fillColor
         
-        let endPointerColor = playableGameboard[endPointer].square.fillColor
-        let endPointerAlpha = endPointerColor.toComponents().alpha
         var jIndex = frontPointer
         var iIndex = frontPointer-1
         
@@ -86,10 +85,10 @@ class QuickSort {
             }
         }
         let finalPivotValue = playableGameboard[iIndex+1].square.fillColor
-        playableGameboard[iIndex+1].square.fillColor = endPointerColor
+        playableGameboard[iIndex+1].square.fillColor = pivotColor
         playableGameboard[endPointer].square.fillColor = finalPivotValue
         
-        let newIPlusOneColor = SkNodeLocationAndColor(square: playableGameboard[iIndex+1].square, location: playableGameboard[iIndex+1].location, color: endPointerColor)
+        let newIPlusOneColor = SkNodeLocationAndColor(square: playableGameboard[iIndex+1].square, location: playableGameboard[iIndex+1].location, color: pivotColor)
         let newEndPointerColor = SkNodeLocationAndColor(square: playableGameboard[endPointer].square, location: playableGameboard[endPointer].location, color: finalPivotValue)
         pendingAnimations.append([newEndPointerColor, newIPlusOneColor])
         
@@ -129,7 +128,7 @@ class QuickSort {
         if mediansObjects.count == 1 {
             return mediansObjects[0]
         } else {
-            return mediansObjects[Int(ceil(Float(mediansAlphas.count)/2))]
+            return mediansObjects[Int(ceil(Float(mediansAlphas.count)/2))-1]
         }
     }
 }
