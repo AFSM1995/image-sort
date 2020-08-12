@@ -64,7 +64,6 @@ class QuickSort {
             pivotColor = pivotValue.square.fillColor
             pivotAlpha = pivotValue.square.fillColor.toComponents().alpha
         } else {
-            print("MoM called", frontPointer, endPointer)
             pivotValue = medianOfMedians(array: array, frontPointer: frontPointer, endPointer: endPointer)
             pivotColor = pivotValue.square.fillColor
             pivotAlpha = pivotValue.square.fillColor.toComponents().alpha
@@ -108,14 +107,6 @@ class QuickSort {
     }
     
     func medianOfMedians(array: [SkNodeAndLocation], frontPointer: Int, endPointer: Int) -> SkNodeAndLocation {
-        
-//        if (endPointer - frontPointer) < 5 {
-//            quickSort(array: scene.playableGameboard, frontPointer: frontPointer, endPointer: endPointer)
-//            let median = Int(ceil((Float(endPointer) - Float(frontPointer))/2))
-//            print(array[median])
-//            return array[endPointer]
-//        }
-        
         var mediansAlphas = [CGFloat]()
         var mediansObjects = [SkNodeAndLocation]()
         var lastChunckEnd = frontPointer
@@ -123,24 +114,17 @@ class QuickSort {
         while (lastChunckEnd + 4) < endPointer {
             let currentChunkEnd = lastChunckEnd + 4
             quickSort(array: scene.playableGameboard, frontPointer: lastChunckEnd, endPointer: currentChunkEnd)
-//            insertionSort(playableGameboard: scene.playableGameboard, frontPointer: lastChunckEnd, endPointer: currentChunkEnd)
-            print("-", lastChunckEnd, currentChunkEnd)
             mediansAlphas.append(array[lastChunckEnd+2].square.fillColor.toComponents().alpha)
             mediansObjects.append(array[lastChunckEnd+2])
             lastChunckEnd = currentChunkEnd+1
         }
         
-
-        // Potential error 0
-//        quickSort(array: mediansObjects, frontPointer: 0, endPointer: mediansAlphas.count-1)
-//        insertionSort(playableGameboard: mediansObjects, frontPointer: 0, endPointer: mediansAlphas.count-1)
-//        print(medians)
-//        print(array)
-//        print(array[Int(ceil(Float(medians.count)/2))])
-        
         if mediansObjects.count == 1 {
             return mediansObjects[0]
         } else {
+            mediansObjects.sort { (Zero, One) -> Bool in
+                Zero.square.fillColor.toComponents().alpha < One.square.fillColor.toComponents().alpha
+            }
             return mediansObjects[Int(ceil(Float(mediansAlphas.count)/2))-1]
         }
     }
