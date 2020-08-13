@@ -238,13 +238,16 @@ class GameManager {
         } else if scene.pathFindingAlgorithimChoice == 2 {
             let iss = InsertionSort(scene: scene)
             swapSquareAndColor = iss.insertionSort(resuming: resuming)
+        } else if scene.pathFindingAlgorithimChoice == 3 {
+            let qs = QuickSortAndMedianOfMedians(scene: scene)
+            swapSquareAndColor = qs.quickSortHelper(resuming: resuming)
         } else if scene.pathFindingAlgorithimChoice == 4 {
+            let nqs = QuickSort(scene: scene)
+            swapSquareAndColor = nqs.quickSortHelper(resuming: resuming)
+        } else if scene.pathFindingAlgorithimChoice == 5 {
             let ss = SelectionSort(scene: scene)
             swapSquareAndColor = ss.selectionSort(resuming: resuming)
-        } else if scene.pathFindingAlgorithimChoice == 3 {
-            let qs = QuickSort(scene: scene)
-            swapSquareAndColor = qs.quickSortHelper(resuming: resuming)
-        } else {
+        }  else {
             print("Out Of Bounds Error")
         }
     }

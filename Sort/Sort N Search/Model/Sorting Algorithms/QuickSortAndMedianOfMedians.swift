@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuickSort {
+class QuickSortAndMedianOfMedians {
     weak var scene: GameScene!
     var pendingAnimations = [[SkNodeLocationAndColor]]()
     
@@ -116,7 +116,7 @@ class QuickSort {
             quickSort(array: scene.playableGameboard, frontPointer: lastChunckEnd, endPointer: currentChunkEnd)
             mediansAlphas.append(array[lastChunckEnd+2].square.fillColor.toComponents().alpha)
             mediansObjects.append(array[lastChunckEnd+2])
-            lastChunckEnd = currentChunkEnd+1
+            lastChunckEnd = currentChunkEnd + 1
         }
         
         if mediansObjects.count == 1 {
