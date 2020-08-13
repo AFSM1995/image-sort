@@ -6,55 +6,84 @@
 //  Copyright © 2020 Álvaro Santillan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-let array = [0,1,1,2,3,5,8,13,21,34,55,77,89,91,95,110]
+class JumpSearch {
+    weak var scene: GameScene!
+    var searchTargetSquare: [SkNodeAndLocation] = []
+    var searchHistory: [SkNodeAndLocation] = []
+    var targetSquareFound = false
+    var playableGameboard: [SkNodeAndLocation] = []
+    var playableGameBoardSize = Int()
 
-func jumpSort(targetValue: Int) {
-    let jumpSize = (Int(ceil(sqrt(Float(array.count)))) - 1)
-    var currentJumpLocation = 0
-    var nextJumpLocation = (currentJumpLocation + jumpSize)
-    var currentJumpLocationValue = array[currentJumpLocation]
-    var nextJumpLocationValue = array[nextJumpLocation]
-    var found = false
-    var targetLocation: Int
-    
-    if currentJumpLocationValue == targetValue {
-        found = true
-        targetLocation = currentJumpLocation
-        print(targetLocation)
+    init(scene: GameScene) {
+        self.scene = scene
+        playableGameboard = scene.playableGameboard
+        playableGameBoardSize = scene.playableGameboard.count
     }
-    
-    while found != true {
-        if nextJumpLocationValue == targetValue {
+
+    func jumpSearch(targetArray: [Float], targetValue: Float) -> ([SkNodeAndLocation], Bool, [SkNodeAndLocation]) {
+        let jumpSize = (Int(ceil(sqrt(Float(targetArray.count)))) - 1)
+    //    print("jump Size", jumpSize)
+        var currentJumpLocation = 0
+        var nextJumpLocation = (currentJumpLocation + jumpSize)
+        var currentJumpLocationValue = targetArray[currentJumpLocation]
+        var nextJumpLocationValue = targetArray[nextJumpLocation]
+        var found = false
+        
+    //    print("explored", currentJumpLocationValue)
+        if currentJumpLocationValue == targetValue {
             found = true
-            targetLocation = nextJumpLocation
-            print(targetLocation)
-        } else if nextJumpLocationValue > targetValue || nextJumpLocation >= array.count {
-            for i in currentJumpLocation...(nextJumpLocation-1) {
-                if array[i] == targetValue {
-                    found = true
-                    targetLocation = i
-                    print(targetLocation)
-                    break
-                }
+            targetLocation = currentJumpLocation
+    //        print(targetLocation)
+        }
+        
+        while found != true {
+    //        print("explored", nextJumpLocationValue)
+            if nextJumpLocationValue == targetValue {
+                found = true
+                targetLocation = nextJumpLocation
+    //            print(targetLocation)
             }
-            break
-        } else if nextJumpLocationValue < targetValue {
-            if (nextJumpLocation + jumpSize) >= array.count {
+    //        print("explored", nextJumpLocationValue)
+            if nextJumpLocationValue > targetValue || nextJumpLocation >= targetArray.count {
+                for i in currentJumpLocation...(nextJumpLocation-1) {
+    //                print("explored", targetArray[i])
+                    if targetArray[i] == targetValue {
+                        found = true
+                        targetLocation = i
+    //                    print(targetLocation)
+                        break
+                    }
+                }
                 break
             }
-            currentJumpLocation = nextJumpLocation
-            currentJumpLocationValue = array[currentJumpLocation]
-            nextJumpLocation = (currentJumpLocation + jumpSize)
-            nextJumpLocationValue = array[nextJumpLocation]
+    //        print("explored", nextJumpLocationValue)
+            if nextJumpLocationValue < targetValue {
+                if (nextJumpLocation + jumpSize) >= targetArray.count {
+                    for i in nextJumpLocation...(targetArray.count-1) {
+    //                    print("explored", targetArray[i])
+                        if targetArray[i] == targetValue {
+                            found = true
+                            targetLocation = i
+    //                        print(targetLocation)
+                            break
+                        }
+                    }
+                    break
+                }
+                currentJumpLocation = nextJumpLocation
+                currentJumpLocationValue = targetArray[currentJumpLocation]
+                nextJumpLocation = (currentJumpLocation + jumpSize)
+                nextJumpLocationValue = targetArray[nextJumpLocation]
+            }
         }
-    }
-    
-    if found == false {
-        targetLocation = -1
-        print(targetLocation)
+        
+        if found == false {
+            targetLocation = -1
+//            print(targetLocation)
+            return (searchHistory, targetFound, target)
+        }
+        return (searchHistory, targetFound, target)
     }
 }
-
-jumpSort(targetValue: 89)
