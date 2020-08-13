@@ -260,6 +260,9 @@ class GameManager {
         } else if scene.mazeGeneratingAlgorithimChoice == 1 {
             let bis = BinarySearch(scene: scene)
             (searchHistory, targetFound, target) = bis.binarySearchHandler()
+        } else if scene.mazeGeneratingAlgorithimChoice == 3 {
+            let qss = QuickSelect(scene: scene)
+            (searchHistory, targetFound, target) = qss.quickSelectHelper()
         }
     }
     

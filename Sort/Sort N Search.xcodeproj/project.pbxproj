@@ -33,6 +33,7 @@
 		387FD13B241DC51C0004FD78 /* MainScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD13A241DC51C0004FD78 /* MainScreenTableViewCell.swift */; };
 		38B04F2724E4BC9E007D23A5 /* QuickSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B04F2624E4BC9E007D23A5 /* QuickSort.swift */; };
 		38B04F2924E4C14B007D23A5 /* QuickSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B04F2824E4C14B007D23A5 /* QuickSelect.swift */; };
+		38B04F2B24E5EC48007D23A5 /* JumpSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B04F2A24E5EC48007D23A5 /* JumpSearch.swift */; };
 		38B35F34248858D9009E2613 /* sfx_coin_single3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 38B35F33248858D9009E2613 /* sfx_coin_single3.wav */; };
 		38B35F3624885B11009E2613 /* sfx_coin_double3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 38B35F3524885B11009E2613 /* sfx_coin_double3.wav */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		387FD13A241DC51C0004FD78 /* MainScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenTableViewCell.swift; sourceTree = "<group>"; };
 		38B04F2624E4BC9E007D23A5 /* QuickSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickSort.swift; path = ../QuickSort.swift; sourceTree = "<group>"; };
 		38B04F2824E4C14B007D23A5 /* QuickSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelect.swift; sourceTree = "<group>"; };
+		38B04F2A24E5EC48007D23A5 /* JumpSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpSearch.swift; sourceTree = "<group>"; };
 		38B35F33248858D9009E2613 /* sfx_coin_single3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_coin_single3.wav; sourceTree = "<group>"; };
 		38B35F3524885B11009E2613 /* sfx_coin_double3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sfx_coin_double3.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +122,7 @@
 			children = (
 				3832DFDB24D8CCFE0082291C /* LinearSearch.swift */,
 				38B04F2824E4C14B007D23A5 /* QuickSelect.swift */,
+				38B04F2A24E5EC48007D23A5 /* JumpSearch.swift */,
 				3828412E24D91BAC00850BE2 /* BinarySearch.swift */,
 			);
 			path = "Search Algorithims";
@@ -293,6 +296,7 @@
 				38B04F2924E4C14B007D23A5 /* QuickSelect.swift in Sources */,
 				3803D89D2497F87A002A6251 /* Custom Extensions.swift in Sources */,
 				3868F98024269C1C008F7B34 /* SettingsScreenViewController.swift in Sources */,
+				38B04F2B24E5EC48007D23A5 /* JumpSearch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

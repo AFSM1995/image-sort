@@ -9,47 +9,24 @@
 import UIKit
 
 class QuickSelect {
-//    https://www.youtube.com/watch?v=MZaf_9IZCrc
     weak var scene: GameScene!
     var pendingAnimations = [[SkNodeLocationAndColor]]()
+    var searchTargetSquare: [SkNodeAndLocation] = []
+    var targetSquareFound = false
     
     init(scene: GameScene) {
         self.scene = scene
     }
     
-    func initialGameBoardAperianceSaver() -> [UIColor] {
-        var initialGameboardLayout: [UIColor] = []
-        for i in scene.playableGameboard {
-            initialGameboardLayout.append(i.square.fillColor)
-        }
-        return initialGameboardLayout
-    }
-    
-    func initialGameBoardAperianceRestorer(resuming: Bool, initialGameboardLayout: [UIColor]) {
-        // Prevents sorted array grid from appering before initial animations begin.
-        // If animation has to restart, prevents sorted array grid from apperaing before animations begin.
-        if resuming == false {
-            for i in scene.playableGameboard {
-                i.square.fillColor = scene.gameboardSquareColor
-            }
-        } else {
-            for (index, i) in (scene.playableGameboard).enumerated() {
-                i.square.fillColor = initialGameboardLayout[index]
-            }
-        }
-    }
-    
-    func quickSortHelper(resuming: Bool) -> [[SkNodeLocationAndColor]]{
-        // Save the gameboard apperiance before animations.
-        let initialGameboardLayout = initialGameBoardAperianceSaver()
+    func quickSelectHelper() -> ([[SkNodeLocationAndColor]], Bool, [SkNodeAndLocation]) {
+        let target = scene.gameBoard.first(where: { $0.location == Tuple(x: Int.random(in: 1...7), y: Int.random(in: 1...13))})!
+        let targetAlpha = target.square.fillColor.toComponents().alpha
         // Run Quick sort on the graph.
-        quickSort(frontPointer: 0, endPointer: scene.playableGameboard.count-1)
-        // Restores grid back to pre-sort apperiance before return.
-        initialGameBoardAperianceRestorer(resuming: resuming, initialGameboardLayout: initialGameboardLayout)
-        return pendingAnimations
+        quickSelect(frontPointer: 0, endPointer: scene.playableGameboard.count-1, target: targetAlpha)
+        return(pendingAnimations, targetSquareFound, searchTargetSquare)
     }
     
-    func quickSort(frontPointer: Int, endPointer: Int) {
+        func quickSelect(frontPointer: Int, endPointer: Int, target: CGFloat) {
         let playableGameboard = scene.playableGameboard
         
         if frontPointer == endPointer {
@@ -92,8 +69,8 @@ class QuickSelect {
         pendingAnimations.append([newEndPointerColor, newIPlusOneColor])
         
         if endPointer-1 != frontPointer {
-            quickSort(frontPointer: frontPointer, endPointer: iIndex)
-            quickSort(frontPointer: iIndex+2, endPointer: endPointer)
+            quickSelect(frontPointer: frontPointer, endPointer: iIndex, target: target)
+            quickSelect(frontPointer: iIndex+2, endPointer: endPointer, target: target)
         }
     }
 }
