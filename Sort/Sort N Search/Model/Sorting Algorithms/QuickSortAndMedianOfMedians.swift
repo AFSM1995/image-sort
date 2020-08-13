@@ -9,6 +9,7 @@
 import UIKit
 
 class QuickSortAndMedianOfMedians {
+//    https://www.youtube.com/watch?v=MZaf_9IZCrc
     weak var scene: GameScene!
     var pendingAnimations = [[SkNodeLocationAndColor]]()
     

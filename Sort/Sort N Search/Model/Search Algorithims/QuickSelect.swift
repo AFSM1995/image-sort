@@ -1,5 +1,5 @@
 //
-//  QuickSort.swift
+//  QuickSelect.swift
 //  Sort N Search
 //
 //  Created by Álvaro Santillan on 8/12/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QuickSort {
+class QuickSelect {
 //    https://www.youtube.com/watch?v=MZaf_9IZCrc
     weak var scene: GameScene!
     var pendingAnimations = [[SkNodeLocationAndColor]]()
