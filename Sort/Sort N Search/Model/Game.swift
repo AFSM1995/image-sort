@@ -85,7 +85,7 @@ class GameManager {
         for (skNodeAndLocation) in scene.gameBoard {
             if skNodeAndLocation.location.x != 0 && skNodeAndLocation.location.x != (scene.rowCount - 1) {
                 if skNodeAndLocation.location.y != 0 && skNodeAndLocation.location.y != (scene.columnCount - 1) {
-                    skNodeAndLocation.square.fillColor = scene.squareColor.withAlphaComponent(CGFloat(colorArrayTwo.first ?? 1.0))
+                    skNodeAndLocation.square.fillColor = scene.squareColor.withAlphaComponent(CGFloat(colorArrayTwo.first ?? 0.1234))
                     orderedSquareShades.append(SkNodeLocationAndColor(square: skNodeAndLocation.square, location: skNodeAndLocation.location, color: skNodeAndLocation.square.fillColor))
                     colorArrayTwo.removeFirst()
                 }
@@ -261,8 +261,8 @@ class GameManager {
             let bis = BinarySearch(scene: scene)
             (searchHistory, targetFound, target) = bis.binarySearchHandler()
         } else if scene.mazeGeneratingAlgorithimChoice == 3 {
-            let qss = QuickSelect(scene: scene)
-            (searchHistory, targetFound, target) = qss.quickSelectHelper()
+            let js = JumpSearch(scene: scene)
+            (searchHistory, targetFound, target) = js.jumpSearch()
         }
     }
     

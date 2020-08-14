@@ -22,7 +22,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let pathFindingAlgorithmList = [["None","0","0"], ["Bubble Sort","0","0"], ["Insertion Sort","0","0"], ["Quick Sort With Median Of Medians","0","0"], ["Quick Sort","0","0"], ["Selection Sort","0","0"]]
     
-    let mazeGenrationAlgorithimList = [["None","0","0"], ["Binary Search","0","0"], ["Linear Search","0","0"], ["Quick Select","0","0"]]
+    let mazeGenrationAlgorithimList = [["None","0","0"], ["Binary Search","0","0"], ["Linear Search","0","0"], ["Jump Select","0","0"]]
     
     let defaults = UserDefaults.standard
     var selectedPathAlgorithim = UserDefaults.standard.integer(forKey: "Selected Path Finding Algorithim")
