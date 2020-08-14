@@ -31,6 +31,7 @@
 		3868F98024269C1C008F7B34 /* SettingsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868F97F24269C1C008F7B34 /* SettingsScreenViewController.swift */; };
 		3868F9822426B5EC008F7B34 /* SettingsScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3868F9812426B5EC008F7B34 /* SettingsScreenTableViewCell.swift */; };
 		387FD13B241DC51C0004FD78 /* MainScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD13A241DC51C0004FD78 /* MainScreenTableViewCell.swift */; };
+		38AAA56A24E70F160086E4F2 /* fibonacciSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AAA56924E70F160086E4F2 /* fibonacciSearch.swift */; };
 		38B04F2724E4BC9E007D23A5 /* QuickSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B04F2624E4BC9E007D23A5 /* QuickSort.swift */; };
 		38B04F2924E4C14B007D23A5 /* QuickSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B04F2824E4C14B007D23A5 /* QuickSelect.swift */; };
 		38B04F2B24E5EC48007D23A5 /* JumpSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B04F2A24E5EC48007D23A5 /* JumpSearch.swift */; };
@@ -65,6 +66,7 @@
 		3868F97F24269C1C008F7B34 /* SettingsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenViewController.swift; sourceTree = "<group>"; };
 		3868F9812426B5EC008F7B34 /* SettingsScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTableViewCell.swift; sourceTree = "<group>"; };
 		387FD13A241DC51C0004FD78 /* MainScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenTableViewCell.swift; sourceTree = "<group>"; };
+		38AAA56924E70F160086E4F2 /* fibonacciSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fibonacciSearch.swift; sourceTree = "<group>"; };
 		38B04F2624E4BC9E007D23A5 /* QuickSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuickSort.swift; path = ../QuickSort.swift; sourceTree = "<group>"; };
 		38B04F2824E4C14B007D23A5 /* QuickSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickSelect.swift; sourceTree = "<group>"; };
 		38B04F2A24E5EC48007D23A5 /* JumpSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpSearch.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				3832DFDB24D8CCFE0082291C /* LinearSearch.swift */,
 				38B04F2824E4C14B007D23A5 /* QuickSelect.swift */,
 				38B04F2A24E5EC48007D23A5 /* JumpSearch.swift */,
+				38AAA56924E70F160086E4F2 /* fibonacciSearch.swift */,
 				3828412E24D91BAC00850BE2 /* BinarySearch.swift */,
 			);
 			path = "Search Algorithims";
@@ -296,6 +299,7 @@
 				38B04F2924E4C14B007D23A5 /* QuickSelect.swift in Sources */,
 				3803D89D2497F87A002A6251 /* Custom Extensions.swift in Sources */,
 				3868F98024269C1C008F7B34 /* SettingsScreenViewController.swift in Sources */,
+				38AAA56A24E70F160086E4F2 /* fibonacciSearch.swift in Sources */,
 				38B04F2B24E5EC48007D23A5 /* JumpSearch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
