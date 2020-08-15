@@ -437,22 +437,29 @@ class GameScene: SKScene {
     var hasRun = false
     var sucssesfullyFound = false
     var endingAnimationCount = Double()
+    
+    var queuedSquareWait = SKAction()
     func pathFindingAnimationsAndSquareColoring() {
         
         func swapAnimationBegining() {
-            var queuedSquareWait = SKAction()
+            var counter = 0
             pathFindingAnimationsHaveEnded = false
-            
-            for (squareIndex, innerSquareArray) in game.swapSquareAndColor.enumerated() {
-                for squareLocationAndColor in innerSquareArray {
-                    if innerSquareArray.count != 1 {
-                        squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {swapAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: true, duration: queuedSquareWait)})
-                    } else {
-                        squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {swapAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: false, duration: queuedSquareWait)})
+            if game.swapSquareAndColor.count != 0 {
+                for (squareIndex, innerSquareArray) in game.swapSquareAndColor.enumerated() {
+                    if counter == 50 {
+                        break
                     }
+                    counter += 1
+                    for squareLocationAndColor in innerSquareArray {
+                        if innerSquareArray.count != 1 {
+                            squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {swapAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: true, duration: self.queuedSquareWait)})
+                        } else {
+                            squareLocationAndColor.square.run(.sequence([queuedSquareWait]), completion: {swapAnimationEnding(squareLocationAndColor: squareLocationAndColor, swap: false, duration: self.queuedSquareWait)})
+                        }
+                    }
+                    queuedSquareWait = .wait(forDuration: TimeInterval(squareIndex) * Double(pathFindingAnimationSpeed))
+                    game.swapSquareAndColor.remove(at: 0)
                 }
-                queuedSquareWait = .wait(forDuration: TimeInterval(squareIndex) * Double(pathFindingAnimationSpeed))
-                game.swapSquareAndColor.remove(at: 0)
             }
         }
         
@@ -578,6 +585,7 @@ class GameScene: SKScene {
         }
     }
 
+    var animationFunctionCalled = false
     override func update(_ currentTime: TimeInterval) {
         // Check if user settings were modified.
         if defaults.bool(forKey: "Settings Value Modified") && defaults.bool(forKey: "Settings Dismissed") {
@@ -622,7 +630,11 @@ class GameScene: SKScene {
             if gamboardAnimationEnded == true {
                 // Dissble buttons for pathfinding animation.
                 animationDualButtonManager(buttonsEnabled: true)
-                pathFindingAnimationsAndSquareColoring()
+                
+                if animationFunctionCalled == false {
+                    pathFindingAnimationsAndSquareColoring()
+                    animationFunctionCalled = true
+                }
 //                UserDefaults.standard.set(animatedQueuedSquareCount, forKey: "highScore")
 //                UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
             }
