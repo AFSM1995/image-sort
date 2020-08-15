@@ -439,6 +439,7 @@ class GameScene: SKScene {
     var endingAnimationCount = Double()
     
     var queuedSquareWait = SKAction()
+    var okToRunNextAnimationBlock = false
     func pathFindingAnimationsAndSquareColoring() {
         
         func swapAnimationBegining() {
@@ -446,8 +447,14 @@ class GameScene: SKScene {
             pathFindingAnimationsHaveEnded = false
             if game.swapSquareAndColor.count != 0 {
                 for (squareIndex, innerSquareArray) in game.swapSquareAndColor.enumerated() {
-                    if counter == 50 {
+                    if counter == 25 {
+//                        okToRunNextAnimationBlock = true
+//                        hasRun = false
                         break
+                    }
+                    else if counter == 15 {
+                        okToRunNextAnimationBlock = true
+                        hasRun = false
                     }
                     counter += 1
                     for squareLocationAndColor in innerSquareArray {
@@ -486,13 +493,14 @@ class GameScene: SKScene {
             UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
             updateScoreButtonText()
             
-            if hasRun == false {
+            if hasRun == false && okToRunNextAnimationBlock == true {
                 DispatchQueue.main.asyncAfter(deadline: .now() + duration.duration + endingAnimationCount) {
-                    if (self.hasRun == false) {
+//                    if (self.hasRun == false) {
+                        swapAnimationBegining()
                         self.gamboardAnimationEnded = true
                         self.animationDualButtonManager(buttonsEnabled: true)
-                        searchAnimationBegining()
-                    }
+//                        searchAnimationBegining()
+//                    }
                     self.hasRun = true
                 }
             }
