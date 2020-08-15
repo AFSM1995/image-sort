@@ -6,6 +6,8 @@
 //  Copyright © 2020 Álvaro Santillan. All rights reserved.
 //
 
+// BROKEN
+
 import Foundation
 
 let array = [10,22,35,40,45,50,80,82,85,90,100]
@@ -29,7 +31,7 @@ func fibGenerator(left: Int, right: Int, target: Int) {
     }
 }
 
-fibGenerator(left: 0, right: 1, target: array.count)
+//fibGenerator(left: 0, right: 1, target: array.count)
 var rightFibArrayIndex = fibNumbers.count - 1
 var midFibArrayIndex = rightFibArrayIndex - 1
 var leftFibArrayIndex = midFibArrayIndex - 1

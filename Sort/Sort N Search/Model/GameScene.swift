@@ -190,51 +190,12 @@ class GameScene: SKScene {
     
     // Contains duplicate functions.
     func settingsChangeSquareColorManager() {
-        
-//        func colorQueued() {
-//            for i in (game.displayFronteerSquareArray) {
-//                for j in i {
-//                    j.square.fillColor = comparisonHaloColor
-//                }
-//            }
-//        }
-//
-//        func colorVisited() {
-//            for i in (game.displayVisitedSquareArray) {
-//                i.square.fillColor = swapHaloColor
-//            }
-//        }
-        
-        func removeAllAnimations() {
-            for i in gameBackground.children {
-                i.removeAllActions()
-            }
-        }
-        
         func colorTheGameboard() {
             for i in gameboardEdgeSquares {
                 i.square.fillColor = gameboardSquareColor
             }
         }
-        
-//        if pathFindingAnimationsHaveEnded == true {
-//            if clearAllWasTapped != true {
-//        removeAllAnimations()
         colorTheGameboard()
-        
-//                colorQueued()
-//                colorVisited()
-//                if clearPathWasTapped != true {
-////                    colorPath()
-//                }
-//
-//                if clearBarriersWasTapped != true {
-////                    colorBarriers()
-//                }
-////                colorSnake()
-////                colorFood()
-//            }
-//        }
     }
     
     private func createScreenLabels() {
@@ -494,39 +455,6 @@ class GameScene: SKScene {
     
     var endingAnimationCount = Double()
     func pathFindingAnimationsAndSquareColoring() {
-//        func visitedSquareAnimationBegining() {
-//            // Color all squares while in animation mode.
-//            colorTheSnake()
-//            colorTheFood()
-//            colorTheBarriers()
-//
-//            for (squareIIndex, squareAndLocation) in game.visitedNodeArray.enumerated() {
-//                // Easter would go here enable this one
-//                squareAndLocation.square.run(.sequence([visitedSquareWait]), completion: {visitedSquareAnimationEnding(squareAndLocation: squareAndLocation)})
-//                visitedSquareWait = .wait(forDuration: TimeInterval(squareIIndex) * Double(pathFindingAnimationSpeed))
-//                game.visitedNodeArray.remove(at: 0)
-//            }
-//        }
-//
-//        func visitedSquareAnimationEnding(squareAndLocation: SkNodeAndLocation) {
-//            // Make sure the game dosent animate over food and the snake head.
-//            // Cant animate the head or food after the fact becouse it will ruin the animation. (Big-O).
-//            // Snake body and barriers will never be a consern since pathfinding animation ignores them.
-////            if !(game.foodPosition.contains(squareAndLocation)) && (game.snakeBodyPos[0] != squareAndLocation) {
-//                squareAndLocation.square.run(.sequence([animationSequanceManager(animation: 2)]))
-//                squareAndLocation.square.fillColor = swapHaloColor
-//                updateScoreButtonText()
-////            }
-//
-//
-//            // runs one time.
-//            if !visitedSquareDispatchCalled {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + visitedSquareWait.duration) {
-//                    pathSquareAnimationBegining(run: self.visitedSquareDispatchCalled)
-//                }
-//                visitedSquareDispatchCalled = true
-//            }
-//        }
         
         func queuedSquareAnimationBegining() {
             var queuedSquareWait = SKAction()
@@ -621,18 +549,8 @@ class GameScene: SKScene {
     }
     
     func squareColoringWhileSnakeIsMoving() {
-        if pathFindingAlgorithimChoice == 0 {
-//            colorTheGameboard()
-//            colorTheSnake()
-//            colorTheFood()
-//            colorThePath()
-//            colorTheBarriers()
-//            colorTheRandomSquares()
-        } else if pathFindingAnimationsHaveEnded == true && game.paused == false {
+        if pathFindingAnimationsHaveEnded == true && game.paused == false {
             colorTheGameboard()
-            colorTheSnake()
-            colorTheFood()
-            colorThePath()
             colorTheBarriers()
         }
     }
@@ -656,34 +574,8 @@ class GameScene: SKScene {
         }
     }
     
-    func colorTheSnake() {
-        for (index, squareAndLocation) in game.snakeBodyPos.enumerated() {
-            if index == 0 {
-//                squareAndLocation.square.fillColor = snakeHeadSquareColor
-            } else {
-//                squareAndLocation.square.fillColor = snakeBodySquareColor
-            }
-        }
-    }
-    
-    func colorTheFood() {
-        for i in (game.foodPosition) {
-//            i.square.fillColor = foodSquareColor
-        }
-    }
-    
-    func colorThePath() {
-        for i in (game.displayPathSquareArray) {
-//            i.square.fillColor = pathSquareColor
-        }
-    }
-    
     func colorTheBarriers() {
         game.barrierSquareManager()
-        
-        for i in (game.barrierNodesWaitingToBeDisplayed) {
-//            i.square.fillColor = barrierSquareColor
-        }
         updateScoreButtonText()
     }
     
