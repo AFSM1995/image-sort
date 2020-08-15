@@ -154,7 +154,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="328" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <segments>
-                                                    <segment title="Sort N Search"/>
+                                                    <segment title="Sort"/>
                                                     <segment title="Search"/>
                                                 </segments>
                                                 <connections>
