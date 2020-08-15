@@ -323,13 +323,6 @@ class GameScene: SKScene {
             return nil
         }
         
-        func IsSquareOccupied(squareLocation: Tuple) -> Bool {
-            for square in game.snakeBodyPos {if squareLocation.x == square.location.x && squareLocation.y == square.location.y {return true}}
-            for square in game.foodPosition {if squareLocation.x == square.location.y && squareLocation.y == square.location.x {return true}}
-            for square in game.pathBlockCordinates {if squareLocation.x == square.y && squareLocation.y == square.x {return true}}
-            return false
-        }
-        
         for touch in touches {
             if let selectedSquare = selectSquareFromTouch(touch.location(in: self)) {
                 let squareLocationAsString = (selectedSquare.name)?.components(separatedBy: ",")
@@ -343,27 +336,25 @@ class GameScene: SKScene {
                 
                 if squareLocation.x != 0 && squareLocation.x != (rowCount - 1) {
                     if squareLocation.y != 0 && squareLocation.y != (columnCount - 1) {
-                        if !(IsSquareOccupied(squareLocation: squareLocation)) {
-                            if self.viewController?.barrierButton.isEnabled == true {
-                                selectedSquare.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
-                                if defaults.bool(forKey: "Add Barrier Mode On Setting") {
+                        if self.viewController?.barrierButton.isEnabled == true {
+                            selectedSquare.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
+                            if defaults.bool(forKey: "Add Barrier Mode On Setting") {
 //                                    updateScoreButtonText()
 //                                    game.barrierNodesWaitingToBeDisplayed.append(SkNodeAndLocation(square: selectedSquare, location: squareLocation))
-                                    selectedSquare.fillColor = selectedSquare.fillColor.withAlphaComponent(alphaOne + 0.05)
+                                selectedSquare.fillColor = selectedSquare.fillColor.withAlphaComponent(alphaOne + 0.05)
 //                                    colorTheBarriers()
 //                                    game.matrix[squareLocation.x][squareLocation.y] = 7
-                                } else {
+                            } else {
 //                                    updateScoreButtonText()
 //                                    game.barrierNodesWaitingToBeRemoved.append(SkNodeAndLocation(square: selectedSquare, location: squareLocation))
 //                                    selectedSquare.fillColor = gameboardSquareColor
 //                                    colorTheBarriers()
-                                    selectedSquare.fillColor = selectedSquare.fillColor.withAlphaComponent(alphaOne - 0.05)
+                                selectedSquare.fillColor = selectedSquare.fillColor.withAlphaComponent(alphaOne - 0.05)
 //                                    game.matrix[squareLocation.x][squareLocation.y] = 0
-                                }
                             }
-                            if defaults.bool(forKey: "Vibrate On Setting") {
-                                vibration.impactOccurred()
-                            }
+                        }
+                        if defaults.bool(forKey: "Vibrate On Setting") {
+                            vibration.impactOccurred()
                         }
                     }
                 }
