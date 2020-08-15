@@ -200,10 +200,21 @@ class GameScene: SKScene {
     
     private func createScreenLabels() {
         let pathFindingAlgorithimName = defaults.string(forKey: "Selected Path Finding Algorithim Name")
-//        let mazeGenerationAlgorithimName = defaults.string(forKey: "Selected Maze Algorithim Name")
+        let mazeGenerationAlgorithimName = defaults.string(forKey: "Selected Maze Algorithim Name")
         
         algorithimChoiceName = SKLabelNode(fontNamed: "Dogica_Pixel")
-        algorithimChoiceName.text = "Path: \(pathFindingAlgorithimName ?? "---")"
+        
+        if pathFindingAlgorithimName == nil || mazeGenerationAlgorithimName == nil {
+            algorithimChoiceName.text = "Running Visualization"
+        } else if pathFindingAlgorithimName == "None" && mazeGenerationAlgorithimName == "None" {
+            algorithimChoiceName.text = "No Algorithm Selected"
+        } else if pathFindingAlgorithimName == "None" {
+            algorithimChoiceName.text = "\(mazeGenerationAlgorithimName ?? "")"
+        } else if mazeGenerationAlgorithimName == "None" {
+            algorithimChoiceName.text = "\(pathFindingAlgorithimName ?? "")"
+        } else {
+            algorithimChoiceName.text = "\(pathFindingAlgorithimName ?? "") Then \(mazeGenerationAlgorithimName ?? "")"
+        }
         algorithimChoiceName.fontColor = screenLabelColor
         algorithimChoiceName.fontSize = 11
         algorithimChoiceName.horizontalAlignmentMode = .center
