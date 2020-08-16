@@ -190,7 +190,7 @@ class GameScene: SKScene {
         algorithimChoiceName = SKLabelNode(fontNamed: "Dogica_Pixel")
         
         if pathFindingAlgorithimName == nil || mazeGenerationAlgorithimName == nil {
-            algorithimChoiceName.text = "Running Visualization"
+            algorithimChoiceName.text = "Oops Something Went Wrong"
         } else if pathFindingAlgorithimName == "None" && mazeGenerationAlgorithimName == "None" {
             algorithimChoiceName.text = "No Algorithm Selected"
         } else if pathFindingAlgorithimName == "None" {
