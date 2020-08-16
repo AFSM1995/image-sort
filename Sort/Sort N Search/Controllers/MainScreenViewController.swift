@@ -32,7 +32,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func checkIfFirstRun() {
         if !defaults.bool(forKey: "Not First Launch") {
-            let legendData = [["Square", 15], ["Swap Halo", 6], ["Comparison Halo", 5], ["Gameboard", 0], ["Search Halo", 9], ["Found Halo", 12], ["Target Halo", 17]]
+            let legendData = [["Square", 13], ["Swap Halo", 6], ["Comparison Halo", 9], ["Gameboard", 0], ["Search Halo", 24], ["Found Halo", 19], ["Target Halo", 31]]
             
             defaults.set(legendData, forKey: "Legend Preferences")
             defaults.set(2, forKey: "Snake Speed Text Setting")
@@ -41,14 +41,18 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             defaults.set(true, forKey: "Food Count Setting")
             defaults.set(false, forKey: "God Button On Setting")
             defaults.set(true, forKey: "Volume On Setting")
-            defaults.set(false, forKey: "Vibrate On Setting")
             defaults.set(true, forKey: "Dark Mode On Setting")
             defaults.set(true, forKey: "Not First Launch")
             defaults.set(true, forKey: "Game Is Paused Setting")
+            defaults.set(true, forKey: "Display Grid Setting")
             
+            
+            defaults.set(true, forKey: "Vibrate On Setting")
+            defaults.set(3, forKey: "Square Size Setting")
             // Bug fix: prevents nil nil from occupying gamescreen on first launch.
             defaults.set("None", forKey: "Selected Path Finding Algorithim Name")
             defaults.set("None", forKey: "Selected Maze Algorithim Name")
+            
             
             overrideUserInterfaceStyle = .dark
         }
