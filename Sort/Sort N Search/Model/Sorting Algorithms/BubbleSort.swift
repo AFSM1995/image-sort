@@ -34,10 +34,8 @@ class BubbleSort {
         } else {
             for (index, i) in (scene.playableGameboard).enumerated() {
                 i.square.fillColor = initialGameboardLayout[index]
-                print("2", i.square.fillColor)
             }
         }
-        print("df")
     }
     
     func bubbleSort(resuming: Bool) -> [[SkNodeLocationAndColor]] {

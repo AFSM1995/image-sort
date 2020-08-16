@@ -432,8 +432,8 @@ class GameScene: SKScene {
     var pathSquareDispatchCalled = Bool()
     var visitedSquareWait = SKAction()
     var pathSquareWait = SKAction()
-    var animatedVisitedSquareCount = Float()
-    var animatedQueuedSquareCount = Float()
+    var swapCounter = Float()
+    var comparisonCounter = Float()
     var hasRun = false
     var sucssesfullyFound = false
     var endingAnimationCount = Double()
@@ -463,20 +463,20 @@ class GameScene: SKScene {
             squareLocationAndColor.square.lineWidth = 5
             
             if swap == true {
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: comparisonHaloColor, duration: 0.5))
-                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: comparisonHaloColor, toColor: .clear, duration: 0.5))
-                animatedQueuedSquareCount += 0.5
-                animatedVisitedSquareCount += 0.5
-                endingAnimationCount += 1.0
-            } else {
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: swapHaloColor, duration: 0.5))
                 squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: swapHaloColor, toColor: .clear, duration: 0.5))
-                animatedVisitedSquareCount += 1
+                swapCounter += 0.5
+                comparisonCounter += 0.5
+                endingAnimationCount += 1.0
+            } else {
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: .clear, toColor: comparisonHaloColor, duration: 0.5))
+                squareLocationAndColor.square.run(SKAction.colorTransitionAction(fromColor: comparisonHaloColor, toColor: .clear, duration: 0.5))
+                comparisonCounter += 1
                 endingAnimationCount += 1.0
             }
             
-            UserDefaults.standard.set(animatedQueuedSquareCount, forKey: "highScore")
-            UserDefaults.standard.set(animatedVisitedSquareCount, forKey: "lastScore")
+            UserDefaults.standard.set(comparisonCounter, forKey: "highScore")
+            UserDefaults.standard.set(swapCounter, forKey: "lastScore")
             updateScoreButtonText()
             
             if hasRun == false {
@@ -635,26 +635,27 @@ class GameScene: SKScene {
         game.update(time: currentTime)
     }
     
-    func updateScoreButtonHalo() {
-        if game.conditionGreen {
-            self.viewController?.scoreButton.layer.borderColor = UIColor.green.cgColor
-        } else if game.conditionYellow {
-            self.viewController?.scoreButton.layer.borderColor = UIColor.yellow.cgColor
-        } else if game.conditionRed {
-            self.viewController?.scoreButton.layer.borderColor = UIColor.red.cgColor
-        }
-    }
+//    func updateScoreButtonHalo() {
+//        if game.conditionGreen {
+//            self.viewController?.scoreButton.layer.borderColor = UIColor.green.cgColor
+//        } else if game.conditionYellow {
+//            self.viewController?.scoreButton.layer.borderColor = UIColor.yellow.cgColor
+//        } else if game.conditionRed {
+//            self.viewController?.scoreButton.layer.borderColor = UIColor.red.cgColor
+//        }
+//    }
     
     func updateScoreButtonText() {
         let scoreButtonTag = self.viewController?.scoreButton.tag
         
         switch scoreButtonTag {
             case 0: // Swap
-                self.viewController?.scoreButton.setTitle(String(Int(animatedQueuedSquareCount)), for: .normal)
+                self.viewController?.scoreButton.setTitle(String(Int(comparisonCounter)), for: .normal)
             case 1: // Comp
-                self.viewController?.scoreButton.setTitle(String(Int(animatedVisitedSquareCount)), for: .normal)
+                self.viewController?.scoreButton.setTitle(String(Int(swapCounter)), for: .normal)
             default:
-                print("Score button loading error")
+                self.viewController?.scoreButton.setTitle(String(Int(comparisonCounter)), for: .normal)
+                print("Score button loading error", self.viewController?.scoreButton.tag)
         }
         defaults.set(false, forKey: "Score Button Is Tapped")
     }

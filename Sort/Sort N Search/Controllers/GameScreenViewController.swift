@@ -115,10 +115,12 @@ class GameScreenViewController: UIViewController {
         switch sender.tag {
             case 0:
                 print("Swap count")
+                scoreButton.layer.borderColor = (colors[legendData[1][1] as! Int].withAlphaComponent(0.8)).cgColor
                 sender.backgroundColor = colors[legendData[1][1] as! Int].withAlphaComponent(0.5)
                 sender.tag = 1
             case 1:
                 print("Comp count")
+                scoreButton.layer.borderColor = (colors[legendData[2][1] as! Int].withAlphaComponent(0.8)).cgColor
                 sender.backgroundColor = colors[legendData[2][1] as! Int].withAlphaComponent(0.5)
                 sender.tag = 0
             default:

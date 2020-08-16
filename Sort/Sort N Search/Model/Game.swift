@@ -161,8 +161,11 @@ class GameManager {
     var conditionRed = Bool()
     
     func sortSelector(resuming: Bool) {
-        if scene.pathFindingAlgorithimChoice == 1 {
-            let bs = BubbleSort(scene: scene)
+        let bs = BubbleSort(scene: scene)
+        
+        if scene.pathFindingAlgorithimChoice == 0 {
+            
+        } else if scene.pathFindingAlgorithimChoice == 1 {
             swapSquareAndColor = bs.bubbleSort(resuming: resuming)
             swapAnimationsSplit = swapSquareAndColor.chunked(into: 100)
         } else if scene.pathFindingAlgorithimChoice == 2 {
@@ -178,7 +181,7 @@ class GameManager {
             let ss = SelectionSort(scene: scene)
             swapSquareAndColor = ss.selectionSort(resuming: resuming)
         }  else {
-            print("Out Of Bounds Error")
+            print("Out Of Bounds Error", scene.pathFindingAlgorithimChoice)
         }
     }
     
@@ -214,7 +217,7 @@ class GameManager {
                 if gameIsOver != true {
                     nextTime = time + Double(gameSpeed)
                     barrierSquareManager()
-                    scene.updateScoreButtonHalo()
+//                    scene.updateScoreButtonHalo()
                     scene.updateScoreButtonText()
                     checkIfPaused()
                 }
