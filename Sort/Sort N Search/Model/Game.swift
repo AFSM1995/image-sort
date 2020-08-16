@@ -9,6 +9,14 @@
 import SpriteKit
 import AVFoundation
 
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
+}
+
 class GameManager {
     weak var audioPlayer: AVAudioPlayer?
     weak var viewController: GameScreenViewController!
@@ -52,6 +60,7 @@ class GameManager {
     var orderedSquareShades: [SkNodeLocationAndColor] = []
     var shuffledSquareShades: [SkNodeLocationAndColor] = []
     var swapSquareAndColor = [[SkNodeLocationAndColor]]()
+    var swapAnimationsSplit = [[[SkNodeLocationAndColor]]]()
     
     func roundUp(factor: Int, n: Int) -> Int {
         return (n + 24) / 25 * 25;
@@ -155,6 +164,7 @@ class GameManager {
         if scene.pathFindingAlgorithimChoice == 1 {
             let bs = BubbleSort(scene: scene)
             swapSquareAndColor = bs.bubbleSort(resuming: resuming)
+            swapAnimationsSplit = swapSquareAndColor.chunked(into: 100)
         } else if scene.pathFindingAlgorithimChoice == 2 {
             let iss = InsertionSort(scene: scene)
             swapSquareAndColor = iss.insertionSort(resuming: resuming)

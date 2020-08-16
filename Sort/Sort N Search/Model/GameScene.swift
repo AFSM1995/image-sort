@@ -161,11 +161,11 @@ class GameScene: SKScene {
     func squareSizeManager(squareSizeId: Int) {
         switch squareSizeId {
         case 1:
-            squareWidth = 25
-        case 2:
             squareWidth = 35
-        case 3:
+        case 2:
             squareWidth = 40
+        case 3:
+            squareWidth = 45
         case 5:
             squareWidth = 50
         default:
@@ -521,6 +521,7 @@ class GameScene: SKScene {
         
         visitedSquareDispatchCalled = false
         pathSquareDispatchCalled = false
+        
         swapAnimationBegining()
     }
     
