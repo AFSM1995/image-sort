@@ -46,7 +46,6 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             defaults.set(true, forKey: "Game Is Paused Setting")
             defaults.set(true, forKey: "Display Grid Setting")
             
-            
             defaults.set(true, forKey: "Vibrate On Setting")
             defaults.set(3, forKey: "Square Size Setting")
             // Bug fix: prevents nil nil from occupying gamescreen on first launch.
