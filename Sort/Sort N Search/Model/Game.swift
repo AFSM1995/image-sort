@@ -141,7 +141,6 @@ class GameManager {
         } else if scene.pathFindingAlgorithimChoice == 1 {
             let bs = BubbleSort(scene: scene)
             swapSquareAndColor = bs.bubbleSort(resuming: resuming)
-//            swapAnimationsSplit = swapSquareAndColor.chunked(into: 100)
         } else if scene.pathFindingAlgorithimChoice == 2 {
             let iss = InsertionSort(scene: scene)
             swapSquareAndColor = iss.insertionSort(resuming: resuming)

@@ -21,7 +21,7 @@ class JumpSearch {
         self.scene = scene
         playableGameboard = scene.playableGameboard
         playableGameBoardSize = scene.playableGameboard.count
-        let bs = BubbleSort(scene: scene)
+//        let bs = BubbleSort(scene: scene)
         
 //        for (index, i) in (scene.playableGameboard).enumerated() {
 //            i.square.fillColor = bs.finalGameboardLayout[index]

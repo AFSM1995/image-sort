@@ -27,9 +27,9 @@ class InsertionSort {
         // Prevents sorted array grid from appering before initial animations begin.
         // If animation has to restart, prevents sorted array grid from apperaing before animations begin.
         if resuming == false {
-            for i in scene.playableGameboard {
-                i.square.fillColor = scene.gameboardSquareColor
-            }
+//            for i in scene.playableGameboard {
+//                i.square.fillColor = scene.gameboardSquareColor
+//            }
         } else {
             for (index, i) in (scene.playableGameboard).enumerated() {
                 i.square.fillColor = initialGameboardLayout[index]
