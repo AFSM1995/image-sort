@@ -9,14 +9,6 @@
 import SpriteKit
 import AVFoundation
 
-extension Array {
-    func chunked(into size: Int) -> [[Element]] {
-        return stride(from: 0, to: count, by: size).map {
-            Array(self[$0 ..< Swift.min($0 + size, count)])
-        }
-    }
-}
-
 class GameManager {
     weak var audioPlayer: AVAudioPlayer?
     weak var viewController: GameScreenViewController!
@@ -139,27 +131,6 @@ class GameManager {
         searchSelector()
 
     }
-    
-    var visitedNodeArray = [SkNodeAndLocation]()
-    func visitedSquareBuilder(visitedX: Int, visitedY: Int) {
-        let squareSK = scene.gameBoard.first(where: {$0.location == Tuple(x: visitedX, y: visitedY)})?.square
-        visitedNodeArray.append(SkNodeAndLocation(square: squareSK!, location: Tuple(x: visitedX, y: visitedY)))
-    }
-    
-    var fronteerSquareArray = [[SkNodeAndLocation]]()
-    func fronteerSquaresBuilder(squareArray: [Tuple]) {
-        var innerFronterSKSquareArray = [SkNodeAndLocation]()
-        for square in squareArray {
-            let squareSK = scene.gameBoard.first(where: {$0.location == Tuple(x: square.y, y: square.x)})?.square
-            innerFronterSKSquareArray.append(SkNodeAndLocation(square: squareSK!, location: Tuple(x: square.x, y: square.y)))
-        }
-        fronteerSquareArray.append(innerFronterSKSquareArray)
-    }
-        
-    var nnnpath: (([Int], [(Tuple)], Int, Int), [SkNodeAndLocation], [[SkNodeAndLocation]], [SkNodeAndLocation], [Bool])?
-    var conditionGreen = Bool()
-    var conditionYellow = Bool()
-    var conditionRed = Bool()
     
     func sortSelector(resuming: Bool) {
         
