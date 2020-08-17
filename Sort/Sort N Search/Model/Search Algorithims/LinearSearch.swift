@@ -21,8 +21,8 @@ class LinearSearch {
     }
     
     func LinearSearch(gameboard: [SkNodeAndLocation]) -> ([SkNodeAndLocation], Bool, [SkNodeAndLocation]) {
-        let randomX = Int.random(in: 1...7)
-        let randomY = Int.random(in: 1...13)
+        let randomX = Int.random(in: 1...(scene.rowCount-2))
+        let randomY = Int.random(in: 1...(scene.columnCount-2))
         
         print(randomX, randomY)
         target.append(scene.gameBoard.first(where: { $0.location == Tuple(x: randomX, y: randomY)})!)

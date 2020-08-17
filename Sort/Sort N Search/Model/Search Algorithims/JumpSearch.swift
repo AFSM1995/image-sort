@@ -29,8 +29,10 @@ class JumpSearch {
     }
 
     func jumpSearch() -> ([SkNodeAndLocation], Bool, [SkNodeAndLocation]) {
-        let randomX = Int.random(in: 1...7)
-        let randomY = Int.random(in: 1...13)
+        print(scene.rowCount)
+        print(scene.columnCount)
+        let randomX = Int.random(in: 1...(scene.rowCount-2))
+        let randomY = Int.random(in: 1...(scene.columnCount-2))
         searchTargetSquare.append(scene.gameBoard.first(where: { $0.location == Tuple(x: randomX, y: randomY)})!)
         let targetValue = searchTargetSquare[0].square.fillColor.toComponents().alpha
         
