@@ -122,10 +122,16 @@ class GameScene: SKScene {
 //                for i in gameBoard {
 //                    i.square.removeAllActions()
 //                }
-                print("hititit")
-                print(nativeBoardLayoutOption, defaults.integer(forKey: "Reset Setting"))
+//                self.viewController?.loadThePausedButton()
+//                endingAnimationCount = 0
+                game.swapSquareAndColor.removeAll()
+                game.searchHistory.removeAll()
+                swapCounter = 0
+                comparisonCounter = 0
+//                print("hititit")
+//                print(nativeBoardLayoutOption, defaults.integer(forKey: "Reset Setting"))
                 nativeBoardLayoutOption = defaults.integer(forKey: "Reset Setting")
-                print("New board layout", nativeBoardLayoutOption)
+//                print("New board layout", nativeBoardLayoutOption)
                 game.initaitateRandomSquares()
                 self.startingAnimationAndSquareColoring()
             }
@@ -348,6 +354,7 @@ class GameScene: SKScene {
                 
                 if squareLocation.x != 0 && squareLocation.x != (rowCount - 1) {
                     if squareLocation.y != 0 && squareLocation.y != (columnCount - 1) {
+//                        probibly unneded chech below since checked on touch
                         if self.viewController?.barrierButton.isEnabled == true {
                             selectedSquare.fillColor.getRed(&redOne, green: &greenOne, blue: &blueOne, alpha: &alphaOne)
                             if defaults.bool(forKey: "Add Barrier Mode On Setting") {

@@ -53,6 +53,12 @@ class GameScreenViewController: UIViewController {
         }
     }
     
+    func loadThePausedButton() {
+        defaults.set(true, forKey: "Game Is Paused Setting")
+        boolButtonLoader(isIconButton: true, targetButton: playButton, key: "Game Is Paused Setting", trueOption: "Play_Icon_Set", falseOption: "Pause_Icon_Set")
+        defaults.bool(forKey: "Game Is Paused Setting") ? (barrierButton.isEnabled = true) : (barrierButton.isEnabled = false)
+    }
+    
     func loadButtonStyling() {
         defaults.set(false, forKey: "Game Is Paused Setting")
         boolButtonLoader(isIconButton: true, targetButton: playButton, key: "Game Is Paused Setting", trueOption: "Play_Icon_Set", falseOption: "Pause_Icon_Set")
