@@ -54,7 +54,7 @@ class SelectionSort {
                 pendingAnimations.append([newJ])
                 
                 let jColorAlpha = playableGameboard[jIndex].square.fillColor.toComponents().alpha
-                if jColorAlpha < currentMinimumAlpha {
+                if jColorAlpha > currentMinimumAlpha {
                     currentMinimumColor = playableGameboard[jIndex].square.fillColor
                     currentMinimumAlpha = jColorAlpha
                     currentMinimumIndex = jIndex
