@@ -77,7 +77,7 @@ class QuickSortAndMedianOfMedians {
             if jIndex < (array.count-1) {
                 let jIndexColorAlpha = array[jIndex].square.fillColor.toComponents().alpha
                 let jIndexColor = array[jIndex].square.fillColor
-                if jIndexColorAlpha < pivotAlpha {
+                if jIndexColorAlpha > pivotAlpha {
                     iIndex += 1
                     let tempIValue = array[iIndex].square.fillColor
                     array[iIndex].square.fillColor = array[jIndex].square.fillColor

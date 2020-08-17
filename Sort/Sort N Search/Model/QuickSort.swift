@@ -67,7 +67,7 @@ class QuickSort {
             if jIndex < (playableGameboard.count-1) {
                 let jIndexColorAlpha = playableGameboard[jIndex].square.fillColor.toComponents().alpha
                 let jIndexColor = playableGameboard[jIndex].square.fillColor
-                if jIndexColorAlpha < endPointerAlpha {
+                if jIndexColorAlpha > endPointerAlpha {
                     iIndex += 1
                     let tempIValue = playableGameboard[iIndex].square.fillColor
                     playableGameboard[iIndex].square.fillColor = playableGameboard[jIndex].square.fillColor
