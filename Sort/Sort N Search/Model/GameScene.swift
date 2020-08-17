@@ -87,6 +87,9 @@ class GameScene: SKScene {
         // Update to display reset option
         boardLayoutOption = defaults.integer(forKey: "Reset Setting")
         
+        // Update score button color
+        self.viewController?.loadScoreButtonStyling()
+        
         // Update square colors, seen by the user in the next frame update.
         targetHaloColor = colors[legendData[6][1] as! Int]
         searchHaloColor = colors[legendData[4][1] as! Int]
@@ -109,6 +112,8 @@ class GameScene: SKScene {
             screenLabelColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.00)
             scoreButtonColor = squareColor
         }
+        
+        
         
         if firstRun {
             // Populate score button text on first run.
@@ -177,7 +182,7 @@ class GameScene: SKScene {
     func settingsChangeSquareColorManager() {
         func colorTheGameboard() {
             for i in gameboardEdgeSquares {
-                i.square.fillColor = gameboardSquareColor
+                i.square.fillColor = fadedGameBoardSquareColor
             }
         }
         colorTheGameboard()

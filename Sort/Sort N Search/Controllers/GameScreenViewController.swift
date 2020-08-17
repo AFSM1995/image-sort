@@ -19,7 +19,7 @@ class GameScreenViewController: UIViewController {
     weak var gameScreenViewController: GameScreenViewController!
     
     let defaults = UserDefaults.standard
-    let legendData = UserDefaults.standard.array(forKey: "Legend Preferences") as! [[Any]]
+    var legendData = [[Any]]()
     let scenee = SKScene()
     var currentGame: GameManager?
     
@@ -63,6 +63,7 @@ class GameScreenViewController: UIViewController {
     }
     
     func loadScoreButtonStyling() {
+        legendData = UserDefaults.standard.array(forKey: "Legend Preferences") as! [[Any]]
         scoreButton.layer.borderWidth = 2
         
         if scoreButton.tag == 0 {
@@ -72,13 +73,6 @@ class GameScreenViewController: UIViewController {
             scoreButton.layer.borderColor = (colors[legendData[1][1] as! Int].withAlphaComponent(0.8)).cgColor
             scoreButton.layer.backgroundColor = (colors[legendData[1][1] as! Int].withAlphaComponent(0.5)).cgColor
         }
-    }
-    
-    func reloadStepButtonSettings(isTheGamePaused: Bool) {
-        boolButtonLoader(isIconButton: true, targetButton: playButton, key: "Game Is Paused Setting", trueOption: "Play_Icon_Set", falseOption: "Pause_Icon_Set")
-        defaults.bool(forKey: "Game Is Paused Setting") ? (barrierButton.isEnabled = true) : (barrierButton.isEnabled = false)
-        
-        boolButtonLoader(isIconButton: true, targetButton: barrierButton, key: "Add Barrier Mode On Setting", trueOption: "Plus_Icon_Set", falseOption: "Minus_Icon_Set")
     }
     
     @IBAction func settingsButtonTapped(_ sender: Any) {
@@ -110,7 +104,8 @@ class GameScreenViewController: UIViewController {
     }
     
     @IBAction func scoreButtonTapped(_ sender: UIButton) {
-        
+        // Fixes Bug Score button color dose not respect legend changes.
+        legendData = UserDefaults.standard.array(forKey: "Legend Preferences") as! [[Any]]
         // If button tapped switch to next option.
         switch sender.tag {
             case 0:
