@@ -530,6 +530,7 @@ class GameScene: SKScene {
         }
         
         func searchAnimationEnding(searchWaitTime: SKAction, squareLocationAndColor: SkNodeAndLocation) {
+            squareLocationAndColor.square.lineWidth = 5
             squareLocationAndColor.square.strokeColor = self.searchHaloColor
             
             DispatchQueue.main.asyncAfter(deadline: .now() + searchWaitTime.duration) {
