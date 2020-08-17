@@ -50,7 +50,7 @@ class SettingsSceenViewController: UIViewController, UITableViewDelegate, UITabl
         fourOptionButtonLoader(targetButton: squareSizeButton, key: "Square Size Setting", optionArray: options)
         
         resetButton.setTitle("No Changes", for: .normal)
-        defaults.set(1, forKey: "Reset Setting")
+//        defaults.set(1, forKey: "Reset Setting")
         
         boolButtonLoader(isIconButton: false, targetButton: displayFormatButton, key: "Display Grid Setting", trueOption: "Format: Grid", falseOption: "Format: Row")
         boolButtonLoader(isIconButton: true, targetButton: soundButton, key: "Volume On Setting", trueOption: "Volume_On_Icon_Set", falseOption: "Volume_Mute_Icon_Set")

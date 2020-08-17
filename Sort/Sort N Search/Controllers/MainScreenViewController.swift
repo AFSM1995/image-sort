@@ -48,6 +48,7 @@ class MainScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             
             defaults.set(true, forKey: "Vibrate On Setting")
             defaults.set(3, forKey: "Square Size Setting")
+            defaults.set(1, forKey: "Reset Setting")
             // Bug fix: prevents nil nil from occupying gamescreen on first launch.
             defaults.set("None", forKey: "Selected Path Finding Algorithim Name")
             defaults.set("None", forKey: "Selected Maze Algorithim Name")

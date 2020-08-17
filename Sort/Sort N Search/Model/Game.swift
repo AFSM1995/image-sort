@@ -72,7 +72,7 @@ class GameManager {
         var colorArray = [Float]()
         let playableGameboardSize = scene!.playableGameboardSize
         
-        if scene.boardLayoutOption == 5 { // 5 Few Unique
+        if scene.nativeBoardLayoutOption == 5 { // 5 Few Unique
             let divideFactor = playableGameboardSize/6
             for i in 1...playableGameboardSize+1 {
                 let newI = roundUp(factor: divideFactor, n: i)
@@ -97,29 +97,30 @@ class GameManager {
             }
         }
         
-        if scene.boardLayoutOption == 1 || scene.boardLayoutOption == 2 || scene.boardLayoutOption == 5 { // No Change, Randomize Board, Few Unique
+        print("current board layout", scene.nativeBoardLayoutOption)
+        if scene.nativeBoardLayoutOption == 1 || scene.nativeBoardLayoutOption == 2 || scene.nativeBoardLayoutOption == 5 { // No Change, Randomize Board, Few Unique
             colorArray.shuffle()
-        } else if scene.boardLayoutOption == 3 { // 3 Most
+        } else if scene.nativeBoardLayoutOption == 3 { // 3 Most
             let arrayCount = Int(colorArray.count/6)
             let upperSortedSquares = (colorArray.count) - arrayCount
             colorArray[arrayCount...upperSortedSquares].shuffle()
-        } else if scene.boardLayoutOption == 4 { // 4 Few
+        } else if scene.nativeBoardLayoutOption == 4 { // 4 Few
             let arrayCount = Int(colorArray.count/6)
             let upperSortedSquares = (colorArray.count) - arrayCount
             colorArray[...arrayCount].shuffle()
             colorArray[upperSortedSquares...].shuffle()
-        } else if scene.boardLayoutOption == 6 { // 6 Top
+        } else if scene.nativeBoardLayoutOption == 6 { // 6 Top
             let validTopSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
             colorArray[...(validTopSquares - 1)].shuffle()
-        } else if scene.boardLayoutOption == 7 { // 7 Center
+        } else if scene.nativeBoardLayoutOption == 7 { // 7 Center
            let validCenterSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
             colorArray[validCenterSquares...((colorArray.count - validCenterSquares) - 2)].shuffle()
-        } else if scene.boardLayoutOption == 8 { // 8 Bottom
+        } else if scene.nativeBoardLayoutOption == 8 { // 8 Bottom
            let validBottomSquares = ((scene.rowCount - 2)/3) * (scene.columnCount - 2)
             colorArray[((colorArray.count - validBottomSquares) + 1)...].shuffle()
-        } else if scene.boardLayoutOption == 9 { // 9 Reverse Sorted
+        } else if scene.nativeBoardLayoutOption == 9 { // 9 Reverse Sorted
             colorArray.reverse()
-        } else if scene.boardLayoutOption == 10 { // 10 Sorted
+        } else if scene.nativeBoardLayoutOption == 10 { // 10 Sorted
             // Do nothing
         }
         
@@ -161,13 +162,13 @@ class GameManager {
     var conditionRed = Bool()
     
     func sortSelector(resuming: Bool) {
-        let bs = BubbleSort(scene: scene)
         
         if scene.pathFindingAlgorithimChoice == 0 {
             
         } else if scene.pathFindingAlgorithimChoice == 1 {
+            let bs = BubbleSort(scene: scene)
             swapSquareAndColor = bs.bubbleSort(resuming: resuming)
-            swapAnimationsSplit = swapSquareAndColor.chunked(into: 100)
+//            swapAnimationsSplit = swapSquareAndColor.chunked(into: 100)
         } else if scene.pathFindingAlgorithimChoice == 2 {
             let iss = InsertionSort(scene: scene)
             swapSquareAndColor = iss.insertionSort(resuming: resuming)

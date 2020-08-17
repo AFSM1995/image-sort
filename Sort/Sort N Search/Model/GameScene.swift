@@ -74,7 +74,7 @@ class GameScene: SKScene {
         startTheGame()
     }
     
-    var boardLayoutOption = Int()
+    var nativeBoardLayoutOption = Int()
     func settingLoader(firstRun: Bool) {
         settingsWereChanged = true
         
@@ -83,9 +83,6 @@ class GameScene: SKScene {
         
         // Update pathfinding animation speed
         pathFindingAnimationSpeed = (defaults.float(forKey: "Snake Move Speed") * 2.4)
-        
-        // Update to display reset option
-        boardLayoutOption = defaults.integer(forKey: "Reset Setting")
         
         // Update score button color
         self.viewController?.loadScoreButtonStyling()
@@ -116,9 +113,23 @@ class GameScene: SKScene {
         
         
         if firstRun {
+            // Update to display reset option
+            nativeBoardLayoutOption = defaults.integer(forKey: "Reset Setting")
             // Populate score button text on first run.
             updateScoreButtonText()
         } else {
+            if nativeBoardLayoutOption != defaults.integer(forKey: "Reset Setting") {
+//                for i in gameBoard {
+//                    i.square.removeAllActions()
+//                }
+                print("hititit")
+                print(nativeBoardLayoutOption, defaults.integer(forKey: "Reset Setting"))
+                nativeBoardLayoutOption = defaults.integer(forKey: "Reset Setting")
+                print("New board layout", nativeBoardLayoutOption)
+                game.initaitateRandomSquares()
+                self.startingAnimationAndSquareColoring()
+            }
+            
             // Update stored UI colors.
             gameBackground!.fillColor = gameBackgroundColor
             gameBackground!.strokeColor = gameBackgroundColor
