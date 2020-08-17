@@ -498,8 +498,8 @@ class GameScene: SKScene {
                 endingAnimationCount += 1.0
             }
             
-            UserDefaults.standard.set(comparisonCounter, forKey: "highScore")
-            UserDefaults.standard.set(swapCounter, forKey: "lastScore")
+            UserDefaults.standard.set(comparisonCounter, forKey: "lastScore")
+            UserDefaults.standard.set(swapCounter, forKey: "highScore")
             updateScoreButtonText()
             
             if hasRun == false {
